@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(['register' => false]);
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('backend.pages.login');
 
 });
 
