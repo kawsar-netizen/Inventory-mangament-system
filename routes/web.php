@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\ItemCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,4 +21,16 @@ Route::get('/', function () {
 
 });
 
-Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+// Route::group(['prefix'=>'admin','middleware' =>['admin','auth']], function(){
+
+    //dashboard route here
+    Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+
+    //category route here
+    // Route::resource('/item-category',[ItemCategoryController::class,'itemCategory']);
+
+// });
+
+
+
+
