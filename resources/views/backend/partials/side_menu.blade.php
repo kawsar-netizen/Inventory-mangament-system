@@ -27,13 +27,34 @@
          
         </li>
         <li>
-            <a href="" title="Application Intel" data-filter-tags="application intel">
+            <a href="{{route('branch.index')}}" title="Application Intel" data-filter-tags="application intel">
+                <i class="fas fa-home"></i>
+                <span class="nav-link-text" data-i18n="nav.application_intel">Branch</span>
+            </a>
+         
+        </li>
+        <li>
+            <a href="{{route('item-category.index')}}" title="Application Intel" data-filter-tags="application intel">
                 <i class="fas fa-home"></i>
                 <span class="nav-link-text" data-i18n="nav.application_intel">Item Category</span>
             </a>
          
         </li>
         <li>
+            <a href="{{route('product-category.index')}}" title="Application Intel" data-filter-tags="application intel">
+                <i class="fas fa-home"></i>
+                <span class="nav-link-text" data-i18n="nav.application_intel">Product Category</span>
+            </a>
+         
+        </li>
+        <li>
+            <a href="{{route('product-entry.index')}}" title="Application Intel" data-filter-tags="application intel">
+                <i class="fas fa-home"></i>
+                <span class="nav-link-text" data-i18n="nav.application_intel">Product Entry</span>
+            </a>
+         
+        </li>
+        {{-- <li>
             <a href="#" title="Theme Settings" data-filter-tags="theme settings">
                 <i class="fal fa-cog"></i>
                 <span class="nav-link-text" data-i18n="nav.theme_settings">Theme Settings</span>
@@ -92,7 +113,7 @@
                     </a>
                 </li>
             </ul>
-        </li>
+        </li> --}}
 
 
 </nav>

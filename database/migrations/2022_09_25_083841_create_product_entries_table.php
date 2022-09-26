@@ -15,8 +15,8 @@ class CreateProductEntriesTable extends Migration
     {
         Schema::create('product_entries', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('product_category_id')->unsigned();
             $table->bigInteger('item_category_id')->unsigned();
+            $table->bigInteger('product_category_id')->unsigned();
             $table->bigInteger('branch_id')->unsigned();
             $table->string('name');
             $table->string('type')->comment('1:asset,2:inventory');
@@ -28,8 +28,11 @@ class CreateProductEntriesTable extends Migration
             $table->string('purchase_date')->nullable();
             $table->string('warranty_date')->nullable();
             $table->string('tag_no');
-            $table->string('user_name');
+            $table->string('entry_by');
             $table->timestamps();
+            $table->foreign('item_category_id')->references('id')->on('item_categories')->onDelete('cascade');
+            $table->foreign('product_category_id')->references('id')->on('product_cagegories')->onDelete('cascade');
+
         });
     }
 

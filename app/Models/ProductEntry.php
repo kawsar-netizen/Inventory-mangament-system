@@ -20,6 +20,9 @@ class ProductEntry extends Model
         'model_no',
         'purchase_date',
         'tag_no',
-        'user',
+        'entry_by',
+        'quantity',
+        'purchased_name',
+        'warranty_date',
     ];
 }

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
-class ItemCategoryController extends Controller
+class ProductCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,9 @@ class ItemCategoryController extends Controller
      */
     public function index()
     {
-        $itemCategory = DB::table('item_categories')->orderBy('id','ASC')->get();
-        return view('backend.pages.ItemCategory.index',compact('itemCategory'));
+        $productCategory = DB::table('product_cagegories')->orderBy('id','ASC')->get();
+
+        return view('backend.pages.ProductCategory.index',compact('productCategory'));
     }
 
     /**
@@ -26,7 +27,7 @@ class ItemCategoryController extends Controller
      */
     public function create()
     {
-        return view('backend.pages.ItemCategory.create');
+        return view('backend.pages.ProductCategory.create');
     }
 
     /**

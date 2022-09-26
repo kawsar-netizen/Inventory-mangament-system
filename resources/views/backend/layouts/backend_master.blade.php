@@ -24,6 +24,7 @@
     <link rel="mask-icon" href="{{ asset('backend/assets/img/favicon/safari-pinned-tab.svg') }}" color="#5bbad5">
     <link rel="stylesheet" media="screen, print" href="{{ asset('backend/assets/css/fa-solid.css') }}">
     <link rel="stylesheet" media="screen, print" href="{{ asset('backend/assets/css/fa-brands.css') }}">
+    @yield('page_style')
 </head>
 
 <body class="mod-bg-1 nav-function-minify layout-composed">
@@ -464,6 +465,8 @@
 
     <script src="{{ asset('backend/assets/js/vendors.bundle.js') }}"></script>
     <script src="{{ asset('backend/assets/js/app.bundle.js') }}"></script>
+    
+    @yield('page_js')
     <script type="text/javascript">
         // push settings with "false" save to local
         initApp.pushSettings("nav-function-minify layout-composed", false);

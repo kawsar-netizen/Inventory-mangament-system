@@ -18,8 +18,9 @@ class CreateProductCagegoriesTable extends Migration
             $table->bigInteger('item_category_id')->unsigned();
             $table->string('name');
             $table->string('type')->comment('1:asset,2:inventory');
-            $table->string('valuation');
+            // $table->string('valuation');
             $table->timestamps();
+            $table->foreign('item_category_id')->references('id')->on('item_categories')->onDelete('cascade');
         });
     }
 

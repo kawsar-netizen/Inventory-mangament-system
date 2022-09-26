@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\ItemCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,23 +13,27 @@ use App\Http\Controllers\Admin\ItemCategoryController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Auth::routes(['register' => false]);
 
 Route::get('/', function () {
     return view('backend.pages.login');
-
 });
 
-// Route::group(['prefix'=>'admin','middleware' =>['admin','auth']], function(){
+Route::group(['middleware' => 'auth'], function () {
 
     //dashboard route here
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
-    //category route here
-    // Route::resource('/item-category',[ItemCategoryController::class,'itemCategory']);
+    //branch route here
+    Route::resource('/branch', 'App\Http\Controllers\Admin\BranchController');
 
-// });
+    //item category route here
+    Route::resource('/item-category', 'App\Http\Controllers\Admin\ItemCategoryController');
 
+    //product category route here
+    Route::resource('/product-category', 'App\Http\Controllers\Admin\ProductCategoryController');
 
-
-
+    //product category route here
+    Route::resource('/product-entry', 'App\Http\Controllers\Admin\ProductEntryController');
+});
