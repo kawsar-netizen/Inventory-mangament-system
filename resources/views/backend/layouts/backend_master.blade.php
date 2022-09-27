@@ -27,7 +27,7 @@
     @yield('page_style')
 </head>
 
-<body class="mod-bg-1 nav-function-minify layout-composed">
+<body class="mod-bg-1 layout-composed" style="margin-top: -20px">
     <!-- DOC: script to save and load page settings -->
     <script>
         'use strict';
@@ -469,7 +469,7 @@
     @yield('page_js')
     <script type="text/javascript">
         // push settings with "false" save to local
-        initApp.pushSettings("nav-function-minify layout-composed", false);
+        initApp.pushSettings("layout-composed", false);
 
         // the codes below are just for example use, you may need to change the scripts according to your requirement
         // select all checkbox function
