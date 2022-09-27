@@ -1,6 +1,5 @@
 @extends('backend.layouts.backend_master');
 
-<<<<<<< HEAD
 @section('title')
     Dashboard
 @endsection
@@ -84,8 +83,4 @@
             </div>
         </div>
     </div>
-=======
-@section('content_ims')
-  <h1 style="text-align: center;margin-top:40px;">Dashboard</h1>
->>>>>>> 5e71620391174ab5718fffa95406cd2c4d41c8ef
 @endsection
