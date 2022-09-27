@@ -28,28 +28,28 @@
         </li>
         <li>
             <a href="{{route('branch.index')}}" title="Application Intel" data-filter-tags="application intel">
-                <i class="fas fa-home"></i>
+                <i class="fa fa-university"></i>
                 <span class="nav-link-text" data-i18n="nav.application_intel">Branch</span>
             </a>
          
         </li>
         <li>
             <a href="{{route('item-category.index')}}" title="Application Intel" data-filter-tags="application intel">
-                <i class="fas fa-home"></i>
+                <i class="fa fa-folder-open"></i>
                 <span class="nav-link-text" data-i18n="nav.application_intel">Item Category</span>
             </a>
          
         </li>
         <li>
             <a href="{{route('product-category.index')}}" title="Application Intel" data-filter-tags="application intel">
-                <i class="fas fa-home"></i>
+                <i class="fa fa-archive"></i>
                 <span class="nav-link-text" data-i18n="nav.application_intel">Product Category</span>
             </a>
          
         </li>
         <li>
             <a href="{{route('product-entry.index')}}" title="Application Intel" data-filter-tags="application intel">
-                <i class="fas fa-home"></i>
+                <i class="fa fa-plus-circle"></i>
                 <span class="nav-link-text" data-i18n="nav.application_intel">Product Entry</span>
             </a>
          
