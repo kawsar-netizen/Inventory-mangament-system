@@ -21,6 +21,7 @@ class CreateProductCagegoriesTable extends Migration
             // $table->string('valuation');
             $table->timestamps();
             $table->foreign('item_category_id')->references('id')->on('item_categories')->onDelete('cascade');
+            
         });
     }
 

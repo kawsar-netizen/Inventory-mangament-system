@@ -14,10 +14,10 @@ class CreateProductEntriesTable extends Migration
     public function up()
     {
         Schema::create('product_entries', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('item_category_id')->unsigned();
-            $table->bigInteger('product_category_id')->unsigned();
-            $table->bigInteger('branch_id')->unsigned();
+            $table->increments('id');
+            $table->unsignedBigInteger('item_category_id');
+            $table->unsignedBigInteger('product_category_id');
+            $table->unsignedBigInteger('branch_id');
             $table->string('name');
             $table->string('type')->comment('1:asset,2:inventory');
             $table->string('status')->comment('0:requisition,1:product_entry');
@@ -32,6 +32,7 @@ class CreateProductEntriesTable extends Migration
             $table->timestamps();
             $table->foreign('item_category_id')->references('id')->on('item_categories')->onDelete('cascade');
             $table->foreign('product_category_id')->references('id')->on('product_cagegories')->onDelete('cascade');
+            //$table->foreign('branch_id')->references('id')->on('branches');
 
         });
     }
