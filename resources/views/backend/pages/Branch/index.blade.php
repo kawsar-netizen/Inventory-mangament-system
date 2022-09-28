@@ -8,9 +8,9 @@
     <link rel="stylesheet" media="screen, print" href="{{ asset('backend/assets/css/fa-solid.css') }}">
 @endsection
 @section('content_ims')
-@if (Session::get('delete'))
+@if (Session::get('success'))
 <script>
-    alert('{{ Session::get('delete') }}')
+    alert('{{ Session::get('success') }}')
 </script>
 @endif
 @if (Session::get('fail'))
