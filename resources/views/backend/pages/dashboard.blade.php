@@ -16,66 +16,30 @@
 
                             <div class="card bg-info text-white text-center p-3">
                                 <blockquote class="blockquote mb-0">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat.</p>
+                                    <h3>475</h3>
                                     <footer class="blockquote-footer text-white">
-                                        <small>
-                                            Someone famous in <cite title="Source Title">Source Title</cite>
-                                        </small>
+                                        <p>Number of Branches</p>
                                     </footer>
                                 </blockquote>
                             </div>
                             <div class="card bg-primary text-white text-center p-3">
                                 <blockquote class="blockquote mb-0">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat.</p>
+                                    <h3>2774</h3>
                                     <footer class="blockquote-footer text-white">
-                                        <small>
-                                            Someone famous in <cite title="Source Title">Source Title</cite>
-                                        </small>
+                                        <p>Current Asset Valuation</p>
                                     </footer>
                                 </blockquote>
                             </div>
 
                             <div class="card bg-primary text-white text-center p-3">
                                 <blockquote class="blockquote mb-0">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat.</p>
+                                    <h3>25</h3>
                                     <footer class="blockquote-footer text-white">
-                                        <small>
-                                            Someone famous in <cite title="Source Title">Source Title</cite>
-                                        </small>
+                                       <p>Number of Product Category</p>
                                     </footer>
                                 </blockquote>
                             </div>
-                            <div class="card bg-secondary text-white text-center p-3">
-                                <blockquote class="blockquote mb-0">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat.</p>
-                                    <footer class="blockquote-footer text-white">
-                                        <small>
-                                            Someone famous in <cite title="Source Title">Source Title</cite>
-                                        </small>
-                                    </footer>
-                                </blockquote>
-                            </div>
-
-                            <div class="card bg-success text-white text-center p-3">
-                                <blockquote class="blockquote mb-0">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat.</p>
-                                    <footer class="blockquote-footer text-white">
-                                        <small>
-                                            Someone famous in <cite title="Source Title">Source Title</cite>
-                                        </small>
-                                    </footer>
-                                </blockquote>
-                            </div>
-                            <div class="card bg-primary text-white text-center p-3">
-                                <blockquote class="blockquote mb-0">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat.</p>
-                                    <footer class="blockquote-footer text-white">
-                                        <small>
-                                            Someone famous in <cite title="Source Title">Source Title</cite>
-                                        </small>
-                                    </footer>
-                                </blockquote>
-                            </div>
+                            
 
                         </div>
                     </div>
