@@ -5,9 +5,19 @@
 @section('page_style')
     <link rel="stylesheet" media="screen, print"
         href="{{ asset('backend/assets/css/datagrid/datatables/datatables.bundle.css') }}">
-        <link rel="stylesheet" media="screen, print" href="{{asset("backend/assets/css/fa-solid.css")}}">
+    <link rel="stylesheet" media="screen, print" href="{{ asset('backend/assets/css/fa-solid.css') }}">
 @endsection
 @section('content_ims')
+@if (Session::get('delete'))
+<script>
+    alert('{{ Session::get('delete') }}')
+</script>
+@endif
+@if (Session::get('fail'))
+<script>
+    alert('{{ Session::get('fail') }}')
+</script>
+@endif
     <div class="row" style="margin-left: 80px;margin-right: 80px; margin-top:50px;">
         <div class="col-xl-12">
             <div id="panel-1" class="panel">
@@ -17,7 +27,8 @@
                     </h2>
                     <div class="panel-toolbar">
                         <a href="{{ route('branch.create') }}">
-                            <button class="btn btn-primary btn-sm"> <span class="fal fa-plus mr-1"></span> Add Branch</button>
+                            <button class="btn btn-primary btn-sm"> <span class="fal fa-plus mr-1"></span> Add
+                                Branch</button>
                         </a>
                     </div>
                 </div>
@@ -29,34 +40,39 @@
                                 <tr>
                                     <th>SL</th>
                                     <th>Branch Name</th>
-                                    <th>Branch Code</th>
                                     <th>Branch Address</th>
+                                    <th>Branch Code</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($branches as $item)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{$item->br_name}}</td>
+                                        <td>{{$item->br_address}}</td>
+                                        <td>{{$item->br_code}}</td>
+                                        <td>
+                                            <form action="{{ route('branch.destroy', $item->id) }}" method="post">
+                                                @csrf
+                                            <a href="{{route('branch.show',$item->id)}}"class="btn btn-sm btn-primary waves-effect waves-themed">View</a>
+                                            <a href="{{ route('branch.edit', $item->id) }}">
+                                                <button type="button" class="btn btn-sm btn-info waves-effect waves-themed">Edit</button>
+                                            </a>
+                                            {{-- @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger waves-effect waves-themed"onclick="return confirm('Are you sure from delete?')">Delete</button> --}}
+                                        </form>
+                                        </td>
 
-                                <tr>
-                                    <td>1</td>
-                                    <td>Vivian Harrell</td>
-                                    <td>Financial Controller</td>
-                                    <td>--</td>
-                                    <td>
-                                        <a href="" class="btn btn-sm btn-primary waves-effect waves-themed">View</a>
-                                        <a href="" class="btn btn-sm btn-info waves-effect waves-themed">Edit</a>
-                                        <a href="" class="btn btn-sm btn-danger waves-effect waves-themed">Delete</a>
-                                    </td>
-                                    
-                                </tr>
-
-
+                                    </tr>
+                                @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <th>SL</th>
                                     <th>Branch Name</th>
-                                    <th>Branch Code</th>
                                     <th>Branch Address</th>
+                                    <th>Branch Code</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
@@ -70,14 +86,12 @@
 @endsection
 @section('page_js')
     <script src="{{ asset('backend/assets/js/datagrid/datatables/datatables.bundle.js') }}"></script>
-    <script src="{{asset('backend/assets/js/datagrid/datatables/datatables.export.js')}}"></script>
+    <script src="{{ asset('backend/assets/js/datagrid/datatables/datatables.export.js') }}"></script>
     <script>
-        $(document).ready(function()
-        {
+        $(document).ready(function() {
 
             // initialize datatable
-            $('#dt-basic-example').dataTable(
-            {
+            $('#dt-basic-example').dataTable({
                 responsive: true,
                 lengthChange: false,
                 dom:
@@ -126,6 +140,5 @@
             });
 
         });
-
     </script>
 @endsection
