@@ -43,6 +43,34 @@
                                                 required="" aria-required="true">
                                                 <span style="color: red">@error('br_address'){{$message}}@enderror</span>
                                         </div>
+                                        <div class="col-md-12 mb-3 select_2_error">
+                                            <label class="form-label" for="location">Location Category</label>
+
+                                            <select class="form-control" name="location" id="location" >
+                                               
+                                                <option  value="{{$edit->location}}" {{ $edit->location == '' ? 'selected' : '' }}>Select Location Category</option>
+                                                <option value="{{$edit->location}}" {{ $edit->location == '1' ? 'selected' : '' }}>Rural</option>
+                                              
+                                                <option value="{{$edit->location}}" {{ $edit->location == '2' ? 'selected' : '' }}>Unrural</option>
+
+                                            </select>
+                                            
+
+                                            <span style="color: red">@error('location'){{$message}}@enderror</span>
+                                        </div>
+                                        <div class="col-md-12 mb-3 select_2_error">
+                                            <label class="form-label" for="br_type">Branch Type</label>
+                                            <select class="form-control" name="br_type" id="br_type" >
+
+                                                <option value="{{$edit->br_type}}" {{ $edit->br_type == '' ? 'selected' : '' }}>Select Branch Type</option>
+                                                <option value="{{$edit->br_type}}" {{ $edit->br_type == '1' ? 'selected' : '' }}>Sub Branch</option>
+                                                <option value="{{$edit->br_type}}" {{ $edit->br_type == '2' ? 'selected' : '' }}>Head Office</option>
+                                                <option value="{{$edit->br_type}}" {{ $edit->br_type == '3' ? 'selected' : '' }}>Agent</option>
+                                                <option value="{{$edit->br_type}}" {{ $edit->br_type == '4' ? 'selected' : '' }}>Branch</option>
+
+                                            </select>
+                                            <span style="color: red">@error('br_type'){{$message}}@enderror</span>
+                                        </div>
                                         <div class="col-md-12 mb-3">
                                             <label class="form-label" for="br_code"> Code </label>
                                             <input type="text" name="br_code" class="form-control"value="{{$edit->br_code}}"

@@ -39,8 +39,6 @@
                                     </footer>
                                 </blockquote>
                             </div>
-                            
-
                         </div>
                     </div>
                 </div>
