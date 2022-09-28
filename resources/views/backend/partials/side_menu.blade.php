@@ -26,7 +26,7 @@
          
         </li>
        
-       <li class="{{ Route::currentRouteNamed('branch.index')||Route::currentRouteNamed('item-category.index')||Route::currentRouteNamed('product-category.index') ? 'active' : '' }}">
+       <li class="{{ Route::currentRouteNamed('branch.index')||Route::currentRouteNamed('user.index')||Route::currentRouteNamed('item-category.index')||Route::currentRouteNamed('product-category.index') ? 'active' : '' }}">
             <a href="#" title="Parameter Settings" >
                 <i class="fal fa-cog"></i>
                 <span class="nav-link-text" data-i18n="nav.theme_settings">Parameter Settings</span>
@@ -39,7 +39,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" title="User">
+                    <a href="{{route('user.index')}}" title="User" class="{{ Route::currentRouteNamed('user.index') ? 'list-group-item active' : '' }}">
                         <i class="fa fa-users"></i>
                         <span class="nav-link-text" data-i18n="nav.theme_settings_layout_options">User</span>
                     </a>

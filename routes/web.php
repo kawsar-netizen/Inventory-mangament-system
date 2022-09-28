@@ -25,6 +25,9 @@ Route::group(['middleware' => 'auth'], function () {
     //dashboard route here
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
+    //user route here
+    Route::resource('/user', 'App\Http\Controllers\Admin\UserController');
+
     //branch route here
     Route::resource('/branch', 'App\Http\Controllers\Admin\BranchController');
 

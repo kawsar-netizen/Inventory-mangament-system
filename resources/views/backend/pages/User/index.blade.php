@@ -26,9 +26,9 @@
                         Branch <span class="fw-300"><i>List</i></span>
                     </h2>
                     <div class="panel-toolbar">
-                        <a href="{{ route('branch.create') }}">
+                        <a href="{{ route('user.create') }}">
                             <button class="btn btn-primary btn-sm"> <span class="fal fa-plus mr-1"></span> Add
-                                Branch</button>
+                                User</button>
                         </a>
                     </div>
                 </div>
@@ -39,28 +39,26 @@
                             <thead>
                                 <tr>
                                     <th>SL</th>
-                                    <th>Branch Name</th>
-                                    <th>Branch Address</th>
-                                    <th>Branch Code</th>
+                                    <th>User Name</th>
+                                    <th>User Branch</th>
+                                    <th>Email</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($branches as $item)
+                                @foreach ($users as $user)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{$item->br_name}}</td>
-                                        <td>{{$item->br_address}}</td>
-                                        <td>{{$item->br_code}}</td>
+                                        <td>{{$user->name}}</td>
+                                        <td>{{$user->branch_name}}</td>
+                                        <td>{{$user->email}}</td>
                                         <td>
-                                            <form action="{{ route('branch.destroy', $item->id) }}" method="post">
+                                            <form action="" method="post">
                                                 @csrf
-                                            <a href="{{route('branch.show',$item->id)}}"class="btn btn-sm btn-primary waves-effect waves-themed">View</a>
-                                            <a href="{{ route('branch.edit', $item->id) }}">
+                                            <a href="{{route('user.show',$user->id)}}"class="btn btn-sm btn-primary waves-effect waves-themed">View</a>
+                                            <a href="">
                                                 <button type="button" class="btn btn-sm btn-info waves-effect waves-themed">Edit</button>
                                             </a>
-                                            {{-- @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger waves-effect waves-themed"onclick="return confirm('Are you sure from delete?')">Delete</button> --}}
                                         </form>
                                         </td>
 
@@ -70,9 +68,9 @@
                             <tfoot>
                                 <tr>
                                     <th>SL</th>
-                                    <th>Branch Name</th>
-                                    <th>Branch Address</th>
-                                    <th>Branch Code</th>
+                                    <th>User Name</th>
+                                    <th>User Branch</th>
+                                    <th>Email</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>

@@ -47,7 +47,7 @@
                             <div>
                                 <a href="#" data-toggle="dropdown" title="drlantern@gotbootstrap.com"
                                     class="header-icon d-flex align-items-center justify-content-center ml-2">
-                                    <img src="{{ asset('backend/assets/img/demo/avatars/avatar-admin.png') }}"
+                                    <img src="{{ asset('backend/assets/img/demo/avatars/avatar-m.png') }}"
                                         class="profile-image rounded-circle" alt="Dr. Codex Lantern">
                                    
                                 </a>
@@ -55,7 +55,7 @@
                                     <div class="dropdown-header bg-trans-gradient d-flex flex-row py-4 rounded-top">
                                         <div class="d-flex flex-row align-items-center mt-1 mb-1 color-white">
                                             <span class="mr-2">
-                                                <img src="{{ asset('backend/assets/img/demo/avatars/avatar-admin.png') }}"
+                                                <img src="{{ asset('backend/assets/img/demo/avatars/avatar-m.png') }}"
                                                     class="rounded-circle profile-image" alt="Dr. Codex Lantern">
                                             </span>
                                             <div class="info-card-text">

@@ -24,6 +24,7 @@
     <link rel="mask-icon" href="{{ asset('backend/assets/img/favicon/safari-pinned-tab.svg') }}" color="#5bbad5">
     <link rel="stylesheet" media="screen, print" href="{{ asset('backend/assets/css/fa-solid.css') }}">
     <link rel="stylesheet" media="screen, print" href="{{ asset('backend/assets/css/fa-brands.css') }}">
+    <link rel="stylesheet" media="screen, print" href="{{ asset('backend/assets/css/formplugins/select2/select2.bundle.css') }}">
     @yield('page_style')
 </head>
 
@@ -465,6 +466,7 @@
 
     <script src="{{ asset('backend/assets/js/vendors.bundle.js') }}"></script>
     <script src="{{ asset('backend/assets/js/app.bundle.js') }}"></script>
+    <script src="{{ asset('backend/assets/js/formplugins/select2/select2.bundle.js') }}"></script>
     
     @yield('page_js')
     <script type="text/javascript">
