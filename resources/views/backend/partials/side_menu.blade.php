@@ -54,7 +54,7 @@
             </a>
          
         </li>
-        {{-- <li>
+        <li>
             <a href="#" title="Theme Settings" data-filter-tags="theme settings">
                 <i class="fal fa-cog"></i>
                 <span class="nav-link-text" data-i18n="nav.theme_settings">Theme Settings</span>
@@ -87,7 +87,7 @@
                 </li>
             </ul>
         </li>
-        <li>
+        {{-- <li>
             <a href="#" title="Package Info" data-filter-tags="package info">
                 <i class="fal fa-tag"></i>
                 <span class="nav-link-text" data-i18n="nav.package_info">Package Info</span>
@@ -113,7 +113,7 @@
                     </a>
                 </li>
             </ul>
-        </li> --}}
+        </li>  --}}
 
 
 </nav>

@@ -30,6 +30,7 @@
                                     <th>SL</th>
                                     <th>Branch Name</th>
                                     <th>Branch Code</th>
+                                    <th>Branch Address</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -39,6 +40,7 @@
                                     <td>1</td>
                                     <td>Vivian Harrell</td>
                                     <td>Financial Controller</td>
+                                    <td>--</td>
                                     <td>
                                         <a href="" class="btn btn-sm btn-primary waves-effect waves-themed">View</a>
                                         <a href="" class="btn btn-sm btn-info waves-effect waves-themed">Edit</a>
@@ -52,8 +54,9 @@
                             <tfoot>
                                 <tr>
                                     <th>SL</th>
-                                    <th>Item Category Name</th>
-                                    <th>Valuation</th>
+                                    <th>Branch Name</th>
+                                    <th>Branch Code</th>
+                                    <th>Branch Address</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
