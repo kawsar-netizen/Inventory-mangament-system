@@ -24,8 +24,9 @@
                         <div class="loader"><i class="fal fa-spinner-third fa-spin-4x fs-xxl"></i></div>
                         <div class="panel-content">
 
-                            <form id="transaction_create_from" action="{{route('product-category.store')}}" method="post" enctype="multipart/form-data">
+                            <form id="transaction_create_from" action="{{route('product-category.update',$data->id)}}" method="post" enctype="multipart/form-data">
                                 @csrf
+                                @method('PUT')
                                 <div class="row">
                                     <div class="col-md-12">
 
@@ -35,18 +36,16 @@
                                                 name="item_category_id" id="item_category_id" required="">
 
                                                 <option value="">Select Item Category</option>
-                                                @foreach ($itemCategory as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                @foreach($item_category as $item){
+                                                    <option value="{{$item->id}}" {{ $item->id == $data->item_category_id ?"selected":""}}>{{$item->name}}</option>}
                                                 @endforeach
-
                                             </select>
                                         </div>
 
                                         <div class="col-md-12 mb-3">
                                             <label class="form-label" for="name">Name</label>
-                                            <input type="text" placeholder="Product category name" name="name"
-                                                id="name" class="form-control" required="" aria-required="true"
-                                                value="{{ old('name') }}">
+                                            <input type="text"  name="name"
+                                                id="name" class="form-control" required=""value="{{ $data->name}}">
                                             <span style="color: red">
                                                 @error('name')
                                                     {{ $message }}
@@ -57,9 +56,9 @@
                                             <label class="form-label" for="type">Type</label>
                                             <select class="form-control select2 select2-hidden-accessible" name="type"
                                                 id="type" required="">
-                                                <option value="">Select Type</option>
-                                                <option value="1">Asset</option>
-                                                <option value="2">Inventory</option>
+                                                <option value="{{$data->type}}" {{ $data->type == '' ? 'selected' : '' }}>Select Type</option>
+                                                <option value="{{$data->type}}"{{ $data->type == '1' ? 'selected' : '' }}>Asset</option>
+                                                <option value="{{$data->type}}"{{ $data->type == '2' ? 'selected' : '' }}>Inventory</option>
                                             </select>
                                             <span style="color: red">
                                                 @error('type')
@@ -72,7 +71,7 @@
                                             <label class="form-label" for="valuation"> Valuation </label>
                                             <input type="number" name="valuation" class="form-control" value="
                                             @php
-                                                $itemCategory = DB::table('item_categories')->where('id','=',$data->item_category_id)->first();
+                                                $itemCategory = DB::table('item_categories')->where('id','=',$item_category->item_category_id)->first();
                                             @endphp{{$itemCategory->valuation}}"id="valuation" required="" >
                                                 <span style="color: red">
                                                     @error('valuation')
@@ -90,7 +89,6 @@
                                     <button class="btn btn-primary  waves-effect waves-themed submit_btn"
                                         type="submit">Submit form</button>
                                 </div>
-
                             </form>
                         </div>
                     </div>
