@@ -8,9 +8,9 @@
     <link rel="stylesheet" media="screen, print" href="{{ asset('backend/assets/css/fa-solid.css') }}">
 @endsection
 @section('content_ims')
-@if (Session::get('delete'))
+@if (Session::get('success'))
 <script>
-    alert('{{ Session::get('delete') }}')
+    alert('{{ Session::get('success') }}')
 </script>
 @endif
 @if (Session::get('fail'))
@@ -50,7 +50,12 @@
                                 @foreach ($productCategory as $item)
                                     <tr>
                                         <td>{{$loop->iteration}}</td>
-                                        <td></td>
+                                        <td>
+                                            @php
+                                                $item_category_name = DB::table('item_categories')->where('id','=',$item->item_category_id)->first();
+                                            @endphp
+                                            {{$item_category_name->name}}
+                                        </td>
                                         <td>{{$item->name}}</td>
                                         <td>
                                             @if ($item->type == 1)
@@ -63,8 +68,8 @@
                                         <td>
                                             <form action="{{ route('product-category.destroy', $item->id) }}" method="post">
                                                 @csrf
-                                                <a
-                                                    href="{{ route('product-category.show', $item->id) }}"class="btn btn-sm btn-primary waves-effect waves-themed">View</a>
+                                                {{-- <a
+                                                    href="{{ route('product-category.show', $item->id) }}"class="btn btn-sm btn-primary waves-effect waves-themed">View</a> --}}
                                                 <a href="{{ route('product-category.edit', $item->id) }}">
                                                     <button type="button"
                                                         class="btn btn-sm btn-info waves-effect waves-themed">Edit</button>
@@ -72,9 +77,7 @@
                                                 @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-danger waves-effect waves-themed"onclick="return confirm('Are you sure from delete?')">Delete</button>
                                             </form>
-
                                         </td>
-
                                     </tr>
                                 @endforeach
                             </tbody>
