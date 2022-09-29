@@ -100,15 +100,15 @@ class BranchController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $edit = DB::table('branches')->where('id',$id)->limit('1')->update([
+        $edit = DB::table('branches')->where('id',$id)->update([
             'br_name'       => $request->input('br_name'),
             'br_address'    => $request->input('br_address'),
             'location'      => $request->input('location'),
             'br_type'       => $request->input('br_type'),
             'br_code'       => $request->input('br_code'),
         ]);
-        if($edit){
-            return redirect()->route('branch.index')->with('success','Data have been successfully updated!!');
+        if( $edit == true ){
+            return back()->with('success','Data have been successfully updated!!');
         }else{
             return back()->with('fail','Something went wrong.Please try letter!!');
         }

@@ -47,7 +47,7 @@
                                         </div>
                                         <div class="col-md-12 mb-3 select_2_error">
                                             <label class="form-label" for="location">Location Category</label>
-                                            <select class="form-control select2 select2-hidden-accessible" name="location" id="location" required="" data-select2-id="employee_id" tabindex="-1" aria-hidden="true" aria-required="true">
+                                            <select class="form-control select2 " name="location" id="location" required="" data-select2-id="employee_id" tabindex="-1" aria-hidden="true" aria-required="true">
 
                                                 <option value="" >Select Location Category</option>
                                                 <option value="1" data-select2-id="1">Rural</option>
