@@ -95,10 +95,6 @@
                
             </ul>
         </li>
-
-
-
-
          <li class="{{ Route::currentRouteNamed('#items')||Route::currentRouteNamed('#products')||Route::currentRouteNamed('#valuation')||Route::currentRouteNamed('#mis') ? 'active' : '' }}">
             <a href="#" title="Report">
                 <i class="fa fa-list-ul"></i>

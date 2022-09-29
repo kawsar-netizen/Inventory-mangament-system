@@ -37,7 +37,6 @@ class BranchController extends Controller
      */
     public function store(Request $request)
     {
-        
         $request->validate([
             'br_name'       => 'required',
             'br_address'    => 'required',
@@ -45,12 +44,16 @@ class BranchController extends Controller
         ], [
             'br_name.required'          => 'Select branch name',
             'br_address.required'       => 'Select branch address',
+            'location.required'         => 'Select location category',
+            'br_type.required'          => 'Select branch type',
             'br_code.required'          => 'Select branch code',
             'br_code.required|unique'   => 'Branch code has already been taken',
         ]);
         $data = DB::table('branches')->insert([
             'br_name'       => $request->input('br_name'),
             'br_address'    => $request->input('br_address'),
+            'location'      => $request->input('location'),
+            'br_type'       => $request->input('br_type'),
             'br_code'       => $request->input('br_code'),
         ]);
         if($data){
@@ -100,10 +103,12 @@ class BranchController extends Controller
         $edit = DB::table('branches')->where('id',$id)->limit('1')->update([
             'br_name'       => $request->input('br_name'),
             'br_address'    => $request->input('br_address'),
+            'location'      => $request->input('location'),
+            'br_type'       => $request->input('br_type'),
             'br_code'       => $request->input('br_code'),
         ]);
         if($edit){
-            return back()->with('success','Data have been successfully updated!!');
+            return redirect()->route('branch.index')->with('success','Data have been successfully updated!!');
         }else{
             return back()->with('fail','Something went wrong.Please try letter!!');
         }

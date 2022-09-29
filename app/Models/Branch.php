@@ -13,6 +13,8 @@ class Branch extends Model
         'id',
         'br_name',
         'br_code',
+        'location',
+        'br_type',
         'status',
     ];
 }

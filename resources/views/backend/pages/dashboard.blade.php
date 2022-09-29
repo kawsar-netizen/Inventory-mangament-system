@@ -52,8 +52,6 @@
                                 </blockquote>
                                 <i class="fa fa-folder position-absolute pos-right pos-bottom opacity-15 mb-n1 mr-n1" style="font-size:6rem"></i>
                             </div>
-                            
-
                         </div>
                     </div>
                 </div>

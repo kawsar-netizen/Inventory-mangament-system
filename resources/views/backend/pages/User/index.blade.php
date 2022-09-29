@@ -7,7 +7,17 @@
         href="{{ asset('backend/assets/css/datagrid/datatables/datatables.bundle.css') }}">
     <link rel="stylesheet" media="screen, print" href="{{ asset('backend/assets/css/fa-solid.css') }}">
 @endsection
+
+
 @section('content_ims')
+
+
+@if (Session::get('success'))
+<script>
+    alert('{{ Session::get('success') }}')
+</script>
+@endif
+
 @if (Session::get('delete'))
 <script>
     alert('{{ Session::get('delete') }}')
@@ -56,7 +66,7 @@
                                             <form action="" method="post">
                                                 @csrf
                                             <a href="{{route('user.show',$user->id)}}"class="btn btn-sm btn-primary waves-effect waves-themed">View</a>
-                                            <a href="">
+                                            <a href="{{ route('user.edit', $user->id) }}">
                                                 <button type="button" class="btn btn-sm btn-info waves-effect waves-themed">Edit</button>
                                             </a>
                                         </form>

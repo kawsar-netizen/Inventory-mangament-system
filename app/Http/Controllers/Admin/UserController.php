@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+
+use App\Models\User;
+
+use Auth;
 
 
 class UserController extends Controller
@@ -100,7 +106,21 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        
+         $edit = DB::table('users')
+                ->leftJoin('branches', 'branch_id', '=', 'branches.id')
+                 ->select('users.*', 'branches.br_name as branch_name')
+                ->where('users.id', $id)
+                ->first();
+
+        // dd($edit);
+
+
+        $branches = DB::table('branches')
+                    ->get();
+
+
+        return view('backend.pages.User.edit',compact('edit','branches'));
     }
 
     /**
@@ -112,7 +132,54 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+          
+        //   $request->validate([
+            
+        //     'email'    => 'unique:users,email,'.Auth::user()->id.',id'
+            
+        // ]);
+
+
+          // $this->validate($request, [
+          //                   'email' => ['required', Rule::unique('users')->ignore(auth()->id())],
+          //               ]);
+
+
+          Validator::make($request->all(), [
+                        'email' => [
+                            'required',
+                            Rule::unique('users')->ignore(Auth::user()->id),
+                        ],
+                    ]);
+
+
+
+        //   $request->validate([
+        //     'email'    => [
+        //                     Rule::unique('users')->ignore(Auth::user()->id),
+        //                 ],
+           
+        // ]);
+
+
+
+        $edit = DB::table('users')
+               ->where('id',$id)
+               ->limit('1')
+               ->update([
+            'name'       => $request->input('name'),
+            'branch_id'    => $request->input('branch_id'),
+            'email'       => $request->input('email'),
+                ]);
+
+        // dd($edit);
+
+        if($edit){
+            return redirect()->route('user.index')->with('success','Data have been successfully updated!!');
+        }else{
+            return back()->with('fail','Something went wrong.Please try letter!!');
+        }
     }
 
     /**

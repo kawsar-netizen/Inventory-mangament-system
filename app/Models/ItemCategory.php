@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\ProductCagegory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ItemCategory extends Model
 {
@@ -14,5 +15,9 @@ class ItemCategory extends Model
         'valuation',
         'status',
     ];
+    public function ProductCategory()
+    {
+        return $this->hasMany(ProductCagegory::class);
+    }
 
 }

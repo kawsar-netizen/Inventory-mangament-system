@@ -8,16 +8,16 @@
     <link rel="stylesheet" media="screen, print" href="{{ asset('backend/assets/css/fa-solid.css') }}">
 @endsection
 @section('content_ims')
-@if (Session::get('delete'))
-<script>
-    alert('{{ Session::get('delete') }}')
-</script>
-@endif
-@if (Session::get('fail'))
-<script>
-    alert('{{ Session::get('fail') }}')
-</script>
-@endif
+    @if (Session::get('success'))
+        <script>
+            alert('{{ Session::get('success') }}')
+        </script>
+    @endif
+    @if (Session::get('fail'))
+        <script>
+            alert('{{ Session::get('fail') }}')
+        </script>
+    @endif
     <div class="row" style="margin-left: 80px;margin-right: 80px; margin-top:50px;">
         <div class="col-xl-12">
             <div id="panel-1" class="panel">
@@ -41,6 +41,8 @@
                                     <th>SL</th>
                                     <th>Branch Name</th>
                                     <th>Branch Address</th>
+                                    <th>Location Category</th>
+                                    <th>Branch Type</th>
                                     <th>Branch Code</th>
                                     <th>Action</th>
                                 </tr>
@@ -49,19 +51,39 @@
                                 @foreach ($branches as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{$item->br_name}}</td>
-                                        <td>{{$item->br_address}}</td>
-                                        <td>{{$item->br_code}}</td>
+                                        <td>{{ $item->br_name }}</td>
+                                        <td>{{ $item->br_address }}</td>
+                                        <td>
+                                            @if ($item->location == 1)
+                                                {{ 'Rural' }}
+                                            @else
+                                                {{ 'Unrural' }}
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($item->br_type == 1)
+                                                {{ 'Sub Branch' }}
+                                            @elseif($item->br_type == 2)
+                                                {{ 'Head Office' }}
+                                            @elseif($item->br_type == 3)
+                                                {{ 'Agent' }}
+                                            @else
+                                                {{ 'Branch' }}
+                                            @endif
+                                        </td>
+                                        <td>{{ $item->br_code }}</td>
                                         <td>
                                             <form action="{{ route('branch.destroy', $item->id) }}" method="post">
                                                 @csrf
-                                            <a href="{{route('branch.show',$item->id)}}"class="btn btn-sm btn-primary waves-effect waves-themed">View</a>
-                                            <a href="{{ route('branch.edit', $item->id) }}">
-                                                <button type="button" class="btn btn-sm btn-info waves-effect waves-themed">Edit</button>
-                                            </a>
-                                            {{-- @method('DELETE')
+                                                <a
+                                                    href="{{ route('branch.show', $item->id) }}"class="btn btn-sm btn-primary waves-effect waves-themed">View</a>
+                                                <a href="{{ route('branch.edit', $item->id) }}">
+                                                    <button type="button"
+                                                        class="btn btn-sm btn-info waves-effect waves-themed">Edit</button>
+                                                </a>
+                                                {{-- @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-danger waves-effect waves-themed"onclick="return confirm('Are you sure from delete?')">Delete</button> --}}
-                                        </form>
+                                            </form>
                                         </td>
 
                                     </tr>
@@ -72,6 +94,8 @@
                                     <th>SL</th>
                                     <th>Branch Name</th>
                                     <th>Branch Address</th>
+                                    <th>Location Category</th>
+                                    <th>Branch Type</th>
                                     <th>Branch Code</th>
                                     <th>Action</th>
                                 </tr>

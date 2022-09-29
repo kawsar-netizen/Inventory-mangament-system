@@ -18,23 +18,24 @@
             <div class="col-xl-6 col-md-7 sortable-grid ui-sortable">
                 <div id="panel-3" class="panel panel-sortable" role="widget">
                     <div class="panel-hdr" role="heading">
-                        <h2 class="ui-sortable-handle">Item Category Set up Form</h2>
+                        <h2 class="ui-sortable-handle">Item Category Update Set up Form</h2>
                     </div>
                     <div class="panel-container show" role="content">
                         <div class="loader"><i class="fal fa-spinner-third fa-spin-4x fs-xxl"></i></div>
                         <div class="panel-content">
 
-                            <form id="transaction_create_from" action="{{ route('item-category.store') }}"
+                            <form id="transaction_create_from" action="{{ route('item-category.update', $edit->id) }}"
                                 method="post"enctype="multipart/form-data" novalidate="novalidate">
 
                                 @csrf
+                                @method('PUT')
+
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="col-md-12 mb-3">
                                             <label class="form-label" for="name">Name</label>
-                                            <input type="text" placeholder="Enter item category name" name="name"
-                                                id="name" class="form-control" required="" aria-required="true"
-                                                value="{{ old('name') }}">
+                                            <input type="text" name="name" id="name" class="form-control"
+                                                required="" aria-required="true" value="{{ $edit->name }}">
                                             <span style="color: red">
                                                 @error('name')
                                                     {{ $message }}
@@ -43,8 +44,7 @@
                                         </div>
                                         <div class="col-md-12 mb-3">
                                             <label class="form-label" for="valuation">Valuation</label>
-                                            <input type="number" placeholder="Enter item category valuation"
-                                                name="valuation"value="{{ old('valuation') }}" id="valuation"
+                                            <input type="number" name="valuation"value="{{ $edit->valuation }}" id="valuation"
                                                 class="form-control" required="" aria-required="true">
                                             <span style="color: red">
                                                 @error('valuation')
@@ -57,7 +57,7 @@
                                 <div
                                     class="panel-content border-faded border-left-0 border-right-0 border-bottom-0 d-flex flex-row align-items-center p-2">
                                     <button class="btn btn-primary  waves-effect waves-themed submit_btn"
-                                        type="submit">Submit form</button>
+                                        type="submit">Update form</button>
                                 </div>
                             </form>
                         </div>

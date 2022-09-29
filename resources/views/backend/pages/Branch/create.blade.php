@@ -45,6 +45,30 @@
                                                 required="" aria-required="true">
                                                 <span style="color: red">@error('br_address'){{$message}}@enderror</span>
                                         </div>
+                                        <div class="col-md-12 mb-3 select_2_error">
+                                            <label class="form-label" for="location">Location Category</label>
+                                            <select class="form-control select2 select2-hidden-accessible" name="location" id="location" required="" data-select2-id="employee_id" tabindex="-1" aria-hidden="true" aria-required="true">
+
+                                                <option value="" >Select Location Category</option>
+                                                <option value="1" data-select2-id="1">Rural</option>
+                                                <option value="2" data-select2-id="2">Unrural</option>
+
+                                            </select>
+                                            <span style="color: red">@error('location'){{$message}}@enderror</span>
+                                        </div>
+                                        <div class="col-md-12 mb-3 select_2_error">
+                                            <label class="form-label" for="br_type">Branch Type</label>
+                                            <select class="form-control select2 select2-hidden-accessible" name="br_type" id="br_type" required="" data-select2-id="employee_id" tabindex="-1" aria-hidden="true" aria-required="true">
+
+                                                <option value="" >Select Branch Type</option>
+                                                <option value="1" data-select2-id="1">Sub Branch</option>
+                                                <option value="2" data-select2-id="2">Head Office</option>
+                                                <option value="3" data-select2-id="3">Agent</option>
+                                                <option value="4" data-select2-id="4">Branch</option>
+
+                                            </select>
+                                            <span style="color: red">@error('br_type'){{$message}}@enderror</span>
+                                        </div>
                                         <div class="col-md-12 mb-3">
                                             <label class="form-label" for="br_code"> Code </label>
                                             <input type="text" name="br_code" class="form-control"value="{{old('br_code')}}"

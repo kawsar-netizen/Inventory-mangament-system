@@ -27,7 +27,8 @@ class ProductCategoryController extends Controller
      */
     public function create()
     {
-        return view('backend.pages.ProductCategory.create');
+        $itemCategory = DB::table('item_categories')->get();
+        return view('backend.pages.ProductCategory.create',compact('itemCategory'));
     }
 
     /**
@@ -38,7 +39,29 @@ class ProductCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'item_category_id'          => 'required',
+            'name'                      => 'required',
+            'type'                      => 'required',
+            'valuation'                 => 'required',
+        ], [
+            'item_category_id.required'             => 'Select item category name',
+            'name.required'                         => 'Select product category name',
+            'type.required'                         => 'Select product category type',
+            'valuation.required'                    => 'Select valuation',
+
+        ]);
+        $data = DB::table('product_cagegories')->insert([
+            'item_category_id'       => $request->input('item_category_id'),
+            'name'                   => $request->input('name'),
+            'type'                   => $request->input('type'),
+
+        ]);
+        if($data){
+            return back()->with('success','Data have been successfully inserted!!');
+        }else{
+            return back()->with('fail','Something went wrong.Please try letter!!');
+        }
     }
 
     /**
@@ -49,7 +72,9 @@ class ProductCategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $data =  DB::table('product_cagegories')->where('id', $id)->first();
+
+        return view('backend.pages.ProductCategory.view',compact('data'));
     }
 
     /**
@@ -83,6 +108,11 @@ class ProductCategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data =  DB::table('item_categories')->where('id', $id)->delete();
+        if($data){
+         return back()->with('delete','product category have been successfully deleted!!');
+        }else{
+         return back()->with('fail','Something went wrong.Please try letter!!');
+        }
     }
 }
