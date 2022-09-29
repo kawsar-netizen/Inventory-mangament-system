@@ -53,8 +53,24 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->br_name }}</td>
                                         <td>{{ $item->br_address }}</td>
-                                        <td>{{ $item->location }}</td>
-                                        <td>{{ $item->br_type }}</td>
+                                        <td>
+                                            @if ($item->location == 1)
+                                                {{ 'Rural' }}
+                                            @else
+                                                {{ 'Unrural' }}
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($item->br_type == 1)
+                                                {{ 'Sub Branch' }}
+                                            @elseif($item->br_type == 2)
+                                                {{ 'Head Office' }}
+                                            @elseif($item->br_type == 3)
+                                                {{ 'Agent' }}
+                                            @else
+                                                {{ 'Branch' }}
+                                            @endif
+                                        </td>
                                         <td>{{ $item->br_code }}</td>
                                         <td>
                                             <form action="{{ route('branch.destroy', $item->id) }}" method="post">

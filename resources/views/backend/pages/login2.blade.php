@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Asset Management System</title>
+    <title>Inventory Management System</title>
    <link rel="stylesheet" href="{{asset('backend/assets/bootstrap4_property/css/bootstrap.min.css')}}">
 
 
@@ -30,7 +30,7 @@
   <img class="card-img-top" src="{{'backend/assets/img/asset_manage.jpg'}}" height="340px" alt="Card image cap">
   
 <div class="card-body">
-	 <h5 class="card-title" align="center">Asset Management System</h5>
+	 <h5 class="card-title" align="center">Inventory Management System</h5>
 				<form  method="POST" action="{{ route('login') }}">
 					  @csrf
 					 <div class="form-group">

@@ -14,20 +14,41 @@
                         <div class="loader"><i class="fal fa-spinner-third fa-spin-4x fs-xxl"></i></div>
                         <div class="panel-content">
 
-                            <form id="transaction_create_from"
-                                action="" method="post"enctype="multipart/form-data" novalidate="novalidate">
+                            <form id="transaction_create_from" action="" method="post"enctype="multipart/form-data"
+                                novalidate="novalidate">
                                 <div class="row">
                                     <div class="col-md-12">
-                                       <div class="col-md-12 mb-3">
-                                           <label class="form-label" for="br_name">Name</label>
-                                            <input type="text"  name="br_name"
-                                                id="br_name" class="form-control" value="{{$data->br_name}}" readonly>
-                                        </div> 
+                                        <div class="col-md-12 mb-3">
+                                            <label class="form-label" for="br_name">Name</label>
+                                            <input type="text" name="br_name" id="br_name" class="form-control"
+                                                value="{{ $data->br_name }}" readonly>
+                                        </div>
                                         <div class="col-md-12 mb-3">
                                             <label class="form-label" for="br_address">Address</label>
-                                            <input type="text"  name="br_address"value="{{$data->br_address}}"
-                                                id="br_address" class="form-control" readonly>  
+                                            <input type="text" name="br_address"value="{{ $data->br_address }}"
+                                                id="br_address" class="form-control" readonly>
                                         </div>
+                                        <div class="col-md-12 mb-3">
+                                            <label class="form-label" for="loacation">Location Category</label>
+                                            <input type="text"
+                                                name="loacation"value="@if ($data->location == 1) {{ 'Rural' }}
+                                        @else
+                                            {{ 'Unrural' }} @endif"id="loacation"
+                                                class="form-control" readonly>
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <label class="form-label" for="br_type">Branch Type</label>
+                                            <input type="text"
+                                                name="br_type"value=" @if ($data->br_type == 1) {{ 'Sub Branch' }}
+                                        @elseif($data->br_type == 2)
+                                            {{ 'Head Office' }}
+                                        @elseif($data->br_type == 3)
+                                            {{ 'Agent' }}
+                                        @else
+                                            {{ 'Branch' }} @endif "
+                                                id="br_type" class="form-control" readonly>
+                                        </div>
+
                                         <div class="col-md-12 mb-3">
                                             <label class="form-label" for="br_code"> Code </label>
                                             <input type="text" name="br_code" class="form-control"value="{{$data->br_code}}" readonly>
@@ -44,4 +65,3 @@
         </div>
     </main>
 @endsection
-
