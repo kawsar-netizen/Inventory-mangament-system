@@ -81,24 +81,37 @@
                                             </select>
                                         </div>
 
-                                      
-                                        <div class="col-md-12 mb-3" id="ddd" >
+                                     
+                                        @if($data->type == 1)
+                                     
+                                        <div class="col-md-12 mb-3" id="ddd">
                                             <label class="form-label" for="valuation"> Valuation </label>
-                                            <input type="number" name="valuation" class="form-control" value="{{$data->product_category_valuation}}" id="valuation" required="" >
+                                    <input type="number" name="valuation" class="form-control" value="{{$data->product_category_valuation}}" id="valuation" >
                                                 <span style="color: red">
                                                     @error('valuation')
                                                         {{ $message }}
                                                     @enderror
-                                                </span>
-
-                                                
+                                                </span>                                               
                                         </div>
+
+                                        @else
+                                        <div class="col-md-12 mb-3" id="ddd">
+                                            <label class="form-label" for="valuation"> Valuation </label>
+                                    <input type="number" name="valuation" class="form-control" value="{{$data->product_category_valuation}}" id="valuation" disabled="" >
+                                                <span style="color: red">
+                                                    @error('valuation')
+                                                        {{ $message }}
+                                                    @enderror
+                                                </span>                                               
+                                        </div>
+
+                                        @endif
 
                                     </div>
                                 </div>
                                 <div
-                                    class="panel-content d-flex flex-row align-items-center float-right">
-                                    <button class="btn btn-success  waves-effect waves-themed submit_btn"
+                                    class="panel-content d-flex flex-row align-items-center">
+                                    <button class="btn btn-primary  waves-effect waves-themed submit_btn"
                                         type="submit">Update</button>
                                 </div>
                             </form>
@@ -127,13 +140,15 @@
     
    if(tt == 2){
 
-     $('#ddd').hide();
-      $('#valuation').val('');
+    //  $('#ddd').hide();
+    // $('#valuation').val('');
+     $('#valuation').prop("disabled", true);
      
 
 
    }else{
-       $('#ddd').show();
+       // $('#ddd').show();
+        $('#valuation').prop("disabled", false);
    }
 
 });

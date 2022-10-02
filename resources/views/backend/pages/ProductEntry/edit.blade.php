@@ -217,9 +217,9 @@
                                 </div>
 
                                 <div
-                                    class="panel-content border-faded border-left-0 border-right-0 border-bottom-0 d-flex flex-row align-items-center p-2">
+                                    class="panel-content  d-flex flex-row align-items-center p-2">
                                     <button class="btn btn-primary  waves-effect waves-themed submit_btn"
-                                        type="submit">Update form</button>
+                                        type="submit">Update</button>
                                 </div>
 
                             </form>

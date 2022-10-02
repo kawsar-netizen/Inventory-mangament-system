@@ -80,9 +80,9 @@
 
                                                                           
 
-                                        <div class="col-md-12 mb-3" id="ddd" style="display: none;">
+                                        <div class="col-md-12 mb-3" id="ddd">
                                             <label class="form-label" for="valuation"> Valuation </label>
-                                            <input type="number" name="valuation" class="form-control" id="valuation" required="">
+                                            <input type="number" name="valuation" class="form-control" id="valuation">
                                                 <span style="color: red">
                                                     @error('valuation')
                                                         {{ $message }}
@@ -114,24 +114,26 @@
     $('.select2').select2();
 
 
-// div show/hidden part start
+// valuation diable/enable part start
     $('#types').on('change',function(){
 
     var tt = $(this).val();
 
-   if(tt == 1){
+   if(tt == 2){
 
-     $('#ddd').show();
+     // $('#valuation').attr('readonly', 'readonly');
+     $('#valuation').prop("disabled", true);
      
 
 
    }else{
-       $('#ddd').hide();
-       $('#valuation').val('');
+       // $('#ddd').hide();
+       // $('#valuation').removeAttr('readonly');
+       $('#valuation').prop("disabled", false);
    }
 
 });
-// div show/hidden part ends
+// valuation diable/enable part ends
 
     });
 
