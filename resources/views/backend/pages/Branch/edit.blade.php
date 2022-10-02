@@ -24,7 +24,7 @@
                         <div class="loader"><i class="fal fa-spinner-third fa-spin-4x fs-xxl"></i></div>
                         <div class="panel-content">
 
-                            <form id="transaction_create_from"action="{{ route('branch.update', $edit->id) }}"
+                            <form action="{{ route('branch.update', $edit->id) }}"
                                 method="post"enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
@@ -57,11 +57,9 @@
 
                                                 <option value="" {{ $edit->location == '' ? 'selected' : '' }}>Select
                                                     Location Category</option>
-                                                <option value="1" {{ $edit->location == '1' ? 'selected' : '' }}>Rural
-                                                </option>
+                                                <option value="1" {{ $edit->location == '1' ? 'selected' : '' }}>Rural</option>
 
-                                                <option value="{{ $edit->location }}"
-                                                    {{ $edit->location == '2' ? 'selected' : '' }}>Urban</option>
+                                                <option value="2"{{ $edit->location == '2' ? 'selected' : '' }}>Urban</option>
 
                                             </select>
 
@@ -72,7 +70,7 @@
                                                 @enderror
                                             </span>
                                         </div>
-                                        <div class="col-md-12 mb-3 select_2_error">
+                                        <div class="col-md-12 mb-3">
                                             <label class="form-label" for="br_type">Branch Type</label>
                                             <select class="form-control select2" name="br_type" id="br_type">
 
@@ -106,8 +104,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="panel-content d-flex flex-row align-items-center float-right">
-                                    <button class="btn btn-success  waves-effect waves-themed submit_btn"
+                                <div class="panel-content d-flex flex-row align-items-center">
+                                    <button class="btn btn-primary  waves-effect waves-themed submit_btn"
                                         type="submit">Update</button>
                                 </div>
                             </form>

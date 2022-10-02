@@ -57,7 +57,7 @@
                                             @if ($item->location == 1)
                                                 {{ 'Rural' }}
                                             @else
-                                                {{ 'Unrural' }}
+                                                {{ 'Urban' }}
                                             @endif
                                         </td>
                                         <td>

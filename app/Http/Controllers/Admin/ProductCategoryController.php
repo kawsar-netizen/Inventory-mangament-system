@@ -43,12 +43,12 @@ class ProductCategoryController extends Controller
             'item_category_id'          => 'required',
             'name'                      => 'required',
             'type'                      => 'required',
-            'valuation'                 => 'required',
+            // 'valuation'                 => 'required',
         ], [
             'item_category_id.required'             => 'Select item category name',
             'name.required'                         => 'Select product category name',
             'type.required'                         => 'Select product category type',
-            'valuation.required'                    => 'Select valuation',
+            // 'valuation.required'                    => 'Select valuation',
 
         ]);
         $data = DB::table('product_cagegories')->insert([
