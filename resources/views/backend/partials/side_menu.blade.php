@@ -38,12 +38,7 @@
                         <span class="nav-link-text" data-i18n="nav.theme_settings_how_it_works">Branch</span>
                     </a>
                 </li>
-                <li>
-                    <a href="{{route('user.index')}}" title="User" class="{{ Route::currentRouteNamed('user.index')||Route::currentRouteNamed('user.create')||Route::currentRouteNamed('user.edit') ? 'list-group-item active' : '' }}">
-                        <i class="fa fa-users"></i>
-                        <span class="nav-link-text" data-i18n="nav.theme_settings_layout_options">User</span>
-                    </a>
-                </li>
+
                 <li>
                     <a href="{{route('item-category.index')}}" title="Item Category" class="{{ Route::currentRouteNamed('item-category.index')||Route::currentRouteNamed('item-category.create')||Route::currentRouteNamed('item-category.edit') ? 'list-group-item active' : '' }}">
                         <i class="fa fa-folder-open"></i>
@@ -61,6 +56,12 @@
                     <a href="#" title="Role">
                         <i class="fa fa-user"></i>
                         <span class="nav-link-text" data-i18n="nav.theme_settings_saving_to_database">Role</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('user.index')}}" title="User" class="{{ Route::currentRouteNamed('user.index')||Route::currentRouteNamed('user.create')||Route::currentRouteNamed('user.edit') ? 'list-group-item active' : '' }}">
+                        <i class="fa fa-users"></i>
+                        <span class="nav-link-text" data-i18n="nav.theme_settings_layout_options">User</span>
                     </a>
                 </li>
             </ul>

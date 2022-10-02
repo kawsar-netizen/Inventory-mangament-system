@@ -141,7 +141,25 @@ class ProductEntryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request->all());
+        $data = DB::table('product_entries')->where('id',$id)->update([
+            'item_category_id'              => $request->input('item_category_id'),
+            'product_category_id'           => $request->input('product_category_id'),
+            'branch_id'                     => $request->input('branch_id'),
+            'name'                          => $request->input('name'),
+            'type'                          => $request->input('type'),
+            'status'                        => $request->input('status'),
+            'brand_no'                      => $request->input('brand_no'),
+            'model_no'                      => $request->input('model_no'),
+            'quantity'                      => $request->input('quantity'),
+            'purchase_date'                 => $request->input('purchase_date'),
+            'warranty_date'                 => $request->input('warranty_date'),
+            'tag_no'                        => $request->input('tag_no'),
+        ]);
+        if ($data) {
+            return redirect()->route('product-entry.index')->with('success', 'Inventroy entry have been successfully updated!!');
+        } else {
+            return back()->with('fail', 'Something went wrong.Please try letter!!');
+        }
     }
 
     /**

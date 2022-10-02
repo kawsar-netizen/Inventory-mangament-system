@@ -141,14 +141,13 @@
                                         <div class="col-md-12 mb-3 select_2_error">
                                             <label class="form-label" for="branch_id"> Branch</label>
                                             <select class="form-control select2" name="branch_id" id="branch_id"
-                                                required="" data-select2-id="branch_id"
-                                                value="{{ $inventory_edit->branch_id }}">
+                                                required="" data-select2-id="branch_id">
 
                                                 <option value="">Select Branch</option>
                                                 @foreach ($branches as $item)
                                                     {
                                                     <option value="{{ $item->id }}"
-                                                        {{ $item->id == $inventory_edit->item_category_id ? 'selected' : '' }}>
+                                                        {{ $item->id == $inventory_edit->branch_id ? 'selected' : '' }}>
                                                         {{ $item->br_name }}</option>}
                                                 @endforeach
 
@@ -168,7 +167,7 @@
                                                     {{ $inventory_edit->status == '' ? 'selected' : '' }}>Select Status
                                                 </option>
                                                 <option value="0"
-                                                    {{ $inventory_edit->status == '2' ? 'selected' : '' }}>requisition
+                                                    {{ $inventory_edit->status == '0' ? 'selected' : '' }}>requisition
                                                 </option>
                                                 <option value="1"
                                                     {{ $inventory_edit->status == '1' ? 'selected' : '' }}>Product Entry
@@ -230,4 +229,14 @@
 
         </div>
     </main>
+@endsection
+@section('page_js')
+<script type="text/javascript">
+    $(document).ready(function(){
+
+    $('.select2').select2();
+
+    });
+
+</script>
 @endsection
