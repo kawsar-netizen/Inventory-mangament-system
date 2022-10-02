@@ -105,9 +105,10 @@ class BranchController extends Controller
             'br_address'    => $request->input('br_address'),
             'location'      => $request->input('location'),
             'br_type'       => $request->input('br_type'),
-            'br_code'       => $request->input('br_code'),
+            'br_code'       => $request->input('br_code')
         ]);
-        if( $edit == true ){
+
+        if($edit){
             return redirect()->route('branch.index')->with('success','Data have been successfully updated!!');
         }else{
             return back()->with('fail','Something went wrong.Please try letter!!');

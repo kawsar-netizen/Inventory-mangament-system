@@ -37,6 +37,8 @@ Route::group(['middleware' => 'auth'], function () {
     //product category route here
     Route::resource('/product-category', 'App\Http\Controllers\Admin\ProductCategoryController');
 
+    Route::post('/valuation',[App\Http\Controllers\Admin\ProductCategoryController::class, 'productCategoryValuation'])->name('productCategoryValuation');
+
     //product category route here
     Route::resource('/product-entry', 'App\Http\Controllers\Admin\ProductEntryController');
 });

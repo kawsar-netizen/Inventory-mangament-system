@@ -18,7 +18,7 @@
             <div class="col-xl-6 col-md-7 sortable-grid ui-sortable">
                 <div id="panel-3" class="panel panel-sortable" role="widget">
                     <div class="panel-hdr" role="heading">
-                        <h2 class="ui-sortable-handle">Item Category Update Set up Form</h2>
+                        <h2 class="ui-sortable-handle">Item Category Update Form</h2>
                     </div>
                     <div class="panel-container show" role="content">
                         <div class="loader"><i class="fal fa-spinner-third fa-spin-4x fs-xxl"></i></div>
@@ -55,9 +55,9 @@
                                     </div>
                                 </div>
                                 <div
-                                    class="panel-content border-faded border-left-0 border-right-0 border-bottom-0 d-flex flex-row align-items-center p-2">
-                                    <button class="btn btn-primary  waves-effect waves-themed submit_btn"
-                                        type="submit">Update form</button>
+                                    class="panel-content d-flex flex-row align-items-center float-right">
+                                    <button class="btn btn-success waves-effect waves-themed submit_btn"
+                                        type="submit">Update</button>
                                 </div>
                             </form>
                         </div>

@@ -46,12 +46,12 @@
                                         <div class="col-md-12 mb-3 select_2_error">
                                             <label class="form-label" for="location">Location Category</label>
 
-                                            <select class="form-control" name="location" id="location" >
+                                            <select class="form-control select2" name="location" id="location" >
                                                
                                                 <option  value="" {{ $edit->location == '' ? 'selected' : '' }}>Select Location Category</option>
                                                 <option value="1" {{ $edit->location == '1' ? 'selected' : '' }}>Rural</option>
                                               
-                                                <option value="2" {{ $edit->location == '2' ? 'selected' : '' }}>Unrural</option>
+                                                <option value="{{$edit->location}}" {{ $edit->location == '2' ? 'selected' : '' }}>Urban</option>
 
                                             </select>
                                             
@@ -60,7 +60,7 @@
                                         </div>
                                         <div class="col-md-12 mb-3 select_2_error">
                                             <label class="form-label" for="br_type">Branch Type</label>
-                                            <select class="form-control" name="br_type" id="br_type" >
+                                            <select class="form-control select2" name="br_type" id="br_type" >
 
                                                 <option value="" {{ $edit->br_type == '' ? 'selected' : '' }}>Select Branch Type</option>
                                                 <option value="1" {{ $edit->br_type == '1' ? 'selected' : '' }}>Sub Branch</option>
@@ -79,9 +79,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="panel-content border-faded border-left-0 border-right-0 border-bottom-0 d-flex flex-row align-items-center p-2">
-                                    <button class="btn btn-primary  waves-effect waves-themed submit_btn"
-                                        type="submit">Update form</button>
+                                <div class="panel-content d-flex flex-row align-items-center float-right">
+                                    <button class="btn btn-success  waves-effect waves-themed submit_btn"
+                                        type="submit">Update</button>
                                 </div>
                             </form>
                         </div>
@@ -93,3 +93,14 @@
     </main>
 @endsection
 
+@section('page_js')
+<script type="text/javascript">
+    $(document).ready(function(){
+
+    $('.select2').select2();
+
+    });
+
+</script>
+
+@endsection

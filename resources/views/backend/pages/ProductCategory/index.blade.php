@@ -13,6 +13,11 @@
     alert('{{ Session::get('success') }}')
 </script>
 @endif
+@if (Session::get('deleted'))
+<script>
+    alert('{{ Session::get('deleted') }}')
+</script>
+@endif
 @if (Session::get('fail'))
 <script>
     alert('{{ Session::get('fail') }}')
@@ -64,12 +69,7 @@
                                                 {{ 'Inventory' }}
                                             @endif
                                         </td>
-                                        <td>
-                                            @php
-                                                $valuation = DB::table('item_categories')->where('id','=',$item->item_category_id)->orderBy('id','ASC')->first();
-                                            @endphp
-                                            {{$valuation->valuation}}%
-                                        </td>
+                                        <td>{{$item->product_category_valuation}}</td>
                                         <td>
                                             <form action="{{ route('product-category.destroy', $item->id) }}" method="post">
                                                 @csrf

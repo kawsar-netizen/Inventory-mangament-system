@@ -47,24 +47,24 @@
                                         </div>
                                         <div class="col-md-12 mb-3 select_2_error">
                                             <label class="form-label" for="location">Location Category</label>
-                                            <select class="form-control select2 " name="location" id="location" required="" data-select2-id="employee_id" tabindex="-1" aria-hidden="true" aria-required="true">
+                                            <select class="form-control select2" name="location" id="location" required=""  tabindex="-1" aria-required="true">
 
                                                 <option value="" >Select Location Category</option>
-                                                <option value="1" data-select2-id="1">Rural</option>
-                                                <option value="2" data-select2-id="2">Unrural</option>
+                                                <option value="1" >Rural</option>
+                                                <option value="2" >Urban</option>
 
                                             </select>
                                             <span style="color: red">@error('location'){{$message}}@enderror</span>
                                         </div>
                                         <div class="col-md-12 mb-3 select_2_error">
                                             <label class="form-label" for="br_type">Branch Type</label>
-                                            <select class="form-control select2 select2-hidden-accessible" name="br_type" id="br_type" required="" data-select2-id="employee_id" tabindex="-1" aria-hidden="true" aria-required="true">
+                                            <select class="form-control select2" name="br_type" id="br_type" required="" tabindex="-1" aria-required="true">
 
                                                 <option value="" >Select Branch Type</option>
-                                                <option value="1" data-select2-id="1">Sub Branch</option>
-                                                <option value="2" data-select2-id="2">Head Office</option>
-                                                <option value="3" data-select2-id="3">Agent</option>
-                                                <option value="4" data-select2-id="4">Branch</option>
+                                                <option value="1" >Sub Branch</option>
+                                                <option value="2" >Head Office</option>
+                                                <option value="3" >Agent</option>
+                                                <option value="4" >Branch</option>
 
                                             </select>
                                             <span style="color: red">@error('br_type'){{$message}}@enderror</span>
@@ -77,9 +77,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="panel-content border-faded border-left-0 border-right-0 border-bottom-0 d-flex flex-row align-items-center p-2">
-                                    <button class="btn btn-primary  waves-effect waves-themed submit_btn"
-                                        type="submit">Submit form</button>
+                                 
+                                <div class="panel-content float-right d-flex flex-row align-items-center">
+                                   <button class="btn btn-success waves-effect waves-themed submit_btn" type="submit">Submit</button>
                                 </div>
                             </form>
                         </div>
@@ -91,3 +91,14 @@
     </main>
 @endsection
 
+@section('page_js')
+<script type="text/javascript">
+    $(document).ready(function(){
+
+    $('.select2').select2();
+
+    });
+
+</script>
+
+@endsection
