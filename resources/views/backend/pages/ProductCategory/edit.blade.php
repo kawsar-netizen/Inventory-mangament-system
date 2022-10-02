@@ -32,7 +32,7 @@
 
                                         <div class="col-md-12 mb-3 select_2_error">
                                             <label class="form-label" for="item_category_id"> Item Category</label>
-                                            <select class="form-control select2 select2-hidden-accessible"
+                                            <select class="form-control select2"
                                                 name="item_category_id" id="item_category_id" required="">
 
                                                 <option value="">Select Item Category</option>
@@ -54,7 +54,7 @@
                                         </div>
                                         <div class="col-md-12 mb-3 select_2_error">
                                             <label class="form-label" for="type">Type</label>
-                                            <select class="form-control select2 select2-hidden-accessible" name="type"
+                                            <select class="form-control select2" name="type"
                                                 id="type" required="">
                                                 <option value="{{$data->type}}" {{ $data->type == '' ? 'selected' : '' }}>Select Type</option>
                                                 <option value="{{$data->type}}"{{ $data->type == '1' ? 'selected' : '' }}>Asset</option>
