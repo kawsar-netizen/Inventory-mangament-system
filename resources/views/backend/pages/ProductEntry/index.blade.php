@@ -5,19 +5,40 @@
 @section('page_style')
     <link rel="stylesheet" media="screen, print"
         href="{{ asset('backend/assets/css/datagrid/datatables/datatables.bundle.css') }}">
-        <link rel="stylesheet" media="screen, print" href="{{asset("backend/assets/css/fa-solid.css")}}">
+    <link rel="stylesheet" media="screen, print" href="{{ asset('backend/assets/css/fa-solid.css') }}">
 @endsection
 @section('content_ims')
+    @if (Session::get('success'))
+        <script>
+            alert('{{ Session::get('success') }}')
+        </script>
+    @endif
+    @if (Session::get('fail'))
+        <script>
+            alert('{{ Session::get('fail') }}')
+        </script>
+    @endif
+    @if (Session::get('delete'))
+        <script>
+            alert('{{ Session::get('delete') }}')
+        </script>
+    @endif
+    @if (Session::get('fail'))
+        <script>
+            alert('{{ Session::get('fail') }}')
+        </script>
+    @endif
+
     <div class="row" style="margin-left: 80px;margin-right: 80px; margin-top:50px;">
         <div class="col-xl-12">
             <div id="panel-1" class="panel">
                 <div class="panel-hdr">
                     <h2>
-                        Product Entry <span class="fw-300"><i>List</i></span>
+                        Inventory Entry <span class="fw-300"><i>List</i></span>
                     </h2>
                     <div class="panel-toolbar">
                         <a href="{{ route('product-entry.create') }}">
-                            <button class="btn btn-primary btn-sm"><span class="fal fa-plus mr-1"></span>Add Product Category</button>
+                            <button class="btn btn-primary btn-sm"><span class="fal fa-plus mr-1"></span>Add Inventory</button>
                         </a>
                     </div>
                 </div>
@@ -29,53 +50,86 @@
                                 <tr>
                                     <th>SL</th>
                                     <th>Item Category Name</th>
+                                    <th>Product Category Name</th>
                                     <th>Type</th>
                                     <th>Branch Name</th>
-                                    <th>Product Name</th>
-                                    {{-- <th>Brand No</th>
-                                    <th>Model No</th> --}}
+                                    <th>Inventory Product Name</th>
+                                    <th>Brand No</th>
+                                    <th>Model No</th>
                                     <th>Purchase Date</th>
                                     <th>Tag No</th>
-                                    {{-- <th>User Name</th> --}}
+                                    <th>User Name</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($productEntry as $item)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>
+                                            @php
+                                                $item_category = DB::table('item_categories')
+                                                    ->where('id', '=', $item->item_category_id)
+                                                    ->orderBy('id', 'ASC')
+                                                    ->first();
+                                            @endphp
+                                            {{ $item_category->name }}
+                                        </td>
+                                        <td>
+                                            @php
+                                                $product_category = DB::table('product_cagegories')->where('id','=',$item->product_category_id)->orderBy('id','ASC')->first();
+                                            @endphp
+                                            {{$product_category->name}}
+                                        </td>
+                                        <td>
+                                            @if ($item->type == 1)
+                                                {{ "Asset" }}
+                                            @else
+                                                {{ "Inventory" }}
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @php
+                                                $branches = DB::table('branches')->where('id','=',$item->branch_id)->orderBy('id','ASC')->first();
+                                            @endphp
+                                            {{$branches->br_name}}
+                                        </td>
+                                        <td>{{$item->name}}</td>
+                                        <td>{{$item->brand_no}}</td>
+                                        <td>{{$item->model_no}}</td>
+                                        <td>{{$item->purchase_date}}</td>
+                                        <td>{{$item->tag_no}}</td>
+                                        <td>{{$item->entry_by}}</td>
+                                        <td>
+                                            <form action="{{ route('product-entry.destroy', $item->id) }}" method="post">
+                                                @csrf
+                                                <a
+                                                    href="{{ route('product-entry.show', $item->id) }}"class="btn btn-sm btn-primary waves-effect waves-themed" style="margin-bottom: 4px;">View</a>
+                                                <a href="{{ route('product-entry.edit', $item->id) }}"style="margin-bottom: 4px;"  class="btn btn-sm btn-info waves-effect waves-themed">
+                                                    Edit
+                                                </a>
+                                                @method('DELETE') <br>
+                                            <button type="submit" class="btn btn-sm btn-danger waves-effect waves-themed"onclick="return confirm('Are you sure from delete?')"style="margin-bottom: 4px;">Delete</button>
+                                            </form>
 
-                                <tr>
-                                    <td>1</td>
-                                    <td>Vivian Harrell</td>
-                                    <td>Financial Controller</td>
-                                    <td>San Francisco</td>
-                                    <td></td>
-                                    {{-- <td></td>
-                                    <td></td> --}}
-                                    <td>62</td>
-                                    <td>62</td>
-                                    {{-- <td></td> --}}
-                                    <td>
-                                        <a href="" class="btn btn-sm btn-primary waves-effect waves-themed">View</a>
-                                        <a href="" class="btn btn-sm btn-info waves-effect waves-themed">Edit</a>
-                                        <a href="" class="btn btn-sm btn-danger waves-effect waves-themed">Delete</a>
-                                    
-                                    </td>
-                                    
-                                </tr>
+                                        </td>
 
-
+                                    </tr>
+                                @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <th>SL</th>
                                     <th>Item Category Name</th>
+                                    <th>Product Category Name</th>
                                     <th>Type</th>
                                     <th>Branch Name</th>
-                                    <th>Product Name</th>
-                                    {{-- <th>Brand No</th>
-                                    <th>Model No</th> --}}
+                                    <th>Inventory Product Name</th>
+                                    <th>Brand No</th>
+                                    <th>Model No</th>
                                     <th>Purchase Date</th>
                                     <th>Tag No</th>
-                                    {{-- <th>User Name</th> --}}
+                                    <th>User Name</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
@@ -89,14 +143,12 @@
 @endsection
 @section('page_js')
     <script src="{{ asset('backend/assets/js/datagrid/datatables/datatables.bundle.js') }}"></script>
-    <script src="{{asset('backend/assets/js/datagrid/datatables/datatables.export.js')}}"></script>
+    <script src="{{ asset('backend/assets/js/datagrid/datatables/datatables.export.js') }}"></script>
     <script>
-        $(document).ready(function()
-        {
+        $(document).ready(function() {
 
             // initialize datatable
-            $('#dt-basic-example').dataTable(
-            {
+            $('#dt-basic-example').dataTable({
                 responsive: true,
                 lengthChange: false,
                 dom:

@@ -64,7 +64,12 @@
                                                 {{ 'Inventory' }}
                                             @endif
                                         </td>
-                                        <td>62</td>
+                                        <td>
+                                            @php
+                                                $valuation = DB::table('item_categories')->where('id','=',$item->item_category_id)->orderBy('id','ASC')->first();
+                                            @endphp
+                                            {{$valuation->valuation}}%
+                                        </td>
                                         <td>
                                             <form action="{{ route('product-category.destroy', $item->id) }}" method="post">
                                                 @csrf

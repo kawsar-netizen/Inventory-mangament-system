@@ -108,7 +108,7 @@ class BranchController extends Controller
             'br_code'       => $request->input('br_code'),
         ]);
         if( $edit == true ){
-            return back()->with('success','Data have been successfully updated!!');
+            return redirect()->route('branch.index')->with('success','Data have been successfully updated!!');
         }else{
             return back()->with('fail','Something went wrong.Please try letter!!');
         }
