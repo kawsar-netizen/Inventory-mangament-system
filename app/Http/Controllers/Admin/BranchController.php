@@ -111,7 +111,7 @@ class BranchController extends Controller
         if($edit){
             return redirect()->route('branch.index')->with('success','Data have been successfully updated!!');
         }else{
-            return back()->with('fail','Something went wrong.Please try letter!!');
+            return redirect()->route('branch.index')->with('fail','Something went wrong.Please try letter!!');
         }
     }
 

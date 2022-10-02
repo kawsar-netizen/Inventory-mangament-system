@@ -10,24 +10,24 @@
 @section('content_ims')
 
 
-@if (Session::get('success'))
-<script>
-    alert('{{ Session::get('success') }}')
-</script>
-@endif
+    @if (Session::get('success'))
+        <script>
+            alert('{{ Session::get('success') }}')
+        </script>
+    @endif
 
 
-@if (Session::get('fail'))
-<script>
-    alert('{{ Session::get('fail') }}')
-</script>
-@endif
+    @if (Session::get('fail'))
+        <script>
+            alert('{{ Session::get('fail') }}')
+        </script>
+    @endif
 
-@if (Session::get('deleted'))
-<script>
-    alert('{{ Session::get('deleted') }}')
-</script>
-@endif
+    @if (Session::get('deleted'))
+        <script>
+            alert('{{ Session::get('deleted') }}')
+        </script>
+    @endif
 
     <div class="row" style="margin-left: 80px;margin-right: 80px; margin-top:50px;">
         <div class="col-xl-12">
@@ -70,7 +70,8 @@
                                                         class="btn btn-sm btn-info waves-effect waves-themed">Edit</button>
                                                 </a>
                                                 @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger waves-effect waves-themed"onclick="return confirm('Are you sure from delete?')">Delete</button>
+                                                <button type="submit"
+                                                    class="btn btn-sm btn-danger waves-effect waves-themed"onclick="return confirm('Are you sure from delete?')">Delete</button>
                                             </form>
                                         </td>
                                     </tr>

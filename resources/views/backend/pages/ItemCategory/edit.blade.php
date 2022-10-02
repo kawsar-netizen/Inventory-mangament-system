@@ -44,8 +44,8 @@
                                         </div>
                                         <div class="col-md-12 mb-3">
                                             <label class="form-label" for="valuation">Valuation</label>
-                                            <input type="number" name="valuation"value="{{ $edit->valuation }}" id="valuation"
-                                                class="form-control" required="" aria-required="true">
+                                            <input type="number" name="valuation"value="{{ $edit->valuation }}"
+                                                id="valuation" class="form-control" required="" aria-required="true">
                                             <span style="color: red">
                                                 @error('valuation')
                                                     {{ $message }}
@@ -54,8 +54,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div
-                                    class="panel-content d-flex flex-row align-items-center float-right">
+                                <div class="panel-content d-flex flex-row align-items-center float-right">
                                     <button class="btn btn-success waves-effect waves-themed submit_btn"
                                         type="submit">Update</button>
                                 </div>
@@ -68,3 +67,11 @@
         </div>
     </main>
 @endsection
+@section('page_js')
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $('.select2').select2();
+
+        });
+    </script>
