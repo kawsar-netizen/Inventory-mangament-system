@@ -24,7 +24,7 @@
                         <div class="loader"><i class="fal fa-spinner-third fa-spin-4x fs-xxl"></i></div>
                         <div class="panel-content">
 
-                            <form id="transaction_create_from" action="{{route('user.update',$edit->id)}}" method="post"enctype="multipart/form-data" novalidate="novalidate">
+                            <form id="transaction_create_from" action="{{route('user.update',$edit->id)}}" method="post"enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="row">

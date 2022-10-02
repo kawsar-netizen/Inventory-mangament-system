@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -24,6 +25,10 @@ class HomeController extends Controller
     public function index()
     {
 
-        return view('backend.pages.dashboard');
+        $productEntry = DB::table('product_entries')->orderBy('id', 'ASC')->get();
+        // return view('backend.pages.productEntry.index', compact('productEntry'));
+
+
+        return view('backend.pages.dashboard', compact('productEntry')); 
     }
 }
