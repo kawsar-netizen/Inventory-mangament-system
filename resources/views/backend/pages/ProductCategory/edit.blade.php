@@ -72,8 +72,7 @@
 
                                         <div class="col-md-12 mb-3 select_2_error">
                                             <label class="form-label" for="item_category_id"> Item Category</label>
-                                            <select class="form-control select2 select2-hidden-accessible"
-                                                name="item_category_id" id="item_category_id" required="">
+                                            <select class="form-control select2"name="item_category_id" id="item_category_id" required="">
 
                                                 <option value="">Select Item Category</option>
                                                 @foreach($item_category as $item){

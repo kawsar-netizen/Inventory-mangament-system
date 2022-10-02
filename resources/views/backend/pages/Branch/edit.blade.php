@@ -48,8 +48,8 @@
 
                                             <select class="form-control select2" name="location" id="location" >
                                                
-                                                <option  value="{{$edit->location}}" {{ $edit->location == '' ? 'selected' : '' }}>Select Location Category</option>
-                                                <option value="{{$edit->location}}" {{ $edit->location == '1' ? 'selected' : '' }}>Rural</option>
+                                                <option  value="" {{ $edit->location == '' ? 'selected' : '' }}>Select Location Category</option>
+                                                <option value="1" {{ $edit->location == '1' ? 'selected' : '' }}>Rural</option>
                                               
                                                 <option value="{{$edit->location}}" {{ $edit->location == '2' ? 'selected' : '' }}>Urban</option>
 
@@ -62,11 +62,11 @@
                                             <label class="form-label" for="br_type">Branch Type</label>
                                             <select class="form-control select2" name="br_type" id="br_type" >
 
-                                                <option value="{{$edit->br_type}}" {{ $edit->br_type == '' ? 'selected' : '' }}>Select Branch Type</option>
-                                                <option value="{{$edit->br_type}}" {{ $edit->br_type == '1' ? 'selected' : '' }}>Sub Branch</option>
-                                                <option value="{{$edit->br_type}}" {{ $edit->br_type == '2' ? 'selected' : '' }}>Head Office</option>
-                                                <option value="{{$edit->br_type}}" {{ $edit->br_type == '3' ? 'selected' : '' }}>Agent</option>
-                                                <option value="{{$edit->br_type}}" {{ $edit->br_type == '4' ? 'selected' : '' }}>Branch</option>
+                                                <option value="" {{ $edit->br_type == '' ? 'selected' : '' }}>Select Branch Type</option>
+                                                <option value="1" {{ $edit->br_type == '1' ? 'selected' : '' }}>Sub Branch</option>
+                                                <option value="2" {{ $edit->br_type == '2' ? 'selected' : '' }}>Head Office</option>
+                                                <option value="3" {{ $edit->br_type == '3' ? 'selected' : '' }}>Agent</option>
+                                                <option value="4" {{ $edit->br_type == '4' ? 'selected' : '' }}>Branch</option>
 
                                             </select>
                                             <span style="color: red">@error('br_type'){{$message}}@enderror</span>
