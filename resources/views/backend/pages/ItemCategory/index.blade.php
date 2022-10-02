@@ -8,16 +8,27 @@
     <link rel="stylesheet" media="screen, print" href="{{ asset('backend/assets/css/fa-solid.css') }}">
 @endsection
 @section('content_ims')
+
+
 @if (Session::get('success'))
 <script>
     alert('{{ Session::get('success') }}')
 </script>
 @endif
+
+
 @if (Session::get('fail'))
 <script>
     alert('{{ Session::get('fail') }}')
 </script>
 @endif
+
+@if (Session::get('deleted'))
+<script>
+    alert('{{ Session::get('deleted') }}')
+</script>
+@endif
+
     <div class="row" style="margin-left: 80px;margin-right: 80px; margin-top:50px;">
         <div class="col-xl-12">
             <div id="panel-1" class="panel">

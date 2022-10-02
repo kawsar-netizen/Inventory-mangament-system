@@ -49,7 +49,7 @@ class ItemCategoryController extends Controller
             'valuation'     => $request->input('valuation'),
         ]);
         if($data){
-            return back()->with('success','Item category have been successfully inserted!!');
+            return redirect()->route('item-category.index')->with('success','Item category have been successfully inserted!!');
         }else{
             return back()->with('fail','Something went wrong.Please try letter!!');
         }
@@ -109,7 +109,7 @@ class ItemCategoryController extends Controller
     {
         $data =  DB::table('item_categories')->where('id', $id)->delete();
        if($data){
-        return back()->with('delete','Item category have been successfully deleted!!');
+        return back()->with('deleted','Item category have been successfully deleted!!');
        }else{
         return back()->with('fail','Something went wrong.Please try letter!!');
        }

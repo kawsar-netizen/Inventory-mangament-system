@@ -26,33 +26,33 @@
          
         </li>
        
-       <li class="{{ Route::currentRouteNamed('branch.index')||Route::currentRouteNamed('user.index')||Route::currentRouteNamed('item-category.index')||Route::currentRouteNamed('product-category.index') ? 'active' : '' }}">
+       <li class="{{ Route::currentRouteNamed('branch.index')||Route::currentRouteNamed('branch.create')||Route::currentRouteNamed('branch.edit')||Route::currentRouteNamed('user.index')||Route::currentRouteNamed('user.create')||Route::currentRouteNamed('user.edit')||Route::currentRouteNamed('item-category.index')||Route::currentRouteNamed('item-category.create')||Route::currentRouteNamed('item-category.edit')||Route::currentRouteNamed('product-category.index')||Route::currentRouteNamed('product-category.create')||Route::currentRouteNamed('product-category.edit') ? 'active' : '' }}">
             <a href="#" title="Parameter Settings" >
                 <i class="fal fa-cog"></i>
                 <span class="nav-link-text" data-i18n="nav.theme_settings">Parameter Settings</span>
             </a>
             <ul>
                 <li>
-                    <a href="{{route('branch.index')}}" title="Branch" class="{{ Route::currentRouteNamed('branch.index') ? 'list-group-item active' : '' }}">
+                    <a href="{{route('branch.index')}}" title="Branch" class="{{ Route::currentRouteNamed('branch.index')||Route::currentRouteNamed('branch.create')||Route::currentRouteNamed('branch.edit') ? 'list-group-item active' : '' }}">
                         <i class="fa fa-university"></i>
                         <span class="nav-link-text" data-i18n="nav.theme_settings_how_it_works">Branch</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('user.index')}}" title="User" class="{{ Route::currentRouteNamed('user.index') ? 'list-group-item active' : '' }}">
+                    <a href="{{route('user.index')}}" title="User" class="{{ Route::currentRouteNamed('user.index')||Route::currentRouteNamed('user.create')||Route::currentRouteNamed('user.edit') ? 'list-group-item active' : '' }}">
                         <i class="fa fa-users"></i>
                         <span class="nav-link-text" data-i18n="nav.theme_settings_layout_options">User</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('item-category.index')}}" title="Item Category" class="{{ Route::currentRouteNamed('item-category.index') ? 'list-group-item active' : '' }}">
+                    <a href="{{route('item-category.index')}}" title="Item Category" class="{{ Route::currentRouteNamed('item-category.index')||Route::currentRouteNamed('item-category.create')||Route::currentRouteNamed('item-category.edit') ? 'list-group-item active' : '' }}">
                         <i class="fa fa-folder-open"></i>
                         <span class="nav-link-text" data-i18n="nav.theme_settings_skin_options">Item Category</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="{{route('product-category.index')}}" title="Product Category" class="{{ Route::currentRouteNamed('product-category.index') ? 'list-group-item active' : '' }}">
+                    <a href="{{route('product-category.index')}}" title="Product Category" class="{{ Route::currentRouteNamed('product-category.index')||Route::currentRouteNamed('product-category.create')||Route::currentRouteNamed('product-category.edit') ? 'list-group-item active' : '' }}">
                         <i class="fa fa-archive"></i>
                         <span class="nav-link-text" data-i18n="nav.theme_settings_skin_options">Product Category</span>
                     </a>
