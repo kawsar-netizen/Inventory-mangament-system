@@ -50,7 +50,7 @@
                                     <th>User Name</th>
                                     <th>User Type</th>
                                     <th>User Branch</th>
-                                    <th>Email</th>
+                                    <th>Email Address</th>
                                     <th>Contact Phone</th>
                                     <th>Action</th>
                                 </tr>
@@ -85,7 +85,7 @@
                                     <th>User Name</th>
                                     <th>User Type</th>
                                     <th>User Branch</th>
-                                    <th>Email</th>
+                                    <th>Email Address</th>
                                     <th>Contact Phone</th>
                                     <th>Action</th>
                                 </tr>
