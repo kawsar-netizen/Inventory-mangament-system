@@ -18,7 +18,9 @@ class CreateUsersTable extends Migration
             $table->BigInteger('branch_id')->unsigned();
             $table->BigInteger('role_id')->unsigned();
             $table->string('name');
+            $table->string('type')->nullable();
             $table->string('email')->unique();
+            $table->string('contact_phone')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

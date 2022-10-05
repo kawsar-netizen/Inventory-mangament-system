@@ -33,7 +33,7 @@
             <div id="panel-1" class="panel">
                 <div class="panel-hdr">
                     <h2>
-                        Branch <span class="fw-300"><i>List</i></span>
+                        Roles <span class="fw-300"><i>List</i></span>
                     </h2>
                     <div class="panel-toolbar">
                         <a href="{{ route('user.create') }}">
@@ -50,8 +50,10 @@
                                 <tr>
                                     <th>SL</th>
                                     <th>User Name</th>
+                                    <th>User Type</th>
                                     <th>User Branch</th>
                                     <th>Email</th>
+                                    <th>Contact Phone</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -60,8 +62,10 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{$user->name}}</td>
+                                        <td>{{$user->type}}</td>
                                         <td>{{$user->branch_name}}</td>
                                         <td>{{$user->email}}</td>
+                                        <td>{{$user->contact_phone}}</td>
                                         <td>
                                             <form action="" method="post">
                                                 @csrf
@@ -79,8 +83,10 @@
                                 <tr>
                                     <th>SL</th>
                                     <th>User Name</th>
+                                    <th>User Type</th>
                                     <th>User Branch</th>
                                     <th>Email</th>
+                                    <th>Contact Phone</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
