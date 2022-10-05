@@ -95,7 +95,7 @@ class ItemCategoryController extends Controller
         if ($edit) {
             return redirect()->route('item-category.index')->with('success', 'Item category have been successfully updated!!');
         } else {
-            return back()->with('fail', 'No data has been updated!!');
+            return redirect()->route('item-category.index')->with('fail', 'No data has been updated!!');
         }
     }
 

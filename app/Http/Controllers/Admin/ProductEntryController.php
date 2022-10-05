@@ -158,7 +158,7 @@ class ProductEntryController extends Controller
         if ($data) {
             return redirect()->route('product-entry.index')->with('success', 'Inventroy entry have been successfully updated!!');
         } else {
-            return back()->with('fail', 'No data has been updated!!');
+            return redirect()->route('product-entry.index')->with('fail', 'No data has been updated!!');
         }
     }
 

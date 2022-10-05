@@ -179,7 +179,7 @@ class UserController extends Controller
         if($edit){
             return redirect()->route('user.index')->with('success','User have been successfully updated!!');
         }else{
-            return back()->with('fail','No data has been updated!!');
+            return redirect()->route('user.index')->with('fail','No data has been updated!!');
         }
     }
 
