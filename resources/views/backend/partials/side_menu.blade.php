@@ -52,6 +52,7 @@
                         <span class="nav-link-text" data-i18n="nav.theme_settings_skin_options">Product Category</span>
                     </a>
                 </li>
+                @if((Auth::user()->role_id == 1) || (Auth::user()->role_id == 2))
                 <li>
                     <a href="#" title="Role">
                         <i class="fa fa-user"></i>
@@ -64,6 +65,7 @@
                         <span class="nav-link-text" data-i18n="nav.theme_settings_layout_options">User</span>
                     </a>
                 </li>
+                @endif
             </ul>
         </li>
 

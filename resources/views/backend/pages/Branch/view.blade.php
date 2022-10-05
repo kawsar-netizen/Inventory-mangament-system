@@ -30,16 +30,12 @@
                                         </div>
                                         <div class="col-md-12 mb-3">
                                             <label class="form-label" for="loacation">Location Category</label>
-                                            <input type="text"
-                                                name="loacation"value="@if ($data->location == 1) {{ 'Rural' }}
-                                        @else{{ 'Urban' }} @endif"id="loacation"
-                                                class="form-control" readonly>
+                                            <input type="text"name="loacation"value="@if($data->location == 1){{ 'Rural' }}
+                                        @else{{ 'Urban' }}@endif"id="loacation"class="form-control" readonly>
                                         </div>
                                         <div class="col-md-12 mb-3">
                                             <label class="form-label" for="br_type">Branch Type</label>
-                                            <input type="text"
-                                                name="br_type"value=" @if ($data->br_type == 1) {{ 'Sub Branch' }} @elseif($data->br_type == 2) {{ 'Head Office' }}@elseif($data->br_type == 3){{ 'Agent' }}@else{{ 'Branch' }} @endif "
-                                                id="br_type" class="form-control" readonly>
+                                            <input type="text"name="br_type"value="@if($data->br_type == 1){{'Sub Branch'}}@elseif($data->br_type == 2){{'Head Office'}}@elseif($data->br_type == 3){{'Agent'}}@else{{ 'Branch'}}@endif"id="br_type" class="form-control" readonly>
                                         </div>
 
                                         <div class="col-md-12 mb-3">

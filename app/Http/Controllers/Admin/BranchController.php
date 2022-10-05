@@ -15,7 +15,7 @@ class BranchController extends Controller
      */
     public function index()
     {
-        $branches = DB::table('branches')->orderBy('id', 'ASC')->get();
+        $branches =  DB::table('branches')->orderBy('id', 'ASC')->get();
         return view('backend.pages.Branch.index', compact('branches'));
     }
 
@@ -56,10 +56,10 @@ class BranchController extends Controller
             'br_type'       => $request->input('br_type'),
             'br_code'       => $request->input('br_code'),
         ]);
-        if($data){
-            return back()->with('success','Data have been successfully inserted!!');
-        }else{
-            return back()->with('fail','Something went wrong.Please try letter!!');
+        if ($data) {
+            return back()->with('success', 'Branch have been successfully inserted!!');
+        } else {
+            return back()->with('fail', 'Something went wrong.Please try letter!!');
         }
     }
 
@@ -73,8 +73,7 @@ class BranchController extends Controller
     {
         $data =  DB::table('branches')->where('id', $id)->first();
 
-        return view('backend.pages.Branch.view',compact('data'));
-
+        return view('backend.pages.Branch.view', compact('data'));
     }
 
     /**
@@ -88,7 +87,7 @@ class BranchController extends Controller
 
         $edit =  DB::table('branches')->where('id', $id)->first();
 
-        return view('backend.pages.Branch.edit',compact('edit'));
+        return view('backend.pages.Branch.edit', compact('edit'));
     }
 
     /**
@@ -100,7 +99,8 @@ class BranchController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $edit = DB::table('branches')->where('id',$id)->update([
+        //dd($request->all());
+        $edit = DB::table('branches')->where('id', $id)->update([
             'br_name'       => $request->input('br_name'),
             'br_address'    => $request->input('br_address'),
             'location'      => $request->input('location'),
@@ -108,10 +108,10 @@ class BranchController extends Controller
             'br_code'       => $request->input('br_code')
         ]);
 
-        if($edit){
-            return redirect()->route('branch.index')->with('success','Data have been successfully updated!!');
-        }else{
-            return back()->with('fail','Something went wrong.Please try letter!!');
+        if ($edit) {
+            return redirect()->route('branch.index')->with('success', 'Branch have been successfully updated!!');
+        } else {
+            return back()->with('fail', 'No data has been updated!!');
         }
     }
 
@@ -123,11 +123,11 @@ class BranchController extends Controller
      */
     public function destroy($id)
     {
-    //    $data =  DB::table('branches')->where('id', $id)->delete();
-    //    if($data){
-    //     return back()->with('delete','Data have been successfully deleted!!');
-    //    }else{
-    //     return back()->with('fail','Something went wrong.Please try letter!!');
-    //    }
+        //    $data =  DB::table('branches')->where('id', $id)->delete();
+        //    if($data){
+        //     return back()->with('delete','Data have been successfully deleted!!');
+        //    }else{
+        //     return back()->with('fail','Something went wrong.Please try letter!!');
+        //    }
     }
 }

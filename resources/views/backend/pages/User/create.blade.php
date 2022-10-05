@@ -47,13 +47,24 @@
                                         <div class="col-md-12 mb-3">
                                             <label class="form-label">Branch</label>
                                             <select class="select2 form-control w-100" name="branch_id">
-                                            	<option>-Select-</option>
+                                            	<option>Select Branch</option>
                                             	@foreach($branches as $branch)
                                             	<option value="{{$branch->id}}">{{$branch->br_name}}</option>
                                             	@endforeach
                                             	
                                             </select>
                                             <span style="color: red">@error('branch_id'){{$message}}@enderror</span>
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <label class="form-label">Role</label>
+                                            <select class="select2 form-control w-100" name="role_id">
+                                            	<option> Select Role</option>
+                                            	@foreach($roles as $item)
+                                            	<option value="{{$item->id}}">{{$item->role_name}}</option>
+                                            	@endforeach
+                                            	
+                                            </select>
+                                            <span style="color: red">@error('role_id'){{$message}}@enderror</span>
                                         </div>
 
 
