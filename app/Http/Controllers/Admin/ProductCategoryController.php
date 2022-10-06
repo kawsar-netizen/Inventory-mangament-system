@@ -147,5 +147,5 @@ class ProductCategoryController extends Controller
         } else {
             echo 'This request is not ajax !';
         }
-    } // end -:- committeedropdown()
+    } 
 }
