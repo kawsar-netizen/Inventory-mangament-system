@@ -27,8 +27,6 @@ class HomeController extends Controller
 
         $productEntry = DB::table('product_entries')->orderBy('id', 'ASC')->get();
         // return view('backend.pages.productEntry.index', compact('productEntry'));
-
-
-        return view('backend.pages.dashboard', compact('productEntry')); 
+        return view('backend.pages.dashboard', compact('productEntry'));
     }
 }

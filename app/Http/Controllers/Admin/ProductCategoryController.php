@@ -52,10 +52,10 @@ class ProductCategoryController extends Controller
 
         ]);
         $data = DB::table('product_cagegories')->insert([
-            'item_category_id'       => $request->input('item_category_id'),
-            'name'                   => $request->input('name'),
-            'type'                   => $request->input('type'),
-            'product_category_valuation' => $request->input('valuation')
+            'item_category_id'              => $request->input('item_category_id'),
+            'name'                          => $request->input('name'),
+            'type'                          => $request->input('type'),
+            'product_category_valuation'    => $request->input('valuation')
 
         ]);
         if ($data) {
@@ -87,11 +87,11 @@ class ProductCategoryController extends Controller
     public function edit($id)
     {
         $item_category = DB::table('item_categories')->get();
-        
+
         $data =  DB::table('product_cagegories')->where('id', $id)->first();
 
-        
-        return view('backend.pages.ProductCategory.edit', compact('data','item_category'));
+
+        return view('backend.pages.ProductCategory.edit', compact('data', 'item_category'));
     }
 
     /**
@@ -103,16 +103,16 @@ class ProductCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $edit = DB::table('product_cagegories')->where('id',$id)->limit('1')->update([
-            'item_category_id'       => $request->input('item_category_id'),
-            'name'                   => $request->input('name'),
-            'type'                   => $request->input('type'),
-            'product_category_valuation' => $request->input('valuation'),
+        $edit = DB::table('product_cagegories')->where('id', $id)->limit('1')->update([
+            'item_category_id'              => $request->input('item_category_id'),
+            'name'                          => $request->input('name'),
+            'type'                          => $request->input('type'),
+            'product_category_valuation'    => $request->input('valuation'),
         ]);
-        if($edit){
-            return redirect()->route('product-category.index')->with('success','Product category have been successfully updated!!');
-        }else{
-            return back()->with('fail','Something went wrong.Please try letter!!');
+        if ($edit) {
+            return redirect()->route('product-category.index')->with('success', 'Product category have been successfully updated!!');
+        } else {
+            return redirect()->route('product-category.index')->with('fail', 'No data has been updated!!');
         }
     }
 
@@ -135,17 +135,17 @@ class ProductCategoryController extends Controller
 
 
 
-     public function productCategoryValuation(Request $request)
+    public function productCategoryValuation(Request $request)
     {
         if ($request->ajax()) {
             $item_category_id = trim($request->item_category_id);
             $valuation = DB::table('item_categories')
-                                        ->select('*')
-                                        ->where('id', $item_category_id)
-                                        ->first();
-            echo $valuation->valuation;                               
-        }else{
-             echo 'This request is not ajax !';
+                ->select('*')
+                ->where('id', $item_category_id)
+                ->first();
+            echo $valuation->valuation;
+        } else {
+            echo 'This request is not ajax !';
         }
-    }// end -:- committeedropdown()
+    } // end -:- committeedropdown()
 }

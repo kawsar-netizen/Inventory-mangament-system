@@ -102,15 +102,15 @@ class ProductEntryController extends Controller
      */
     public function show($id)
     {
-        $data =  DB::table('product_entries')->where('id', $id)->first();
+        $data               =  DB::table('product_entries')->where('id', $id)->first();
 
-        $itemCategory = DB::table('item_categories')->get();
+        $itemCategory       = DB::table('item_categories')->get();
 
-        $productCategory = DB::table('product_cagegories')->get();
+        $productCategory    = DB::table('product_cagegories')->get();
 
-        $branches =DB::table('branches')->get();
+        $branches = DB::table('branches')->get();
 
-        return view('backend.pages.productEntry.view', compact('data','itemCategory','productCategory','branches'));
+        return view('backend.pages.productEntry.view', compact('data', 'itemCategory', 'productCategory', 'branches'));
     }
 
     /**
@@ -121,15 +121,15 @@ class ProductEntryController extends Controller
      */
     public function edit($id)
     {
-        $inventory_edit = DB::table('product_entries')->where('id',$id)->first();
+        $inventory_edit         = DB::table('product_entries')->where('id', $id)->first();
 
-        $itemCategory = DB::table('item_categories')->get();
+        $itemCategory           = DB::table('item_categories')->get();
 
-        $productCategory = DB::table('product_cagegories')->get();
+        $productCategory        = DB::table('product_cagegories')->get();
 
-        $branches =DB::table('branches')->get();
+        $branches               = DB::table('branches')->get();
 
-        return view('backend.pages.productEntry.edit', compact('inventory_edit','itemCategory','productCategory','branches'));
+        return view('backend.pages.productEntry.edit', compact('inventory_edit', 'itemCategory', 'productCategory', 'branches'));
     }
 
     /**
@@ -141,7 +141,7 @@ class ProductEntryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = DB::table('product_entries')->where('id',$id)->update([
+        $data = DB::table('product_entries')->where('id', $id)->update([
             'item_category_id'              => $request->input('item_category_id'),
             'product_category_id'           => $request->input('product_category_id'),
             'branch_id'                     => $request->input('branch_id'),
@@ -158,7 +158,7 @@ class ProductEntryController extends Controller
         if ($data) {
             return redirect()->route('product-entry.index')->with('success', 'Inventroy entry have been successfully updated!!');
         } else {
-            return back()->with('fail', 'Something went wrong.Please try letter!!');
+            return redirect()->route('product-entry.index')->with('fail', 'No data has been updated!!');
         }
     }
 

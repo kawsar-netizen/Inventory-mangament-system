@@ -52,18 +52,20 @@
                         <span class="nav-link-text" data-i18n="nav.theme_settings_skin_options">Product Category</span>
                     </a>
                 </li>
+                @if((Auth::user()->role_id == 1) || (Auth::user()->role_id == 2))
                 <li>
-                    <a href="#" title="Role">
-                        <i class="fa fa-user"></i>
-                        <span class="nav-link-text" data-i18n="nav.theme_settings_saving_to_database">Role</span>
+                    <a href="{{route('user.index')}}" title="User" class="{{ Route::currentRouteNamed('user.index')||Route::currentRouteNamed('user.create')||Route::currentRouteNamed('user.edit') ? 'list-group-item active' : '' }}">
+                        <i class="fa fa-users"></i>
+                        <span class="nav-link-text" data-i18n="nav.theme_settings_layout_options">Roles</span>
                     </a>
                 </li>
-                <li>
+                {{-- <li>
                     <a href="{{route('user.index')}}" title="User" class="{{ Route::currentRouteNamed('user.index')||Route::currentRouteNamed('user.create')||Route::currentRouteNamed('user.edit') ? 'list-group-item active' : '' }}">
                         <i class="fa fa-users"></i>
                         <span class="nav-link-text" data-i18n="nav.theme_settings_layout_options">User</span>
                     </a>
-                </li>
+                </li> --}}
+                @endif
             </ul>
         </li>
 

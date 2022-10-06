@@ -10,30 +10,28 @@
 
 
 @section('content_ims')
+    @if (Session::get('success'))
+        <script>
+            alert('{{ Session::get('success') }}')
+        </script>
+    @endif
 
-
-@if (Session::get('success'))
-<script>
-    alert('{{ Session::get('success') }}')
-</script>
-@endif
-
-@if (Session::get('delete'))
-<script>
-    alert('{{ Session::get('delete') }}')
-</script>
-@endif
-@if (Session::get('fail'))
-<script>
-    alert('{{ Session::get('fail') }}')
-</script>
-@endif
+    @if (Session::get('delete'))
+        <script>
+            alert('{{ Session::get('delete') }}')
+        </script>
+    @endif
+    @if (Session::get('fail'))
+        <script>
+            alert('{{ Session::get('fail') }}')
+        </script>
+    @endif
     <div class="row" style="margin-left: 80px;margin-right: 80px; margin-top:50px;">
         <div class="col-xl-12">
             <div id="panel-1" class="panel">
                 <div class="panel-hdr">
                     <h2>
-                        Branch <span class="fw-300"><i>List</i></span>
+                        Roles <span class="fw-300"><i>List</i></span>
                     </h2>
                     <div class="panel-toolbar">
                         <a href="{{ route('user.create') }}">
@@ -50,8 +48,10 @@
                                 <tr>
                                     <th>SL</th>
                                     <th>User Name</th>
+                                    <th>User Type</th>
                                     <th>User Branch</th>
-                                    <th>Email</th>
+                                    <th>Email Address</th>
+                                    <th>Contact Phone</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -59,17 +59,21 @@
                                 @foreach ($users as $user)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{$user->name}}</td>
-                                        <td>{{$user->branch_name}}</td>
-                                        <td>{{$user->email}}</td>
+                                        <td><a href="">{{ $user->name }}</a></td>
+                                        <td>{{ $user->type }}</td>
+                                        <td>{{ $user->branch_name }}</td>
+                                        <td>{{ $user->email }}</td>
+                                        <td>{{ $user->contact_phone }}</td>
                                         <td>
                                             <form action="" method="post">
                                                 @csrf
-                                            <a href="{{route('user.show',$user->id)}}"class="btn btn-sm btn-primary waves-effect waves-themed">View</a>
-                                            <a href="{{ route('user.edit', $user->id) }}">
-                                                <button type="button" class="btn btn-sm btn-info waves-effect waves-themed">Edit</button>
-                                            </a>
-                                        </form>
+                                                <a
+                                                    href="{{ route('user.show', $user->id) }}"class="btn btn-sm btn-primary waves-effect waves-themed">View</a>
+                                                <a href="{{ route('user.edit', $user->id) }}">
+                                                    <button type="button"
+                                                        class="btn btn-sm btn-info waves-effect waves-themed">Edit</button>
+                                                </a>
+                                            </form>
                                         </td>
 
                                     </tr>
@@ -79,8 +83,10 @@
                                 <tr>
                                     <th>SL</th>
                                     <th>User Name</th>
+                                    <th>User Type</th>
                                     <th>User Branch</th>
-                                    <th>Email</th>
+                                    <th>Email Address</th>
+                                    <th>Contact Phone</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>

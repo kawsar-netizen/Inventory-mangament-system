@@ -44,23 +44,15 @@
                                             </span>
                                         </div>
 
-
-                                         <div class="col-md-12 mb-3 select_2_error">
+                                        <div class="col-md-12 mb-3 select_2_error">
                                             <label class="form-label" for="type">Type</label>
-                                            <select class="select2 form-control w-100" name="type" id="type">
-                                                <option value="{{$data->type}}">
-                                                    @if($data->type == 1)
-                                                    Asset
-                                                    @else
-                                                    Inventory
-                                                    @endif
-                                                </option>
-                                               
-                                                <option value="">--Select Type--</option>
-                                                <option value="1">Asset</option>
-                                                <option value="2">Inventory</option>
-                                               
-                                                
+                                            <select class="form-control select2" name="type" id="type">
+                                                <option value="" {{ $data->type == '' ? 'selected' : '' }}>
+                                                    Select Type</option>
+                                                <option value="1" {{ $data->type == '1' ? 'selected' : '' }}>
+                                                    Asset</option>
+                                                <option value="2" {{ $data->type == '2' ? 'selected' : '' }}>
+                                                    Inventory</option>
                                             </select>
                                             <span style="color: red">
                                                 @error('type')
@@ -69,20 +61,15 @@
                                             </span>
                                         </div>
 
-
-
                                         <div class="col-md-12 mb-3 select_2_error">
                                             <label class="form-label" for="item_category_id"> Item Category</label>
                                             <select class="form-control select2"name="item_category_id" id="item_category_id" required="">
-
                                                 <option value="">Select Item Category</option>
                                                 @foreach($item_category as $item){
                                                     <option value="{{$item->id}}" {{ $item->id == $data->item_category_id ?"selected":""}}>{{$item->name}}</option>}
                                                 @endforeach
                                             </select>
                                         </div>
-
-                                     
                                         @if($data->type == 1)
                                      
                                         <div class="col-md-12 mb-3" id="ddd">
