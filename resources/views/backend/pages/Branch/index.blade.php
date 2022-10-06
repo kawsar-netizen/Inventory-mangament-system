@@ -8,11 +8,21 @@
     <link rel="stylesheet" media="screen, print" href="{{ asset('backend/assets/css/fa-solid.css') }}">
 @endsection
 @section('content_ims')
-    @if (Session::get('success'))
+
+
+
+
+
+
+    <!-- @if (Session::get('success'))
         <script>
             alert('{{ Session::get('success') }}')
         </script>
-    @endif
+    @endif -->
+
+
+
+
     @if (Session::get('fail'))
         <script>
             alert('{{ Session::get('fail') }}')
@@ -111,7 +121,27 @@
 @section('page_js')
     <script src="{{ asset('backend/assets/js/datagrid/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('backend/assets/js/datagrid/datatables/datatables.export.js') }}"></script>
+
+
+@if ($message = Session::get('success'))
+<script type="text/javascript">
+  
+        Swal.fire(
+            {
+                // position: "top-end",
+                type: "success",
+                title: "{{ Session::get('success') }}",
+                showConfirmButton: false,
+                timer: 1500
+            });
+</script>
+@endif
+
+
+
+
     <script>
+
         $(document).ready(function() {
 
             // initialize datatable
@@ -164,5 +194,7 @@
             });
 
         });
+
+
     </script>
 @endsection
