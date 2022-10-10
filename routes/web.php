@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DemoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,7 @@ Auth::routes(['register' => false]);
 Route::get('/', function () {
     return view('backend.pages.login');
 });
+
 
 Route::group(['middleware' => 'auth'], function () {
 
