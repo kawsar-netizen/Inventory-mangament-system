@@ -15,7 +15,7 @@
     @endif
     <main id="js-page-content" role="main" class="page-content">
         <div class="row" style="margin-left: 80px; margin-right: 80px; margin-top:50px;">
-            <div class="col-xl-12 col-md-6 sortable-grid ui-sortable">
+            <div class="col-xl-12 col-md-12 sortable-grid ui-sortable">
                 <div id="panel-3" class="panel panel-sortable" role="widget">
                     <div class="panel-hdr" role="heading">
                         <h2 class="ui-sortable-handle">Inventory Entry Set up Form</h2>
@@ -32,11 +32,10 @@
                                         <div class="col-md-12 mb-3 select_2_error">
                                             <label class="form-label" for="item_category_id"> Item Category</label>
                                             <select class="form-control select2" name="item_category_id"
-                                                id="item_category_id" required="" data-select2-id="item_category_id"
-                                                tabindex="-1" aria-hidden="true" aria-required="true">
+                                                id="item_category_id" required="" aria-required="true">
                                                 <option value="">Select Item Category</option>
                                                 @foreach ($itemCategory as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                    <option value="{{ $item->id }}" @if(old('item_category_id') == $item->id) selected @endif>{{ $item->name }}</option>
                                                 @endforeach
                                             </select>
                                             <span style="color: red">
@@ -65,7 +64,7 @@
                                         <div class="col-md-12 mb-3">
                                             <label class="form-label" for="name">Name</label>
                                             <input type="text" placeholder="Inventroy entry name" name="name"
-                                                id="name" class="form-control" required="" aria-required="true">
+                                                id="name" class="form-control" required="" aria-required="true" value="{{ old('name') }}">
                                             <span style="color: red">
                                                 @error('name')
                                                     {{ $message }}
@@ -77,7 +76,7 @@
                                         <div class="col-md-12 mb-3">
                                             <label class="form-label" for="brand_no"> Brand No </label>
                                             <input type="text" name="brand_no" class="form-control" id="brand_no"
-                                                required="" aria-required="true">
+                                                required="" aria-required="true" value="{{ old('brand_no') }}">
                                             <span style="color: red">
                                                 @error('brand_no')
                                                     {{ $message }}
@@ -88,7 +87,7 @@
                                         <div class="col-md-12 mb-3">
                                             <label class="form-label" for="quantity"> Quantity </label>
                                             <input type="number" name="quantity" class="form-control" id="quantity"
-                                                required="" aria-required="true">
+                                                required="" aria-required="true" value="{{ old('quantity') }}">
                                             <span style="color: red">
                                                 @error('quantity')
                                                     {{ $message }}
@@ -97,9 +96,9 @@
 
                                         </div>
                                         <div class="col-md-12 mb-3">
-                                            <label class="form-label" for="warranty_date"> Warranty </label>
+                                            <label class="form-label"> Warranty </label>
                                             <input type="number" name="warranty_date" class="form-control"
-                                                id="warranty_date" required="" aria-required="true">
+                                                id="warranty_date" required="" aria-required="true" value="{{ old('warranty_date') }}">
                                             <span style="color: red">
                                                 @error('warranty_date')
                                                     {{ $message }}
@@ -113,13 +112,11 @@
                                         <div class="col-md-12 mb-3 select_2_error">
                                             <label class="form-label" for="product_category_id"> Product Category</label>
                                             <select class="form-control select2" name="product_category_id"
-                                                id="product_category_id" required=""
-                                                data-select2-id="product_category_id" tabindex="-1" aria-hidden="true"
-                                                aria-required="true">
+                                                id="product_category_id" required="" aria-required="true">
 
                                                 <option value="">Select Product Category</option>
                                                 @foreach ($productCategory as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                    <option value="{{ $item->id }}" @if(old('product_category_id') == $item->id) selected @endif>{{ $item->name }}</option>
                                                 @endforeach
 
                                             </select>
@@ -132,12 +129,11 @@
                                         <div class="col-md-12 mb-3 select_2_error">
                                             <label class="form-label" for="branch_id"> Branch</label>
                                             <select class="form-control select2" name="branch_id" id="branch_id"
-                                                required="" data-select2-id="branch_id" tabindex="-1"
-                                                aria-hidden="true" aria-required="true">
+                                                required="" aria-required="true">
 
                                                 <option value="">Select Branch</option>
                                                 @foreach ($branches as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->br_name }}</option>
+                                                    <option value="{{ $item->id }}"  @if(old('branch_id') == $item->id) selected @endif>{{ $item->br_name }}</option>
                                                 @endforeach
 
                                             </select>
@@ -166,7 +162,7 @@
                                         <div class="col-md-12 mb-3">
                                             <label class="form-label" for="model_no"> Model No </label>
                                             <input type="text" name="model_no" class="form-control" id="model_no"
-                                                required="" aria-required="true">
+                                                required="" aria-required="true" value="{{ old('model_no') }}">
                                             <span style="color: red">
                                                 @error('model_no')
                                                     {{ $message }}
@@ -176,7 +172,7 @@
                                         <div class="col-md-12 mb-3">
                                             <label class="form-label" for="tag_no"> Tag No </label>
                                             <input type="text" name="tag_no" class="form-control" id="tag_no"
-                                                required="" aria-required="true">
+                                                required="" aria-required="true" value="{{ old('tag_no') }}">
                                             <span style="color: red">
                                                 @error('tag_no')
                                                     {{ $message }}
@@ -187,7 +183,7 @@
                                         <div class="col-md-12 mb-3">
                                             <label class="form-label" for="purchase_date"> Purchase Date </label>
                                             <input type="date" name="purchase_date" class="form-control"
-                                                id="purchase_date" required="" aria-required="true">
+                                                id="purchase_date" required="" aria-required="true" value="{{ old('purchase_date') }}">
                                             <span style="color: red">
                                                 @error('purchase_date')
                                                     {{ $message }}
@@ -200,9 +196,9 @@
                                 </div>
 
                                 <div
-                                    class="panel-content border-faded border-left-0 border-right-0 border-bottom-0 d-flex flex-row align-items-center p-2">
+                                    class="panel-content d-flex flex-row align-items-center p-2">
                                     <button class="btn btn-primary  waves-effect waves-themed submit_btn"
-                                        type="submit">Submit form</button>
+                                        type="submit">Submit</button>
                                 </div>
 
                             </form>
@@ -221,6 +217,44 @@
     $('.select2').select2();
 
     });
+
+
+
+
+
+     // for fetching product categroy data start
+    $('#item_category_id').change(function(e) {
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        }
+      });
+      e.preventDefault();
+
+      var item_category_id = $(this).val();
+      var product_category_id = $(this).closest('form').find('#product_category_id');
+      if (item_category_id == '') {
+        $('#product_category_id').html('');
+        return false;
+      }
+      $.ajax({
+        url: "{{ route('productCategoryDropdown') }}",
+        method: "POST",
+        data: {
+          'item_category_id': item_category_id
+        },
+        success: function(response) {
+           
+           $('#product_category_id').html(response);
+            console.log(response);
+        },
+        error: function(response) {
+        
+          console.log(response);
+        }
+      }); 
+    });
+// for fetching product categroy data end
 
 </script>
 @endsection

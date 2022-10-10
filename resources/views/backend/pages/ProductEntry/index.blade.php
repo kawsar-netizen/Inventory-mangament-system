@@ -49,11 +49,11 @@
                             <thead>
                                 <tr>
                                     <th>SL</th>
-                                    <th>Item Category Name</th>
-                                    <th>Product Category Name</th>
+                                    <th>Item Category</th>
+                                    <th>Product Category</th>
                                     <th>Type</th>
-                                    <th>Branch Name</th>
-                                    <th>Inventory Product Name</th>
+                                    <th>Branch</th>
+                                    <th>Product</th>
                                     <th>Brand No</th>
                                     <th>Model No</th>
                                     <th>Purchase Date</th>
@@ -120,11 +120,11 @@
                             <tfoot>
                                 <tr>
                                     <th>SL</th>
-                                    <th>Item Category Name</th>
-                                    <th>Product Category Name</th>
+                                    <th>Item Category</th>
+                                    <th>Product Category</th>
                                     <th>Type</th>
-                                    <th>Branch Name</th>
-                                    <th>Inventory Product Name</th>
+                                    <th>Branch</th>
+                                    <th>Product</th>
                                     <th>Brand No</th>
                                     <th>Model No</th>
                                     <th>Purchase Date</th>

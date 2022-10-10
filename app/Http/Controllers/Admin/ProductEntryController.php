@@ -177,4 +177,38 @@ class ProductEntryController extends Controller
             return back()->with('fail', 'Something went wrong.Please try letter!!');
         }
     }
+
+
+     public function productCategoryDropdown(Request $request)
+    {
+        if ($request->ajax()) {
+            $item_category_id = trim($request->item_category_id);
+
+            $product_categories = DB::table('product_cagegories')
+                ->select('*')
+                ->where('item_category_id', $item_category_id)
+                ->get();
+
+
+ $str="<option value=''>-- Select --</option>";  
+
+
+    foreach ($product_categories as $p_cat) {
+
+       $str .= "<option value='$p_cat->id'> $p_cat->name </option>";
+       
+    }
+
+    echo $str;
+
+           
+
+
+        } else {
+            echo 'This request is not ajax !';
+        }
+    }
+
+
+
 }
