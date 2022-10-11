@@ -39,9 +39,13 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/valuation',[App\Http\Controllers\Admin\ProductCategoryController::class, 'productCategoryValuation'])->name('productCategoryValuation');
 
-    //product category route here
+    //product entry route here
     Route::resource('/product-entry', 'App\Http\Controllers\Admin\ProductEntryController');
-
-
     Route::post('/product-category-dropdown',[App\Http\Controllers\Admin\ProductEntryController::class, 'productCategoryDropdown'])->name('productCategoryDropdown');
+
+
+    //product requisition route here
+    Route::resource('/product-requisition', 'App\Http\Controllers\Admin\ProductRequisitionController');
+
+
 });

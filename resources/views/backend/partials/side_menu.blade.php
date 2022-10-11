@@ -76,7 +76,7 @@
 
 
 
-        <li class="{{ Route::currentRouteNamed('product-entry.index')||Route::currentRouteNamed('#requisition') ? 'active' : '' }}">
+        <li class="{{ Route::currentRouteNamed('product-entry.index')||Route::currentRouteNamed('product-requisition.index') ? 'active' : '' }}">
             <a href="#" title="Inventory Settings">
                 <i class="fal fa-tag"></i>
                 <span class="nav-link-text" data-i18n="nav.package_info">Inventory Settings</span>
@@ -89,7 +89,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#requisition" title="Inventory Requisition">
+                    <a href="{{route('product-requisition.index')}}" title="Inventory Requisition">
                       <i class="fa fa-check-square"></i>
                         <span class="nav-link-text" data-i18n="nav.package_info_product_licensing">Inventory
                             Requisition</span>
