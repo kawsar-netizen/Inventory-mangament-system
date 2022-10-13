@@ -46,6 +46,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     //product requisition route here
     Route::resource('/product-requisition', 'App\Http\Controllers\Admin\ProductRequisitionController');
-
+    Route::post('/product-entry-dropdown',[App\Http\Controllers\Admin\ProductRequisitionController::class, 'productEntryDropdown'])->name('productEntryDropdown');
+    Route::post('/product-entry-brand-dropdown',[App\Http\Controllers\Admin\ProductRequisitionController::class, 'productEntryBrandDropdown'])->name('productEntryBrandDropdown');
 
 });

@@ -109,7 +109,7 @@
                                         </td>
                                         <td>
                                             @php
-                                                $product_category = DB::table('product_cagegories')->where('id','=',$item->product_category_id)->orderBy('id','ASC')->first();
+                                                $product_category = DB::table('product_categories')->where('id','=',$item->product_category_id)->orderBy('id','ASC')->first();
                                             @endphp
                                             {{$product_category->name}}
                                         </td>

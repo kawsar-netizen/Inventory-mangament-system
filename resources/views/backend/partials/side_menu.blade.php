@@ -76,20 +76,20 @@
 
 
 
-        <li class="{{ Route::currentRouteNamed('product-entry.index')||Route::currentRouteNamed('product-requisition.index') ? 'active' : '' }}">
+        <li class="{{ Route::currentRouteNamed('product-entry.index')||Route::currentRouteNamed('product-entry.create')||Route::currentRouteNamed('product-entry.edit')||Route::currentRouteNamed('product-requisition.index')||Route::currentRouteNamed('product-requisition.create')||Route::currentRouteNamed('product-requisition.edit') ? 'active' : '' }}">
             <a href="#" title="Inventory Settings">
                 <i class="fal fa-tag"></i>
                 <span class="nav-link-text" data-i18n="nav.package_info">Inventory Settings</span>
             </a>
             <ul>
                 <li>
-                    <a href="{{route('product-entry.index')}}" title="Inventory Entry" class="{{ Route::currentRouteNamed('product-entry.index') ? 'list-group-item active' : '' }}">
+                    <a href="{{route('product-entry.index')}}" title="Inventory Entry" class="{{ Route::currentRouteNamed('product-entry.index')||Route::currentRouteNamed('product-entry.create')||Route::currentRouteNamed('product-entry.edit') ? 'list-group-item active' : '' }}">
                         <i class="fa fa-plus"></i>
                         <span class="nav-link-text" data-i18n="nav.package_info_documentation">Inventory Entry</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('product-requisition.index')}}" title="Inventory Requisition">
+                    <a href="{{route('product-requisition.index')}}" title="Inventory Requisition" class="{{ Route::currentRouteNamed('product-requisition.index')||Route::currentRouteNamed('product-requisition.create')||Route::currentRouteNamed('product-requisition.edit') ? 'list-group-item active' : '' }}">
                       <i class="fa fa-check-square"></i>
                         <span class="nav-link-text" data-i18n="nav.package_info_product_licensing">Inventory
                             Requisition</span>
