@@ -38,7 +38,7 @@
                     </h2>
                     <div class="panel-toolbar">
                         <a href="{{ route('product-requisition.create') }}">
-                            <button class="btn btn-primary btn-sm"><span class="fal fa-plus mr-1"></span>Add Inventory Requisition</button>
+                            <button class="btn btn-info btn-sm"><span class="fal fa-plus mr-1"></span>Add Inventory Requisition</button>
                         </a>
                     </div>
                 </div>
