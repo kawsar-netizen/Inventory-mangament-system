@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class ProductRequisitionController extends Controller
 {
@@ -16,7 +17,7 @@ class ProductRequisitionController extends Controller
      */
     public function index()
     {
-         $productRequisition = DB::table('product_entries')->orderBy('id', 'DESC')->get();
+         $productRequisition = DB::table('product_requisitions')->orderBy('id', 'DESC')->get();
         return view('backend.pages.productRequisition.index', compact('productRequisition'));
     }
 
@@ -57,7 +58,53 @@ class ProductRequisitionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'item_category_id'                              => 'required',
+            'product_category_id'                           => 'required',
+            'branch_id'                                     => 'required',
+            'product_entry_id'                              => 'required',
+          
+        ], [
+            'item_category_id.required'                                 => 'Select item category name',
+            'product_category_id.required'                              => 'Select product category name',
+            'branch_id.required'                                        => 'Select branch name',
+            'product_entry_id.required'                                 => 'Select inventory product name',
+            
+
+        ]);
+
+
+         $br = $request->branch_id;
+         $req = DB::table('users')
+                           ->select('id')
+                           ->where('branch_id',$br)
+                           ->where('role_id',3)
+                           ->first();
+
+         $req_to_user_id = $req->id;
+        
+        $user = Auth::user()->id;
+
+        $data = DB::table('product_requisitions')->insert([
+            'item_category_id'                      => $request->input('item_category_id'),
+            'product_category_id'                   => $request->input('product_category_id'),
+            'inventory_product_id'                  => $request->input('product_entry_id'),
+            'branch_id'                             => $br,
+            'brand'                                 => $request->input('brand_no'),
+            'model'                                 => $request->input('model_no'),
+            'quantity'                              => $request->input('quantity'),
+            'warranty'                              => $request->input('warranty_date'),
+            'requisition_request_date'              => Carbon::today(),
+            'requested_from'                        => $user,
+            'requested_to'                          => $req_to_user_id,
+            'requisition_current_status'            => 1
+
+        ]);
+        if ($data) {
+            return redirect()->route('product-requisition.index')->with('success', 'Product Requisition have been successfully sumbmitted!');
+        } else {
+            return back()->with('fail', 'Something went wrong.Please try letter!!');
+        }
     }
 
     /**

@@ -38,7 +38,7 @@
                     </h2>
                     <div class="panel-toolbar">
                         <a href="{{ route('product-requisition.create') }}">
-                            <button class="btn btn-info btn-sm"><span class="fal fa-plus mr-1"></span>Add Inventory Requisition</button>
+                            <button class="btn btn-primary btn-sm"><span class="fal fa-plus mr-1"></span>Add Inventory Requisition</button>
                         </a>
                     </div>
                 </div>
@@ -51,14 +51,15 @@
                                     <th>SL</th>
                                     <th>Item Category</th>
                                     <th>Product Category</th>
-                                    <th>Type</th>
-                                    <th>Branch</th>
-                                    <th>Product</th>
+                                    <th>Inventory Product Name</th>
+                                    <th>Branch</th>                                 
                                     <th>Brand No</th>
                                     <th>Model No</th>
-                                    <th>Purchase Date</th>
-                                    <th>Tag No</th>
-                                    <th>User Name</th>
+                                    <th>Quantity</th>
+                                    <th>Warranty (years)</th>
+                                    <th>Requisition Date</th>
+                                    <th>Status</th>
+                                  
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -70,46 +71,59 @@
                                             @php
                                                 $item_category = DB::table('item_categories')
                                                     ->where('id', '=', $item->item_category_id)
-                                                    ->orderBy('id', 'ASC')
+                                                    ->orderBy('id', 'DESC')
                                                     ->first();
                                             @endphp
                                             {{ $item_category->name }}
                                         </td>
                                         <td>
                                             @php
-                                                $product_category = DB::table('product_categories')->where('id','=',$item->product_category_id)->orderBy('id','ASC')->first();
+                                                $product_category = DB::table('product_categories')->where('id','=',$item->product_category_id)->orderBy('id','DESC')->first();
                                             @endphp
                                             {{$product_category->name}}
                                         </td>
                                         <td>
-                                            @if ($item->type == 1)
-                                                {{ "Asset" }}
-                                            @else
-                                                {{ "Inventory" }}
-                                            @endif
+                                           @php
+                                                $item_name = DB::table('product_entries')->where('id','=',$item->inventory_product_id)->orderBy('id','DESC')->first();
+                                            @endphp
+                                            {{$item_name->name}}
                                         </td>
                                         <td>
                                             @php
-                                                $branches = DB::table('branches')->where('id','=',$item->branch_id)->orderBy('id','ASC')->first();
+                                                $branches = DB::table('branches')->where('id','=',$item->branch_id)->orderBy('id','DESC')->first();
                                             @endphp
                                             {{$branches->br_name}}
                                         </td>
-                                        <td>{{$item->name}}</td>
-                                        <td>{{$item->brand_no}}</td>
-                                        <td>{{$item->model_no}}</td>
-                                        <td>{{$item->purchase_date}}</td>
-                                        <td>{{$item->tag_no}}</td>
-                                        <td>{{$item->entry_by}}</td>
+                                        
+                                        <td>{{$item->brand}}</td>
+                                        <td>{{$item->model}}</td>
+                                        <td>{{$item->quantity}}</td>
+                                        <td>{{$item->warranty}}</td>
+                                        <td>{{$item->requisition_request_date}}</td>
                                         <td>
-                                            <form action="{{ route('product-entry.destroy', $item->id) }}" method="post">
-                                                @csrf
-                                                <a
-                                                    href="{{ route('product-entry.show', $item->id) }}"class="btn btn-sm btn-primary waves-effect waves-themed" style="margin-bottom: 4px;">View</a>
-                                                <a href="{{ route('product-entry.edit', $item->id) }}"style="margin-bottom: 4px;"  class="btn btn-sm btn-info waves-effect waves-themed">
-                                                    Edit
-                                                </a>
-                                                @method('DELETE') <br>
-                                            <button type="submit" class="btn btn-sm btn-danger waves-effect waves-themed"onclick="return confirm('Are you sure from delete?')"style="margin-bottom: 4px;">Delete</button>
+                                         @if($item->requisition_current_status == 1)
+                                        <span class="badge badge-warning" style="padding: 10px">{{'Pending'}}</span>
+
+                                         @elseif($item->requisition_current_status == 2)           
+                                         <span class="badge badge-info" style="padding: 10px">{{'Received'}}</span>
+
+                                         @elseif($item->requisition_current_status == 3)
+                                         <span class="badge badge-danger" style="padding: 10px">{{'Denied'}}</span>
+                                         
+                                         @else
+                                         <span class="badge badge-success" style="padding: 10px">{{'Delivered'}}</span>
+                                         @endif
+                                        </td>
+                                       
+                                        <td>
+                                            <form action="" method="post">
+                                                @csrf                                              
+                                                <a href=""class="btn btn-sm btn-primary waves-effect waves-themed" style="margin-bottom: 4px;">View</a>
+
+                                                @if($item->requisition_current_status == 1)
+                                                <a href=""style="margin-bottom: 4px;" class="btn btn-sm btn-info waves-effect waves-themed">Edit</a>
+                                                @else
+                                                @endif
                                             </form>
 
                                         </td>
@@ -122,14 +136,14 @@
                                     <th>SL</th>
                                     <th>Item Category</th>
                                     <th>Product Category</th>
-                                    <th>Type</th>
-                                    <th>Branch</th>
-                                    <th>Product</th>
+                                    <th>Inventory Product Name</th>
+                                    <th>Branch</th>                                 
                                     <th>Brand No</th>
                                     <th>Model No</th>
-                                    <th>Purchase Date</th>
-                                    <th>Tag No</th>
-                                    <th>User Name</th>
+                                    <th>Quantity</th>
+                                    <th>Warranty (years)</th>
+                                    <th>Requisition Date</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>

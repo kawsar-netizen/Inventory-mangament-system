@@ -24,7 +24,7 @@
                         <div class="loader"><i class="fal fa-spinner-third fa-spin-4x fs-xxl"></i></div>
                         <div class="panel-content">
 
-                            <form action="{{ route('product-entry.store') }}" method="post"enctype="multipart/form-data"
+                            <form action="{{ route('product-requisition.store') }}" method="post"enctype="multipart/form-data"
                                 novalidate="novalidate">
                                 @csrf
 
@@ -117,7 +117,7 @@
 
                                         </div>
                                         <div class="col-md-12 mb-3">
-                                            <label class="form-label"> Warranty </label>
+                                            <label class="form-label"> Warranty (years)</label>
                                             <input type="number" name="warranty_date" class="form-control"
                                                 id="warranty_date" required="" aria-required="true" value="{{ old('warranty_date') }}" readonly>
                                             <span style="color: red">
@@ -154,18 +154,6 @@
                                                 required="" aria-required="true" value="{{ old('model_no') }}" readonly>
                                             <span style="color: red">
                                                 @error('model_no')
-                                                    {{ $message }}
-                                                @enderror
-                                            </span>
-                                        </div>
-                                      
-
-                                        <div class="col-md-12 mb-3">
-                                            <label class="form-label" for="purchase_date"> Date </label>
-                                            <input type="date" name="purchase_date" class="form-control"
-                                                id="purchase_date" required="" aria-required="true" value="{{ old('purchase_date') }}">
-                                            <span style="color: red">
-                                                @error('purchase_date')
                                                     {{ $message }}
                                                 @enderror
                                             </span>
