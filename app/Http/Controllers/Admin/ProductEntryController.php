@@ -16,7 +16,7 @@ class ProductEntryController extends Controller
      */
     public function index()
     {
-        $productEntry = DB::table('product_entries')->orderBy('id', 'ASC')->get();
+        $productEntry = DB::table('product_entries')->orderBy('id', 'DESC')->get();
         return view('backend.pages.productEntry.index', compact('productEntry'));
     }
 

@@ -17,8 +17,40 @@ class ProductRequisitionController extends Controller
      */
     public function index()
     {
-         $productRequisition = DB::table('product_requisitions')->orderBy('id', 'DESC')->get();
+         
+       $user_id = Auth::user()->id;
+       $role = Auth::user()->role_id;
+       $br = Auth::user()->branch_id;
+
+
+
+// this is for master admin and super user
+       if($role == 1 || $role == 2){
+
+        $productRequisition = DB::table('product_requisitions')->orderBy('id', 'DESC')->get();
         return view('backend.pages.productRequisition.index', compact('productRequisition'));
+
+//this is for branch manager
+        }elseif($role == 3){
+
+            $productRequisition = DB::table('product_requisitions')
+                                  ->where('branch_id',$br)
+                                  ->orderBy('id', 'DESC')
+                                  ->get();
+        return view('backend.pages.productRequisition.index', compact('productRequisition'));
+
+//this is for branch user
+        }else{
+
+            $productRequisition = DB::table('product_requisitions')
+                                  ->where('requested_from',$user_id)
+                                  ->orderBy('id', 'DESC')
+                                  ->get();
+        return view('backend.pages.productRequisition.index', compact('productRequisition'));
+
+        }
+
+         
     }
 
     /**

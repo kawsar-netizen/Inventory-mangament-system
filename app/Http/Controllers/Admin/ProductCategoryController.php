@@ -15,7 +15,7 @@ class ProductCategoryController extends Controller
      */
     public function index()
     {
-        $productCategory = DB::table('product_categories')->orderBy('id', 'ASC')->get();
+        $productCategory = DB::table('product_categories')->orderBy('id', 'DESC')->get();
 
         return view('backend.pages.ProductCategory.index', compact('productCategory'));
     }
