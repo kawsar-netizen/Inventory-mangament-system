@@ -26,7 +26,7 @@ class UserController extends Controller
         $users  = DB::table('users')
             ->leftJoin('branches', 'branch_id', '=', 'branches.id')
             ->select('users.*', 'branches.br_name as branch_name')
-            ->orderBy('users.id', 'ASC')
+            ->orderBy('users.id', 'DESC')
             ->get();
         return view('backend.pages.User.index', compact('users'));
     }

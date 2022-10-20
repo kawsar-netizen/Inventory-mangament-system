@@ -15,7 +15,7 @@ class ProductCategoryController extends Controller
      */
     public function index()
     {
-        $productCategory = DB::table('product_cagegories')->orderBy('id', 'ASC')->get();
+        $productCategory = DB::table('product_categories')->orderBy('id', 'DESC')->get();
 
         return view('backend.pages.ProductCategory.index', compact('productCategory'));
     }
@@ -51,7 +51,7 @@ class ProductCategoryController extends Controller
             // 'valuation.required'                    => 'Select valuation',
 
         ]);
-        $data = DB::table('product_cagegories')->insert([
+        $data = DB::table('product_categories')->insert([
             'item_category_id'              => $request->input('item_category_id'),
             'name'                          => $request->input('name'),
             'type'                          => $request->input('type'),
@@ -73,7 +73,7 @@ class ProductCategoryController extends Controller
      */
     public function show($id)
     {
-        $data =  DB::table('product_cagegories')->where('id', $id)->first();
+        $data =  DB::table('product_categories')->where('id', $id)->first();
 
         return view('backend.pages.ProductCategory.view', compact('data'));
     }
@@ -88,7 +88,7 @@ class ProductCategoryController extends Controller
     {
         $item_category = DB::table('item_categories')->get();
 
-        $data =  DB::table('product_cagegories')->where('id', $id)->first();
+        $data =  DB::table('product_categories')->where('id', $id)->first();
 
 
         return view('backend.pages.ProductCategory.edit', compact('data', 'item_category'));
@@ -103,7 +103,7 @@ class ProductCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $edit = DB::table('product_cagegories')->where('id', $id)->limit('1')->update([
+        $edit = DB::table('product_categories')->where('id', $id)->limit('1')->update([
             'item_category_id'              => $request->input('item_category_id'),
             'name'                          => $request->input('name'),
             'type'                          => $request->input('type'),
@@ -124,7 +124,7 @@ class ProductCategoryController extends Controller
      */
     public function destroy($id)
     {
-        $data =  DB::table('product_cagegories')->where('id', $id)->delete();
+        $data =  DB::table('product_categories')->where('id', $id)->delete();
         if ($data) {
             return back()->with('deleted', 'product category have been successfully deleted!!');
         } else {

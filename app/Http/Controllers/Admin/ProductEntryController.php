@@ -16,7 +16,7 @@ class ProductEntryController extends Controller
      */
     public function index()
     {
-        $productEntry = DB::table('product_entries')->orderBy('id', 'ASC')->get();
+        $productEntry = DB::table('product_entries')->orderBy('id', 'DESC')->get();
         return view('backend.pages.productEntry.index', compact('productEntry'));
     }
 
@@ -29,7 +29,7 @@ class ProductEntryController extends Controller
     {
         $branches              = DB::table('branches')->orderBy('id', 'ASC')->get();
         $itemCategory          = DB::table('item_categories')->orderBy('id', 'ASC')->get();
-        $productCategory       = DB::table('product_cagegories')->orderBy('id', 'ASC')->get();
+        $productCategory       = DB::table('product_categories')->orderBy('id', 'ASC')->get();
         return view('backend.pages.productEntry.create', compact('itemCategory', 'branches', 'productCategory'));
     }
 
@@ -106,7 +106,7 @@ class ProductEntryController extends Controller
 
         $itemCategory       = DB::table('item_categories')->get();
 
-        $productCategory    = DB::table('product_cagegories')->get();
+        $productCategory    = DB::table('product_categories')->get();
 
         $branches = DB::table('branches')->get();
 
@@ -125,7 +125,7 @@ class ProductEntryController extends Controller
 
         $itemCategory           = DB::table('item_categories')->get();
 
-        $productCategory        = DB::table('product_cagegories')->get();
+        $productCategory        = DB::table('product_categories')->get();
 
         $branches               = DB::table('branches')->get();
 
@@ -184,7 +184,7 @@ class ProductEntryController extends Controller
         if ($request->ajax()) {
             $item_category_id = trim($request->item_category_id);
 
-            $product_categories = DB::table('product_cagegories')
+            $product_categories = DB::table('product_categories')
                 ->select('*')
                 ->where('item_category_id', $item_category_id)
                 ->get();

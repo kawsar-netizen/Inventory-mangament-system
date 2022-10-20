@@ -15,7 +15,7 @@ class ItemCategoryController extends Controller
      */
     public function index()
     {
-        $itemCategory = DB::table('item_categories')->orderBy('id', 'ASC')->get();
+        $itemCategory = DB::table('item_categories')->orderBy('id', 'DESC')->get();
         return view('backend.pages.ItemCategory.index', compact('itemCategory'));
     }
 
