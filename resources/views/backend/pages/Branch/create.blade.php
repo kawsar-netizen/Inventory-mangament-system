@@ -101,8 +101,8 @@
                                     </div>
                                 </div>
 
-                                <div class="panel-content float-right d-flex flex-row align-items-center">
-                                    <button class="btn btn-success waves-effect waves-themed submit_btn"
+                                <div class="panel-content  d-flex flex-row align-items-center">
+                                    <button class="btn btn-primary waves-effect waves-themed submit_btn"
                                         type="submit">Submit</button>
                                 </div>
                             </form>

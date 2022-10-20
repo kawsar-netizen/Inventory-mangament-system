@@ -151,7 +151,7 @@
 
                                                 <option value="">Select Status</option>
                                                 <option value="1">Product Entry</option>
-                                                <option value="0">requisition</option>
+                                                <option value="0">Requisition</option>
                                             </select>
                                             <span style="color: red">
                                                 @error('status')
