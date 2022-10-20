@@ -10,6 +10,10 @@
     <meta name="description" content="Inbox">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, minimal-ui">
+
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- Call App Mode on ios devices -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <!-- Remove Tap Highlight on Windows Phone IE -->
@@ -24,6 +28,8 @@
     <link rel="mask-icon" href="{{ asset('backend/assets/img/favicon/safari-pinned-tab.svg') }}" color="#5bbad5">
     <link rel="stylesheet" media="screen, print" href="{{ asset('backend/assets/css/fa-solid.css') }}">
     <link rel="stylesheet" media="screen, print" href="{{ asset('backend/assets/css/fa-brands.css') }}">
+    <link rel="stylesheet" media="screen, print" href="{{ asset('backend/assets/css/formplugins/select2/select2.bundle.css') }}">
+    <link rel="stylesheet" media="screen, print" href="{{ asset('backend/assets/css/notifications/sweetalert2/sweetalert2.bundle.css') }}">
     @yield('page_style')
 </head>
 
@@ -465,6 +471,8 @@
 
     <script src="{{ asset('backend/assets/js/vendors.bundle.js') }}"></script>
     <script src="{{ asset('backend/assets/js/app.bundle.js') }}"></script>
+    <script src="{{ asset('backend/assets/js/formplugins/select2/select2.bundle.js') }}"></script>
+    <script src="{{ asset('backend/assets/js/notifications/sweetalert2/sweetalert2.bundle.js') }}"></script>
     
     @yield('page_js')
     <script type="text/javascript">

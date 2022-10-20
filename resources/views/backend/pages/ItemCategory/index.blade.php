@@ -5,9 +5,30 @@
 @section('page_style')
     <link rel="stylesheet" media="screen, print"
         href="{{ asset('backend/assets/css/datagrid/datatables/datatables.bundle.css') }}">
-        <link rel="stylesheet" media="screen, print" href="{{asset("backend/assets/css/fa-solid.css")}}">
+    <link rel="stylesheet" media="screen, print" href="{{ asset('backend/assets/css/fa-solid.css') }}">
 @endsection
 @section('content_ims')
+
+
+    @if (Session::get('success'))
+        <script>
+            alert('{{ Session::get('success') }}')
+        </script>
+    @endif
+
+
+    @if (Session::get('fail'))
+        <script>
+            alert('{{ Session::get('fail') }}')
+        </script>
+    @endif
+
+    @if (Session::get('deleted'))
+        <script>
+            alert('{{ Session::get('deleted') }}')
+        </script>
+    @endif
+
     <div class="row" style="margin-left: 80px;margin-right: 80px; margin-top:50px;">
         <div class="col-xl-12">
             <div id="panel-1" class="panel">
@@ -17,7 +38,8 @@
                     </h2>
                     <div class="panel-toolbar">
                         <a href="{{ route('item-category.create') }}">
-                            <button class="btn btn-primary btn-sm"> <span class="fal fa-plus mr-1"></span> Add Item Category</button>
+                            <button class="btn btn-primary btn-sm"> <span class="fal fa-plus mr-1"></span> Add Item
+                                Category</button>
                         </a>
                     </div>
                 </div>
@@ -34,20 +56,26 @@
                                 </tr>
                             </thead>
                             <tbody>
-
-                                <tr>
-                                    <td>1</td>
-                                    <td>Vivian Harrell</td>
-                                    <td>Financial Controller</td>
-                                    <td>
-                                        <a href="" class="btn btn-sm btn-primary waves-effect waves-themed">View</a>
-                                        <a href="" class="btn btn-sm btn-info waves-effect waves-themed">Edit</a>
-                                        <a href="" class="btn btn-sm btn-danger waves-effect waves-themed">Delete</a>
-                                    </td>
-                                    
-                                </tr>
-
-
+                                @foreach ($itemCategory as $item)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item->name }}</td>
+                                        <td>{{ $item->valuation }}%</td>
+                                        <td>
+                                            <form action="{{ route('item-category.destroy', $item->id) }}" method="post">
+                                                @csrf
+                                                {{-- <a href="{{ route('item-category.show', $item->id) }}"class="btn btn-btn-waves-waves-themed">View</a> --}}
+                                                <a href="{{ route('item-category.edit', $item->id) }}">
+                                                    <button type="button"
+                                                        class="btn btn-sm btn-info waves-effect waves-themed">Edit</button>
+                                                </a>
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                    class="btn btn-sm btn-danger waves-effect waves-themed"onclick="return confirm('Are you sure from delete?')">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -67,14 +95,12 @@
 @endsection
 @section('page_js')
     <script src="{{ asset('backend/assets/js/datagrid/datatables/datatables.bundle.js') }}"></script>
-    <script src="{{asset('backend/assets/js/datagrid/datatables/datatables.export.js')}}"></script>
+    <script src="{{ asset('backend/assets/js/datagrid/datatables/datatables.export.js') }}"></script>
     <script>
-        $(document).ready(function()
-        {
+        $(document).ready(function() {
 
             // initialize datatable
-            $('#dt-basic-example').dataTable(
-            {
+            $('#dt-basic-example').dataTable({
                 responsive: true,
                 lengthChange: false,
                 dom:
@@ -123,6 +149,5 @@
             });
 
         });
-
     </script>
 @endsection

@@ -1,39 +1,42 @@
 @extends('backend.layouts.backend_master');
 @section('title')
-    Product Category
+    Branch
 @endsection
 @section('page_style')
     <link rel="stylesheet" media="screen, print"
         href="{{ asset('backend/assets/css/datagrid/datatables/datatables.bundle.css') }}">
     <link rel="stylesheet" media="screen, print" href="{{ asset('backend/assets/css/fa-solid.css') }}">
 @endsection
+
+
 @section('content_ims')
-@if (Session::get('success'))
-<script>
-    alert('{{ Session::get('success') }}')
-</script>
-@endif
-@if (Session::get('deleted'))
-<script>
-    alert('{{ Session::get('deleted') }}')
-</script>
-@endif
-@if (Session::get('fail'))
-<script>
-    alert('{{ Session::get('fail') }}')
-</script>
-@endif
+    @if (Session::get('success'))
+        <script>
+            alert('{{ Session::get('success') }}')
+        </script>
+    @endif
+
+    @if (Session::get('delete'))
+        <script>
+            alert('{{ Session::get('delete') }}')
+        </script>
+    @endif
+    @if (Session::get('fail'))
+        <script>
+            alert('{{ Session::get('fail') }}')
+        </script>
+    @endif
     <div class="row" style="margin-left: 80px;margin-right: 80px; margin-top:50px;">
         <div class="col-xl-12">
             <div id="panel-1" class="panel">
                 <div class="panel-hdr">
                     <h2>
-                        Product Category <span class="fw-300"><i>List</i></span>
+                        Roles <span class="fw-300"><i>List</i></span>
                     </h2>
                     <div class="panel-toolbar">
-                        <a href="{{ route('product-category.create') }}">
-                            <button class="btn btn-primary btn-sm"><span class="fal fa-plus mr-1"></span>Add Product
-                                Category</button>
+                        <a href="{{ route('user.create') }}">
+                            <button class="btn btn-primary btn-sm"> <span class="fal fa-plus mr-1"></span> Add
+                                User</button>
                         </a>
                     </div>
                 </div>
@@ -44,55 +47,46 @@
                             <thead>
                                 <tr>
                                     <th>SL</th>
-                                    <th>Item Category Name</th>
-                                    <th>Product Category Name</th>
-                                    <th>Type</th>
-                                    <th>Valuation</th>
+                                    <th>User Name</th>
+                                    <th>User Type</th>
+                                    <th>User Branch</th>
+                                    <th>Email Address</th>
+                                    <th>Contact Phone</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($productCategory as $item)
+                                @foreach ($users as $user)
                                     <tr>
-                                        <td>{{$loop->iteration}}</td>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td><a href="">{{ $user->name }}</a></td>
+                                        <td>{{ $user->type }}</td>
+                                        <td>{{ $user->branch_name }}</td>
+                                        <td>{{ $user->email }}</td>
+                                        <td>{{ $user->contact_phone }}</td>
                                         <td>
-                                            @php
-                                                $item_category_name = DB::table('item_categories')->where('id','=',$item->item_category_id)->first();
-                                            @endphp
-                                            {{$item_category_name->name}}
-                                        </td>
-                                        <td>{{$item->name}}</td>
-                                        <td>
-                                            @if ($item->type == 1)
-                                                {{ 'Asset' }}
-                                            @else
-                                                {{ 'Inventory' }}
-                                            @endif
-                                        </td>
-                                        <td>{{$item->product_category_valuation}}</td>
-                                        <td>
-                                            <form action="{{ route('product-category.destroy', $item->id) }}" method="post">
+                                            <form action="" method="post">
                                                 @csrf
-                                                {{-- <a
-                                                    href="{{ route('product-category.show', $item->id) }}"class="btn btn-sm btn-primary waves-effect waves-themed">View</a> --}}
-                                                <a href="{{ route('product-category.edit', $item->id) }}">
+                                                <a
+                                                    href="{{ route('user.show', $user->id) }}"class="btn btn-sm btn-primary waves-effect waves-themed">View</a>
+                                                <a href="{{ route('user.edit', $user->id) }}">
                                                     <button type="button"
                                                         class="btn btn-sm btn-info waves-effect waves-themed">Edit</button>
                                                 </a>
-                                                @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger waves-effect waves-themed"onclick="return confirm('Are you sure from delete?')">Delete</button>
                                             </form>
                                         </td>
+
                                     </tr>
                                 @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <th>SL</th>
-                                    <th>Item Category Name</th>
-                                    <th>Product Category Name</th>
-                                    <th>Type</th>
-                                    <th>Valuation</th>
+                                    <th>User Name</th>
+                                    <th>User Type</th>
+                                    <th>User Branch</th>
+                                    <th>Email Address</th>
+                                    <th>Contact Phone</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>

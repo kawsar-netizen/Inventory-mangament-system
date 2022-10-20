@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DemoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,13 +18,17 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(['register' => false]);
 
 Route::get('/', function () {
-    return view('backend.pages.login2');
+    return view('backend.pages.login');
 });
+
 
 Route::group(['middleware' => 'auth'], function () {
 
     //dashboard route here
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+
+    //user route here
+    Route::resource('/user', 'App\Http\Controllers\Admin\UserController');
 
     //branch route here
     Route::resource('/branch', 'App\Http\Controllers\Admin\BranchController');
@@ -34,6 +39,16 @@ Route::group(['middleware' => 'auth'], function () {
     //product category route here
     Route::resource('/product-category', 'App\Http\Controllers\Admin\ProductCategoryController');
 
-    //product category route here
+    Route::post('/valuation',[App\Http\Controllers\Admin\ProductCategoryController::class, 'productCategoryValuation'])->name('productCategoryValuation');
+
+    //product entry route here
     Route::resource('/product-entry', 'App\Http\Controllers\Admin\ProductEntryController');
+    Route::post('/product-category-dropdown',[App\Http\Controllers\Admin\ProductEntryController::class, 'productCategoryDropdown'])->name('productCategoryDropdown');
+
+
+    //product requisition route here
+    Route::resource('/product-requisition', 'App\Http\Controllers\Admin\ProductRequisitionController');
+    Route::post('/product-entry-dropdown',[App\Http\Controllers\Admin\ProductRequisitionController::class, 'productEntryDropdown'])->name('productEntryDropdown');
+    Route::post('/product-entry-brand-dropdown',[App\Http\Controllers\Admin\ProductRequisitionController::class, 'productEntryBrandDropdown'])->name('productEntryBrandDropdown');
+
 });

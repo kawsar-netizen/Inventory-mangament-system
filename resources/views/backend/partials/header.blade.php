@@ -5,7 +5,7 @@
                             <a href="#"
                                 class="page-logo-link press-scale-down d-flex align-items-center position-relative"
                                 data-toggle="modal" data-target="#modal-shortcut">
-                                <img src="img/logo.png" alt="SmartAdmin WebApp" aria-roledescription="logo">
+                                <!-- <img src="img/logo.png" alt="SmartAdmin WebApp" aria-roledescription="logo"> -->
                                 <span class="page-logo-text mr-1">SmartAdmin WebApp</span>
                                 <span
                                     class="position-absolute text-white opacity-50 small pos-top pos-right mr-2 mt-n2"></span>
@@ -18,56 +18,12 @@
                         <div class="hidden-md-down dropdown-icon-menu position-relative">
 
                              <a href="#" class="header-btn btn js-waves-off" data-action="toggle"
-                                        data-class="nav-function-minify" title="Hide Navigation">
+                                        data-class="nav-function-minify" title="Hide Navigation" style="padding-top: 5px">
                                         <i class="ni ni-menu"></i>
                              </a>
 
-
-
-
-                            <!-- <a href="#" class="header-btn btn js-waves-off" data-action="toggle"
-                                data-class="nav-function-hidden" title="Hide Navigation">
-                                <i class="ni ni-menu"></i>
-                            </a>
-                            <ul>
-                                <li>
-                                    <a href="#" class="btn js-waves-off" data-action="toggle"
-                                        data-class="nav-function-minify" title="Minify Navigation">
-                                        <i class="ni ni-minify-nav"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="btn js-waves-off" data-action="toggle"
-                                        data-class="nav-function-fixed" title="Lock Navigation">
-                                        <i class="ni ni-lock-nav"></i>
-                                    </a>
-                                </li>
-                            </ul> -->
                         </div>
 
-                        <!-- samer ends -->
-
-
-                       <!--  <div class="hidden-md-down dropdown-icon-menu position-relative">
-                            <a href="#" class="header-btn btn js-waves-off" data-action="toggle"
-                                data-class="nav-function-hidden" title="Hide Navigation">
-                                <i class="ni ni-menu"></i>
-                            </a>
-                            <ul>
-                                <li>
-                                    <a href="#" class="btn js-waves-off" data-action="toggle"
-                                        data-class="nav-function-minify" title="Minify Navigation">
-                                        <i class="ni ni-minify-nav"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="btn js-waves-off" data-action="toggle"
-                                        data-class="nav-function-fixed" title="Lock Navigation">
-                                        <i class="ni ni-lock-nav"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div> -->
 
 
                         <!-- DOC: mobile button appears during mobile width -->
@@ -91,17 +47,15 @@
                             <div>
                                 <a href="#" data-toggle="dropdown" title="drlantern@gotbootstrap.com"
                                     class="header-icon d-flex align-items-center justify-content-center ml-2">
-                                    <img src="{{ asset('backend/assets/img/demo/avatars/avatar-admin.png') }}"
+                                    <img src="{{ asset('backend/assets/img/demo/avatars/avatar-m.png') }}"
                                         class="profile-image rounded-circle" alt="Dr. Codex Lantern">
-                                    <!-- you can also add username next to the avatar with the codes below:
-         <span class="ml-1 mr-1 text-truncate text-truncate-header hidden-xs-down">Me</span>
-         <i class="ni ni-chevron-down hidden-xs-down"></i> -->
+                                   
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-animated dropdown-lg">
                                     <div class="dropdown-header bg-trans-gradient d-flex flex-row py-4 rounded-top">
                                         <div class="d-flex flex-row align-items-center mt-1 mb-1 color-white">
                                             <span class="mr-2">
-                                                <img src="{{ asset('backend/assets/img/demo/avatars/avatar-admin.png') }}"
+                                                <img src="{{ asset('backend/assets/img/demo/avatars/avatar-m.png') }}"
                                                     class="rounded-circle profile-image" alt="Dr. Codex Lantern">
                                             </span>
                                             <div class="info-card-text">

@@ -19,23 +19,24 @@
             <div class="col-xl-6 col-md-7 sortable-grid ui-sortable">
                 <div id="panel-3" class="panel panel-sortable" role="widget">
                     <div class="panel-hdr" role="heading">
-                        <h2 class="ui-sortable-handle">Product Category Set up Form</h2>
+                        <h2 class="ui-sortable-handle">Product Category Update Form</h2>
                     </div>
                     <div class="panel-container show" role="content">
                         <div class="loader"><i class="fal fa-spinner-third fa-spin-4x fs-xxl"></i></div>
                         <div class="panel-content">
 
-                            <form id="transaction_create_from" action="{{route('product-category.store')}}" method="post" enctype="multipart/form-data">
+                            <form id="transaction_create_from" action="{{route('product-category.update',$data->id)}}" method="post" enctype="multipart/form-data">
                                 @csrf
+                                @method('PUT')
                                 <div class="row">
                                     <div class="col-md-12">
 
 
-                                         <div class="col-md-12 mb-3">
+
+                                        <div class="col-md-12 mb-3">
                                             <label class="form-label" for="name">Name</label>
-                                            <input type="text" placeholder="Product category name" name="name"
-                                                id="name" class="form-control" required="" aria-required="true"
-                                                value="{{ old('name') }}">
+                                            <input type="text"  name="name"
+                                                id="name" class="form-control" required=""value="{{ $data->name}}">
                                             <span style="color: red">
                                                 @error('name')
                                                     {{ $message }}
@@ -43,61 +44,64 @@
                                             </span>
                                         </div>
 
-
-                                         <div class="col-md-12 mb-3 select_2_error">
+                                        <div class="col-md-12 mb-3 select_2_error">
                                             <label class="form-label" for="type">Type</label>
-                                            <select class="form-control select2 " name="type" id="types" required="">
-                                                <option value="">Select Type</option>
-                                                <option value="1">Asset</option>
-                                                <option value="2">Inventory</option>
+                                            <select class="form-control select2" name="type" id="type">
+                                                <option value="" {{ $data->type == '' ? 'selected' : '' }}>
+                                                    Select Type</option>
+                                                <option value="1" {{ $data->type == '1' ? 'selected' : '' }}>
+                                                    Asset</option>
+                                                <option value="2" {{ $data->type == '2' ? 'selected' : '' }}>
+                                                    Inventory</option>
                                             </select>
                                             <span style="color: red">
                                                 @error('type')
                                                     {{ $message }}
                                                 @enderror
                                             </span>
-                                        </div>  
-                                       
-                                      
-                                       
-                                            <div class="col-md-12 mb-3 select_2_error">
-                                            <label class="form-label" for="item_category_id"> Item Category</label>
-                                            <select class="form-control select2"
-                                                name="item_category_id" id="item_category_id" required="">
-
-                                                <option value="">Select Item Category</option>
-                                                @foreach ($itemCategory as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                @endforeach
-
-                                            </select>
                                         </div>
 
-
-                                        
-                                      
-                                      
-                                        
-
-                                                                          
-
+                                        <div class="col-md-12 mb-3 select_2_error">
+                                            <label class="form-label" for="item_category_id"> Item Category</label>
+                                            <select class="form-control select2"name="item_category_id" id="item_category_id" required="">
+                                                <option value="">Select Item Category</option>
+                                                @foreach($item_category as $item){
+                                                    <option value="{{$item->id}}" {{ $item->id == $data->item_category_id ?"selected":""}}>{{$item->name}}</option>}
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        @if($data->type == 1)
+                                     
                                         <div class="col-md-12 mb-3" id="ddd">
                                             <label class="form-label" for="valuation"> Valuation </label>
-                                            <input type="number" name="valuation" class="form-control" id="valuation">
+                                    <input type="number" name="valuation" class="form-control" value="{{$data->product_category_valuation}}" id="valuation" >
                                                 <span style="color: red">
                                                     @error('valuation')
                                                         {{ $message }}
                                                     @enderror
-                                                </span>                                              
+                                                </span>                                               
                                         </div>
+
+                                        @else
+                                        <div class="col-md-12 mb-3" id="ddd">
+                                            <label class="form-label" for="valuation"> Valuation </label>
+                                    <input type="number" name="valuation" class="form-control" value="{{$data->product_category_valuation}}" id="valuation" disabled="" >
+                                                <span style="color: red">
+                                                    @error('valuation')
+                                                        {{ $message }}
+                                                    @enderror
+                                                </span>                                               
+                                        </div>
+
+                                        @endif
 
                                     </div>
                                 </div>
-                                <div class="panel-content d-flex flex-row align-items-center">
+                                <div
+                                    class="panel-content d-flex flex-row align-items-center">
                                     <button class="btn btn-primary  waves-effect waves-themed submit_btn"
-                                        type="submit">Submit</button>
+                                        type="submit">Update</button>
                                 </div>
-
                             </form>
                         </div>
                     </div>
@@ -115,34 +119,34 @@
     $('.select2').select2();
 
 
-// valuation diable/enable part start
-    $('#types').on('change',function(){
+
+    // div show/hidden part start
+    $('#type').on('change',function(){
 
     var tt = $(this).val();
 
+    
    if(tt == 2){
 
-     // $('#valuation').attr('readonly', 'readonly');
+    //  $('#ddd').hide();
+    // $('#valuation').val('');
      $('#valuation').prop("disabled", true);
      
 
 
    }else{
-       // $('#ddd').hide();
-       // $('#valuation').removeAttr('readonly');
-       $('#valuation').prop("disabled", false);
+       // $('#ddd').show();
+        $('#valuation').prop("disabled", false);
    }
 
 });
-// valuation diable/enable part ends
+// div show/hidden part ends
 
     });
 
 
 
-
-
-     // for valuation start
+         // for resolve description start
     $('#item_category_id').change(function(e) {
       $.ajaxSetup({
         headers: {
@@ -173,9 +177,9 @@
         }
       }); 
     });
-// for valuation ends
-
 
 </script>
+
+
 
 @endsection

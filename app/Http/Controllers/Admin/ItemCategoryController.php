@@ -15,8 +15,8 @@ class ItemCategoryController extends Controller
      */
     public function index()
     {
-        $itemCategory = DB::table('item_categories')->orderBy('id','ASC')->get();
-        return view('backend.pages.ItemCategory.index',compact('itemCategory'));
+        $itemCategory = DB::table('item_categories')->orderBy('id', 'DESC')->get();
+        return view('backend.pages.ItemCategory.index', compact('itemCategory'));
     }
 
     /**
@@ -37,7 +37,22 @@ class ItemCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'          => 'required',
+            'valuation'     => 'required',
+        ], [
+            'name.required'             => 'Select item category name',
+            'valuation.required'        => 'Select item category valuation',
+        ]);
+        $data = DB::table('item_categories')->insert([
+            'name'          => $request->input('name'),
+            'valuation'     => $request->input('valuation'),
+        ]);
+        if ($data) {
+            return redirect()->route('item-category.index')->with('success', 'Item category have been successfully inserted!!');
+        } else {
+            return back()->with('fail', 'Something went wrong.Please try letter!!');
+        }
     }
 
     /**
@@ -59,7 +74,9 @@ class ItemCategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $edit =  DB::table('item_categories')->where('id', $id)->first();
+
+        return view('backend.pages.ItemCategory.edit', compact('edit'));
     }
 
     /**
@@ -71,7 +88,15 @@ class ItemCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $edit = DB::table('item_categories')->where('id', $id)->limit('1')->update([
+            'name'         => $request->input('name'),
+            'valuation'    => $request->input('valuation'),
+        ]);
+        if ($edit) {
+            return redirect()->route('item-category.index')->with('success', 'Item category have been successfully updated!!');
+        } else {
+            return redirect()->route('item-category.index')->with('fail', 'No data has been updated!!');
+        }
     }
 
     /**
@@ -82,6 +107,11 @@ class ItemCategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data =  DB::table('item_categories')->where('id', $id)->delete();
+        if ($data) {
+            return back()->with('deleted', 'Item category have been successfully deleted!!');
+        } else {
+            return back()->with('fail', 'Something went wrong.Please try letter!!');
+        }
     }
 }

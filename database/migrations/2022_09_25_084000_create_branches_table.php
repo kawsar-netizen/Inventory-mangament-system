@@ -16,7 +16,10 @@ class CreateBranchesTable extends Migration
         Schema::create('branches', function (Blueprint $table) {
             $table->id();
             $table->string('br_name');
-            $table->string('br_code')->nullable();
+            $table->string('br_address');
+            $table->string('location')->nullable()->comment('1:rural,2:unrural');
+            $table->string('br_type')->nullable()->comment('1:sub-branch,2:head-office,3:agent,4:branch');
+            $table->string('br_code');
             $table->integer('status')->default('1');
             $table->timestamps();
         });
