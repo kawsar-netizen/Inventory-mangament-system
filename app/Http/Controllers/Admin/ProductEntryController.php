@@ -44,29 +44,29 @@ class ProductEntryController extends Controller
         $request->validate([
             'item_category_id'                              => 'required',
             'product_category_id'                           => 'required',
-            'branch_id'                                     => 'required',
+            // 'branch_id'                                     => 'required',
             'name'                                          => 'required',
-            'type'                                          => 'required',
-            'status'                                        => 'required',
+            // 'type'                                          => 'required',
+            // 'status'                                        => 'required',
             'brand_no'                                      => 'required',
             'model_no'                                      => 'required',
-            'tag_no'                                        => 'required',
+            // 'tag_no'                                        => 'required',
             'quantity'                                      => 'required',
             'warranty_date'                                 => 'required',
-            'purchase_date'                                 => 'required',
+            // 'purchase_date'                                 => 'required',
         ], [
             'item_category_id.required'                                 => 'Select item category name',
             'product_category_id.required'                              => 'Select product category name',
-            'branch_id.required'                                        => 'Select branch name',
+            // 'branch_id.required'                                        => 'Select branch name',
             'name.required'                                             => 'Enter inventory name',
-            'type.required'                                             => 'Select type',
-            'status.required'                                           => 'Select status',
+            // 'type.required'                                             => 'Select type',
+            // 'status.required'                                           => 'Select status',
             'brand_no.required'                                         => 'Enter brand name',
             'model_no.required'                                         => 'Enter model name',
-            'tag_no.required'                                           => 'Enter tag name',
+            // 'tag_no.required'                                           => 'Enter tag name',
             'quantity.required'                                         => 'Enter quantity',
             'warranty_date.required'                                    => 'Enter product warranty',
-            'purchase_date.required'                                    => 'Enter product purchase date',
+            // 'purchase_date.required'                                    => 'Enter product purchase date',
 
         ]);
 
@@ -141,6 +141,41 @@ class ProductEntryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
+
+       
+       $request->validate([
+            'item_category_id'                              => 'required',
+            'product_category_id'                           => 'required',
+            'name'                                          => 'required',
+            'brand_no'                                      => 'required',
+            'model_no'                                      => 'required',
+            'quantity'                                      => 'required',
+            'warranty_date'                                 => 'required',
+          
+        ], [
+            'item_category_id.required'                                 => 'Select item category name',
+            'product_category_id.required'                              => 'Select product category name',
+          
+            'name.required'                                             => 'Enter inventory name',
+          
+            'brand_no.required'                                         => 'Enter brand name',
+            'model_no.required'                                         => 'Enter model name',
+          
+            'quantity.required'                                         => 'Enter quantity',
+            'warranty_date.required'                                    => 'Enter product warranty',
+         
+
+        ]);
+
+
+
+
+
+
+
+
+
         $data = DB::table('product_entries')->where('id', $id)->update([
             'item_category_id'              => $request->input('item_category_id'),
             'product_category_id'           => $request->input('product_category_id'),

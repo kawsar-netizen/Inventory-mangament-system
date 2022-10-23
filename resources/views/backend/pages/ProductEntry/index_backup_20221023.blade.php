@@ -51,13 +51,13 @@
                                     <th>SL</th>
                                     <th>Item Category</th>
                                     <th>Product Category</th>
-                                    <!-- <th>Type</th> -->
-                                    <!-- <th>Branch</th> -->
+                                    <th>Type</th>
+                                    <th>Branch</th>
                                     <th>Product</th>
                                     <th>Brand No</th>
                                     <th>Model No</th>
-                                    <!-- <th>Purchase Date</th> -->
-                                    <!-- <th>Tag No</th> -->
+                                    <th>Purchase Date</th>
+                                    <th>Tag No</th>
                                     <th>User Name</th>
                                     <th>Action</th>
                                 </tr>
@@ -81,12 +81,24 @@
                                             @endphp
                                             {{$product_category->name}}
                                         </td>
-                                        
+                                        <td>
+                                            @if ($item->type == 1)
+                                                {{ "Asset" }}
+                                            @else
+                                                {{ "Inventory" }}
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @php
+                                                $branches = DB::table('branches')->where('id','=',$item->branch_id)->orderBy('id','ASC')->first();
+                                            @endphp
+                                            {{$branches->br_name}}
+                                        </td>
                                         <td>{{$item->name}}</td>
                                         <td>{{$item->brand_no}}</td>
                                         <td>{{$item->model_no}}</td>
-                                        <!-- <td>{{$item->purchase_date}}</td> -->
-                                        <!-- <td>{{$item->tag_no}}</td> -->
+                                        <td>{{$item->purchase_date}}</td>
+                                        <td>{{$item->tag_no}}</td>
                                         <td>{{$item->entry_by}}</td>
                                         <td>
                                             <form action="{{ route('product-entry.destroy', $item->id) }}" method="post">
@@ -110,13 +122,13 @@
                                     <th>SL</th>
                                     <th>Item Category</th>
                                     <th>Product Category</th>
-                                    <!-- <th>Type</th> -->
-                                    <!-- <th>Branch</th> -->
+                                    <th>Type</th>
+                                    <th>Branch</th>
                                     <th>Product</th>
                                     <th>Brand No</th>
                                     <th>Model No</th>
-                                    <!-- <th>Purchase Date</th> -->
-                                    <!-- <th>Tag No</th> -->
+                                    <th>Purchase Date</th>
+                                    <th>Tag No</th>
                                     <th>User Name</th>
                                     <th>Action</th>
                                 </tr>

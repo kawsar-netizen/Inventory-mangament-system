@@ -15,7 +15,7 @@
     @endif
     <main id="js-page-content" role="main" class="page-content">
         <div class="row" style="margin-left: 80px; margin-right: 80px; margin-top:50px;">
-            <div class="col-xl-12 col-md-6 sortable-grid ui-sortable">
+            <div class="col-xl-12 col-md-12 sortable-grid ui-sortable">
                 <div id="panel-3" class="panel panel-sortable" role="widget">
                     <div class="panel-hdr" role="heading">
                         <h2 class="ui-sortable-handle">Inventory Entry Update Form</h2>
@@ -50,18 +50,34 @@
                                             </span>
                                         </div>
 
-                                        <div class="col-md-12 mb-3 select_2_error">
-                                            <label class="form-label" for="type">Type</label>
-                                            <select class="form-control select2" name="type" id="type">
-                                                <option value="" {{ $inventory_edit->type == '' ? 'selected' : '' }}>
-                                                    Select Type</option>
-                                                <option value="1" {{ $inventory_edit->type == '1' ? 'selected' : '' }}>
-                                                    Asset</option>
-                                                <option value="2" {{ $inventory_edit->type == '2' ? 'selected' : '' }}>
-                                                    Inventory</option>
+
+                                            <div class="col-md-12 mb-3 select_2_error">
+
+                                           @php
+                                                $product_category_name = DB::table('product_categories')
+                                                ->select('name')
+                                                ->where('id','=',$inventory_edit->product_category_id)
+                                                ->first();
+                                            @endphp
+
+
+
+                                            <label class="form-label"> Product Category</label>
+                                            <select class="form-control select2" name="product_category_id"
+                                                id="product_category_id" required="" >
+
+                                           <option value="{{ $inventory_edit->product_category_id }}">{{ $product_category_name->name }}</option>
+
+                                                <!-- @foreach ($productCategory as $item)
+                                                    {
+                                                    <option value="{{ $item->id }}"
+                                                        {{ $item->id == $inventory_edit->item_category_id ? 'selected' : '' }}>
+                                                        {{ $item->name }}</option>}
+                                                @endforeach -->
+
                                             </select>
                                             <span style="color: red">
-                                                @error('type')
+                                                @error('product_category_id')
                                                     {{ $message }}
                                                 @enderror
                                             </span>
@@ -69,7 +85,7 @@
 
 
                                         <div class="col-md-12 mb-3">
-                                            <label class="form-label" for="name">Name</label>
+                                            <label class="form-label" for="name">Inventory Product Name</label>
                                             <input type="text" name="name" value="{{ $inventory_edit->name }}"
                                                 id="name" class="form-control">
                                             <span style="color: red">
@@ -80,7 +96,14 @@
                                         </div>
 
 
-                                        <div class="col-md-12 mb-3">
+                                    </div>
+
+                                    <div class="col-md-6">
+
+                                    
+                                        
+
+                                         <div class="col-md-12 mb-3">
                                             <label class="form-label" for="brand_no"> Brand No </label>
                                             <input type="text" name="brand_no" class="form-control" id="brand_no"
                                                 value="{{ $inventory_edit->brand_no }}">
@@ -91,6 +114,19 @@
                                             </span>
 
                                         </div>
+
+
+                                         <div class="col-md-12 mb-3">
+                                            <label class="form-label" for="model_no"> Model No </label>
+                                            <input type="text" name="model_no" class="form-control" id="model_no"
+                                                value="{{ $inventory_edit->model_no }}">
+                                            <span style="color: red">
+                                                @error('model_no')
+                                                    {{ $message }}
+                                                @enderror
+                                            </span>
+                                        </div>
+
                                         <div class="col-md-12 mb-3">
                                             <label class="form-label" for="quantity"> Quantity </label>
                                             <input type="number" name="quantity" class="form-control" id="quantity"
@@ -102,8 +138,9 @@
                                             </span>
 
                                         </div>
+
                                         <div class="col-md-12 mb-3">
-                                            <label class="form-label" for="warranty_date"> Warranty </label>
+                                            <label class="form-label" for="warranty_date"> Warranty (years)</label>
                                             <input type="number" name="warranty_date" class="form-control"
                                                 id="warranty_date" value="{{ $inventory_edit->warranty_date }}">
                                             <span style="color: red">
@@ -113,103 +150,8 @@
                                             </span>
 
                                         </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="col-md-12 mb-3 select_2_error">
-                                            <label class="form-label" for="product_category_id"> Product Category</label>
-                                            <select class="form-control select2" name="product_category_id"
-                                                id="product_category_id" required=""
-                                                data-select2-id="product_category_id" tabindex="-1" aria-hidden="true"
-                                                aria-required="true">
-
-                                                <option value="">Select Product Category</option>
-                                                @foreach ($productCategory as $item)
-                                                    {
-                                                    <option value="{{ $item->id }}"
-                                                        {{ $item->id == $inventory_edit->item_category_id ? 'selected' : '' }}>
-                                                        {{ $item->name }}</option>}
-                                                @endforeach
-
-                                            </select>
-                                            <span style="color: red">
-                                                @error('product_category_id')
-                                                    {{ $message }}
-                                                @enderror
-                                            </span>
-                                        </div>
-                                        <div class="col-md-12 mb-3 select_2_error">
-                                            <label class="form-label" for="branch_id"> Branch</label>
-                                            <select class="form-control select2" name="branch_id" id="branch_id"
-                                                required="" data-select2-id="branch_id">
-
-                                                <option value="">Select Branch</option>
-                                                @foreach ($branches as $item)
-                                                    {
-                                                    <option value="{{ $item->id }}"
-                                                        {{ $item->id == $inventory_edit->branch_id ? 'selected' : '' }}>
-                                                        {{ $item->br_name }}</option>}
-                                                @endforeach
-
-                                            </select>
-                                            <span style="color: red">
-                                                @error('branch_id')
-                                                    {{ $message }}
-                                                @enderror
-                                            </span>
-                                        </div>
-                                        <div class="col-md-12 mb-3 select_2_error">
-                                            <label class="form-label" for="status">Status</label>
-                                            <select class="form-control select2" name="status" id="status"
-                                                required="" data-select2-id="status"
-                                                value="{{ $inventory_edit->status }}">
-                                                <option value=""
-                                                    {{ $inventory_edit->status == '' ? 'selected' : '' }}>Select Status
-                                                </option>
-                                                <option value="0"
-                                                    {{ $inventory_edit->status == '0' ? 'selected' : '' }}>requisition
-                                                </option>
-                                                <option value="1"
-                                                    {{ $inventory_edit->status == '1' ? 'selected' : '' }}>Product Entry
-                                                </option>
-                                            </select>
-                                            <span style="color: red">
-                                                @error('status')
-                                                    {{ $message }}
-                                                @enderror
-                                            </span>
-                                        </div>
-                                        <div class="col-md-12 mb-3">
-                                            <label class="form-label" for="model_no"> Model No </label>
-                                            <input type="text" name="model_no" class="form-control" id="model_no"
-                                                value="{{ $inventory_edit->model_no }}">
-                                            <span style="color: red">
-                                                @error('model_no')
-                                                    {{ $message }}
-                                                @enderror
-                                            </span>
-                                        </div>
-                                        <div class="col-md-12 mb-3">
-                                            <label class="form-label" for="tag_no"> Tag No </label>
-                                            <input type="text" name="tag_no" class="form-control" id="tag_no"
-                                                value="{{ $inventory_edit->tag_no }}">
-                                            <span style="color: red">
-                                                @error('tag_no')
-                                                    {{ $message }}
-                                                @enderror
-                                            </span>
-                                        </div>
-
-                                        <div class="col-md-12 mb-3">
-                                            <label class="form-label" for="purchase_date"> Purchase Date </label>
-                                            <input type="date" name="purchase_date" class="form-control"
-                                                id="purchase_date" value="{{ $inventory_edit->purchase_date }}">
-                                            <span style="color: red">
-                                                @error('purchase_date')
-                                                    {{ $message }}
-                                                @enderror
-                                            </span>
-                                        </div>
+                                       
+                                     
 
                                     </div>
 
@@ -237,6 +179,42 @@
     $('.select2').select2();
 
     });
+
+     // for fetching product categroy data start
+    $('#item_category_id').change(function(e) {
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        }
+      });
+      e.preventDefault();
+
+      var item_category_id = $(this).val();
+
+
+      var product_category_id = $(this).closest('form').find('#product_category_id');
+      if (item_category_id == '') {
+        $('#product_category_id').html('');
+        return false;
+      }
+      $.ajax({
+        url: "{{ route('productCategoryDropdown') }}",
+        method: "POST",
+        data: {
+          'item_category_id': item_category_id
+        },
+        success: function(response) {
+           
+           $('#product_category_id').html(response);
+            console.log(response);
+        },
+        error: function(response) {
+        
+          console.log(response);
+        }
+      }); 
+    });
+// for fetching product categroy data end
 
 </script>
 @endsection
