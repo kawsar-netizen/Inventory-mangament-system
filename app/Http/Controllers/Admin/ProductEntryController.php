@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class ProductEntryController extends Controller
 {
@@ -83,7 +84,8 @@ class ProductEntryController extends Controller
             'tag_no'                                => $request->input('tag_no'),
             'quantity'                              => $request->input('quantity'),
             'warranty_date'                         => $request->input('warranty_date'),
-            'purchase_date'                         => $request->input('purchase_date'),
+            // 'purchase_date'                         => $request->input('purchase_date'),
+            'purchase_date'                         => Carbon::today(),
             'entry_by'                              => $user,
 
         ]);

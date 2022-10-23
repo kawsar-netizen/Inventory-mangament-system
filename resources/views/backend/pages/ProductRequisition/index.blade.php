@@ -57,6 +57,7 @@
                                     <th>Model No</th>
                                     <th>Quantity</th>
                                     <th>Warranty (years)</th>
+                                    <th>Requisition From</th>
                                     <th>Requisition Date</th>
                                     <th>Status</th>
                                   
@@ -99,6 +100,13 @@
                                         <td>{{$item->model}}</td>
                                         <td>{{$item->quantity}}</td>
                                         <td>{{$item->warranty}}</td>
+                                        <td>
+                                            @php
+                                                $user = DB::table('users')->where('id','=',$item->requested_from)->orderBy('id','DESC')->first();
+                                            @endphp
+                                            {{$user->name}}
+
+                                        </td>
                                         <td>{{$item->requisition_request_date}}</td>
                                         <td>
                                          @if($item->requisition_current_status == 1)
@@ -116,6 +124,20 @@
                                         </td>
                                        
                                         <td>
+
+                                             @php                                                       
+                                              $role = Auth::user()->role_id;                                             
+                                            @endphp
+
+
+                                            @if(($role == 1) || ($role == 2) || ($role == 3))
+                                              
+                                              <form action="" method="post">
+                                                @csrf                                                                                       
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#default-example-modal-center">Review</button>                                              
+                                            </form>
+                                            @else
+
                                             <form action="" method="post">
                                                 @csrf                                              
                                                 <a href=""class="btn btn-sm btn-primary waves-effect waves-themed" style="margin-bottom: 4px;">View</a>
@@ -125,7 +147,7 @@
                                                 @else
                                                 @endif
                                             </form>
-
+                                           @endif
                                         </td>
 
                                     </tr>
@@ -142,6 +164,7 @@
                                     <th>Model No</th>
                                     <th>Quantity</th>
                                     <th>Warranty (years)</th>
+                                    <th>Requisition From</th>
                                     <th>Requisition Date</th>
                                     <th>Status</th>
                                     <th>Action</th>
@@ -149,6 +172,29 @@
                             </tfoot>
                         </table>
                         <!-- datatable end -->
+
+
+
+                        <!-- Modal center -->
+                                            <div class="modal fade" id="default-example-modal-center" tabindex="-1" role="dialog" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">
+                                                                Review Current Requisition
+                                                            </h4>
+                                                           
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-success" data-dismiss="modal">Accept</button>
+                                                            <button type="button" class="btn btn-danger">Decline</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                     </div>
                 </div>
             </div>
