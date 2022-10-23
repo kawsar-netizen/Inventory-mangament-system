@@ -49,4 +49,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/product-entry-dropdown',[App\Http\Controllers\Admin\ProductRequisitionController::class, 'productEntryDropdown'])->name('productEntryDropdown');
     Route::post('/product-entry-brand-dropdown',[App\Http\Controllers\Admin\ProductRequisitionController::class, 'productEntryBrandDropdown'])->name('productEntryBrandDropdown');
 
+    Route::post('/product-requisition/review/modal', [App\Http\Controllers\Admin\ProductRequisitionController::class, 'requisitionReviewModal'])->name('requisition_review_modal');
+
 });

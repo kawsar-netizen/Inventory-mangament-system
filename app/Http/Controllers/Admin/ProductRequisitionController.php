@@ -242,5 +242,34 @@ class ProductRequisitionController extends Controller
 
 
 
+ public function requisitionReviewModal(Request $request)
+   {
+      if ($request->ajax()) {
+         try {
+
+        $requisition_id = trim($request->row_id);
+
+           $productRequisitionData = DB::table('product_requisitions')
+                                  ->select('product_requisitions.*','item_categories.name as item_cat_name','product_categories.name as product_cat_name','product_entries.name as product_name')
+                                  ->leftjoin('item_categories','item_category_id','=','item_categories.id')
+                                  ->leftjoin('product_categories','product_category_id','=','product_categories.id')
+                                  ->leftjoin('product_entries','inventory_product_id','=','product_entries.id')
+                                  ->where('product_requisitions.id',$requisition_id)
+                                  ->first();
+            
+
+            $view = view('backend.pages.productRequisition.review_modal_body',compact('productRequisitionData'))->render();
+
+            return response()->json(['success' => true, 'error' => false, 'message' =>  'View Loaded Successsfully', 'html' => $view]);
+         } catch (\Exception $e) {
+            return response()->json(
+               ['success' => false, 'error' => true, 'message' =>  $e->getMessage()]
+            );
+         }
+      } else {
+         echo 'This request is not ajax !';
+      }
+   } // end -:- edit_agenda_modal()
+
 
 }

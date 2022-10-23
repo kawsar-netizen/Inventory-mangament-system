@@ -134,7 +134,7 @@
                                               
                                               <form action="" method="post">
                                                 @csrf                                                                                       
-                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#default-example-modal-center">Review</button>                                              
+                        <button type="button" class="btn btn-info" onclick="openEditResolveAgendaFormWithModal({{$item->id}})" >Review</button>                                              
                                             </form>
                                             @else
 
@@ -176,8 +176,8 @@
 
 
                         <!-- Modal center -->
-                                            <div class="modal fade" id="default-example-modal-center" tabindex="-1" role="dialog" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h4 class="modal-title">
@@ -188,10 +188,9 @@
                                                         <div class="modal-body">
                                                             
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-success" data-dismiss="modal">Accept</button>
-                                                            <button type="button" class="btn btn-danger">Decline</button>
-                                                        </div>
+                                                        <!-- <div class="modal-footer">
+                                                            
+                                                        </div> -->
                                                     </div>
                                                 </div>
                                             </div>
@@ -257,6 +256,51 @@
             });
 
         });
+
+
+
+         function openEditResolveAgendaFormWithModal(row_id) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            }
+        });
+    
+
+        if (row_id == '') {
+            alert('No ID Found !');
+            return false;
+        }
+        var formData = {
+            'row_id': row_id
+        };
+        $.ajax({
+            type: 'POST',
+            url: "{{ route('requisition_review_modal') }}",
+            data: formData,
+            beforeSend: function() {
+                $('#reviewModal .modal-body').html('');
+            },
+            success: function(response) {
+                if (response.success == true) {
+                    $('#reviewModal .modal-body').html(response.html);
+                    $('#reviewModal').modal('show');
+                } else {
+                    $('#reviewModal .modal-body').html('');
+                    alert(response.message);
+                    console.log(response);
+                }
+            },
+            error: function(response) {
+                $('#reviewModal .modal-body').html('');
+                alert('Error Is Occored ! ' + response.message);
+                console.log(response);
+            },
+            complete: function() {
+
+            }
+        });
+    } // end -:- openEditResolveAgendaFormWithModal()
 
     </script>
 @endsection
