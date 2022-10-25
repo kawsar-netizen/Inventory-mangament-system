@@ -71,10 +71,10 @@
 
                                 @foreach ($productRequisition as $item)
 
-                <!--list of requisitions for Head office (starts)-->
-                    @if( (($item->status_by_branch_manager == 1) && ($role == 1)) || (($item->status_by_branch_manager == 1) && ($role == 2)))
 
-                                 
+                                @if( (($item->status_by_branch_manager == 1) && ($role == 1)) || (($item->status_by_branch_manager == 1) && ($role == 2)))
+
+                                  <!--list of requisitions for Head office (starts)-->
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
@@ -120,7 +120,21 @@
 
                                         <td>-</td>
 
-                                  
+                                        <!-- <td>
+                                         @if($item->requisition_current_status == 1)
+                                        <span class="badge badge-warning" style="padding: 10px">{{'Pending'}}</span>
+
+                                         @elseif($item->requisition_current_status == 2)           
+                                         <span class="badge badge-info" style="padding: 10px">{{'Received'}}</span>
+
+                                         @elseif($item->requisition_current_status == 3)
+                                         <span class="badge badge-danger" style="padding: 10px">{{'Declined'}}</span>
+                                         
+                                         @else
+                                         <span class="badge badge-success" style="padding: 10px">{{'Delivered'}}</span>
+                                         @endif
+                                        </td>
+ -->
 
                                        <td>
                                           <form action="" method="post">

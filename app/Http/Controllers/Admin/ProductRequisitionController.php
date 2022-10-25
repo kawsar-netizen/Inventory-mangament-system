@@ -269,7 +269,39 @@ class ProductRequisitionController extends Controller
       } else {
          echo 'This request is not ajax !';
       }
-   } // end -:- edit_agenda_modal()
+   } 
+
+
+   public function requisitionReviewAcceptedByBranchManager(Request $request){
+
+         $item = $request->requisition_id;
+
+          $data = DB::table('product_requisitions')
+              ->where('id', $item)
+              ->update([
+                'status_by_branch_manager' => 1,
+                'requisition_current_status'=> 2,
+            ]);
+
+       return redirect()->route('product-requisition.index');
+
+   }
+
+
+    public function requisitionReviewDeclinedByBranchManager(Request $request){
+
+         $item = $request->requisition_id;
+
+          $data = DB::table('product_requisitions')
+              ->where('id', $item)
+              ->update([
+                'status_by_branch_manager' => 2,
+                'requisition_current_status'=> 3,
+            ]);
+
+       return redirect()->route('product-requisition.index');
+
+   }
 
 
 }

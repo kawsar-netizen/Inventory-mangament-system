@@ -51,4 +51,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/product-requisition/review/modal', [App\Http\Controllers\Admin\ProductRequisitionController::class, 'requisitionReviewModal'])->name('requisition_review_modal');
 
+    Route::post('/product-requisition/reviewAcceptedByManager', [App\Http\Controllers\Admin\ProductRequisitionController::class, 'requisitionReviewAcceptedByBranchManager'])->name('requisition_accepted_by_branch_manager');
+
+
+     Route::post('/product-requisition/reviewDeclinedByManager', [App\Http\Controllers\Admin\ProductRequisitionController::class, 'requisitionReviewDeclinedByBranchManager'])->name('requisition_declined_by_branch_manager');
+
 });

@@ -65,76 +65,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                 @php                                                       
-                                  $role = Auth::user()->role_id;                                             
-                                @endphp
-
                                 @foreach ($productRequisition as $item)
-
-                <!--list of requisitions for Head office (starts)-->
-                    @if( (($item->status_by_branch_manager == 1) && ($role == 1)) || (($item->status_by_branch_manager == 1) && ($role == 2)))
-
-                                 
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>
-                                            @php
-                                                $item_category = DB::table('item_categories')
-                                                    ->where('id', '=', $item->item_category_id)
-                                                    ->orderBy('id', 'DESC')
-                                                    ->first();
-                                            @endphp
-                                            {{ $item_category->name }}
-                                        </td>
-                                        <td>
-                                            @php
-                                                $product_category = DB::table('product_categories')->where('id','=',$item->product_category_id)->orderBy('id','DESC')->first();
-                                            @endphp
-                                            {{$product_category->name}}
-                                        </td>
-                                        <td>
-                                           @php
-                                                $item_name = DB::table('product_entries')->where('id','=',$item->inventory_product_id)->orderBy('id','DESC')->first();
-                                            @endphp
-                                            {{$item_name->name}}
-                                        </td>
-                                        <td>
-                                            @php
-                                                $branches = DB::table('branches')->where('id','=',$item->branch_id)->orderBy('id','DESC')->first();
-                                            @endphp
-                                            {{$branches->br_name}}
-                                        </td>
-                                        
-                                        <td>{{$item->brand}}</td>
-                                        <td>{{$item->model}}</td>
-                                        <td>{{$item->quantity}}</td>
-                                        <td>{{$item->warranty}}</td>
-                                        <td>
-                                            @php
-                                                $user = DB::table('users')->where('id','=',$item->requested_from)->orderBy('id','DESC')->first();
-                                            @endphp
-                                            {{$user->name}}
-
-                                        </td>
-                                        <td>{{$item->requisition_request_date}}</td>
-
-                                        <td>-</td>
-
-                                  
-
-                                       <td>
-                                          <form action="" method="post">
-                                                @csrf                                                                                       
-                        <button type="button" class="btn btn-info" onclick="openEditResolveAgendaFormWithModal({{$item->id}})" >Review</button>                                              
-                                            </form> 
-                                       </td>
-                                   </tr>
-
-                            <!--list of requisitions for Head office (ends)-->
-
-
-
-                               @elseif( ($role == 3) || ($role == 4))                         
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
@@ -185,53 +116,28 @@
                                          <span class="badge badge-info" style="padding: 10px">{{'Received'}}</span>
 
                                          @elseif($item->requisition_current_status == 3)
-                                         <span class="badge badge-danger" style="padding: 10px">{{'Canceled'}}</span>
+                                         <span class="badge badge-danger" style="padding: 10px">{{'Denied'}}</span>
                                          
                                          @else
                                          <span class="badge badge-success" style="padding: 10px">{{'Delivered'}}</span>
                                          @endif
                                         </td>
-                                      
+                                       
                                         <td>
+
                                              @php                                                       
                                               $role = Auth::user()->role_id;                                             
                                             @endphp
-                                             
-                                            @if($role == 3) 
-                                            <!-- if user is branch manager -->
 
 
-                                               <!-- branch manager action buttons (starts)  -->
-                                                @if($item->status_by_branch_manager == 1)                                               
-                                                <button type="submit" class="btn btn-sm btn-secondary waves-effect waves-themed" disabled style="margin-bottom: 4px;">Accepted</button>
-                                               
-
-                                                 @elseif($item->status_by_branch_manager == 2)
-                                                <button type="submit" class="btn btn-sm btn-secondary waves-effect waves-themed" disabled style="margin-bottom: 4px;">Declined</button>
-
-                                                @else
-
-                                                <form action="{{route('requisition_accepted_by_branch_manager')}}" method="post">
-                                                @csrf
-                                                <input type="hidden" name="requisition_id" value="{{$item->id}}"> 
-                                                <button type="submit" class="btn btn-sm btn-success waves-effect waves-themed" onclick="return confirm('Are you sure?');" style="margin-bottom: 4px;">Accept</button>
-
-                                                </form>
-
-
-                                                <form action="{{route('requisition_declined_by_branch_manager')}}" method="post">
-                                                @csrf
-                                                <input type="hidden" name="requisition_id" value="{{$item->id}}">
-                                                <button type="submit" class="btn btn-sm btn-danger waves-effect waves-themed" onclick="return confirm('Are you sure?');" style="margin-bottom: 4px;">Decline</button>
-                                                </form>
-                                              @endif
-                                              <!-- branch manager action buttons (ends) -->
-
-                                               
-
-
+                                            @if(($role == 1) || ($role == 2) || ($role == 3))
+                                              
+                                              <form action="" method="post">
+                                                @csrf                                                                                       
+                        <button type="button" class="btn btn-info" onclick="openEditResolveAgendaFormWithModal({{$item->id}})" >Review</button>                                              
+                                            </form>
                                             @else
-                                            <!-- if user is branch user -->
+
                                             <form action="" method="post">
                                                 @csrf                                              
                                                 <a href=""class="btn btn-sm btn-primary waves-effect waves-themed" style="margin-bottom: 4px;">View</a>
@@ -243,11 +149,8 @@
                                             </form>
                                            @endif
                                         </td>
+
                                     </tr>
-
-                                    @else
-
-                                   @endif
                                 @endforeach
                             </tbody>
                             <tfoot>
@@ -270,7 +173,9 @@
                         </table>
                         <!-- datatable end -->
 
-                        <!-- Modal for review (start)-->
+
+
+                        <!-- Modal center -->
                                             <div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-hidden="true">
                                                 <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                                     <div class="modal-content">
@@ -289,9 +194,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-
-                        <!-- Modal for review (end)-->
-
                     </div>
                 </div>
             </div>
@@ -314,7 +216,12 @@
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                 buttons: [
-                   
+                    /*{
+                        extend:    'colvis',
+                        text:      'Column Visibility',
+                        titleAttr: 'Col visibility',
+                        className: 'mr-sm-3'
+                    },*/
                     {
                         extend: 'pdfHtml5',
                         text: 'PDF',
@@ -348,8 +255,6 @@
                 ]
             });
 
-
-     
         });
 
 
