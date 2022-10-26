@@ -158,7 +158,16 @@ class ProductRequisitionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $productRequisitionData = DB::table('product_requisitions')
+                                  ->select('product_requisitions.*','item_categories.name as item_cat_name','product_categories.name as product_cat_name','product_entries.name as product_name', 'branches.br_name as branch_name', 'requisition_request_date')
+                                  ->leftjoin('item_categories','item_category_id','=','item_categories.id')
+                                  ->leftjoin('product_categories','product_category_id','=','product_categories.id')
+                                  ->leftjoin('product_entries','inventory_product_id','=','product_entries.id')
+                                  ->leftjoin('branches','product_requisitions.branch_id','=','branches.id')
+                                  ->where('product_requisitions.id',$id)
+                                  ->first();
+
+        return view('backend.pages.productRequisition.edit', compact('productRequisitionData'));
     }
 
     /**
@@ -170,7 +179,18 @@ class ProductRequisitionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate(['quantity' => 'required'], ['quantity.required'=> 'Quantity can not be null']);
+
+
+        $data = DB::table('product_requisitions')->where('id', $id)->update([
+          'quantity' => $request->input('quantity'),
+          'updated_at' =>Carbon::now()
+        ]);
+        if ($data) {
+            return redirect()->route('product-requisition.index')->with('success', 'Inventroy requisition have been successfully updated!!');
+        } else {
+            return redirect()->route('product-requisition.index')->with('fail', 'No data has been updated!!');
+        }
     }
 
     /**
@@ -250,15 +270,16 @@ class ProductRequisitionController extends Controller
         $requisition_id = trim($request->row_id);
 
            $productRequisitionData = DB::table('product_requisitions')
-                                  ->select('product_requisitions.*','item_categories.name as item_cat_name','product_categories.name as product_cat_name','product_entries.name as product_name')
+                                  ->select('product_requisitions.*','item_categories.name as item_cat_name','product_categories.name as product_cat_name','product_entries.name as product_name', 'branches.br_name as branch_name', 'requisition_request_date')
                                   ->leftjoin('item_categories','item_category_id','=','item_categories.id')
                                   ->leftjoin('product_categories','product_category_id','=','product_categories.id')
                                   ->leftjoin('product_entries','inventory_product_id','=','product_entries.id')
+                                  ->leftjoin('branches','product_requisitions.branch_id','=','branches.id')
                                   ->where('product_requisitions.id',$requisition_id)
                                   ->first();
             
 
-            $view = view('backend.pages.productRequisition.review_modal_body',compact('productRequisitionData'))->render();
+            $view = view('backend.pages.productRequisition.review_by_head_office_modal',compact('productRequisitionData'))->render();
 
             return response()->json(['success' => true, 'error' => false, 'message' =>  'View Loaded Successsfully', 'html' => $view]);
          } catch (\Exception $e) {
@@ -270,6 +291,49 @@ class ProductRequisitionController extends Controller
          echo 'This request is not ajax !';
       }
    } 
+
+
+
+
+
+
+
+public function requisitionReviewByBranchManagerModal(Request $request)
+   {
+      if ($request->ajax()) {
+         try {
+
+        $requisition_id = trim($request->row_id);
+
+           $productRequisitionData = DB::table('product_requisitions')
+                                  ->select('product_requisitions.*','item_categories.name as item_cat_name','product_categories.name as product_cat_name','product_entries.name as product_name', 'branches.br_name as branch_name','requisition_request_date')
+                                  ->leftjoin('item_categories','item_category_id','=','item_categories.id')
+                                  ->leftjoin('product_categories','product_category_id','=','product_categories.id')
+                                  ->leftjoin('product_entries','inventory_product_id','=','product_entries.id')
+                                  ->leftjoin('branches','product_requisitions.branch_id','=','branches.id')
+                                  ->where('product_requisitions.id',$requisition_id)
+                                  ->first();
+            
+
+            $view = view('backend.pages.productRequisition.review_by_branch_manager_modal',compact('productRequisitionData'))->render();
+
+            return response()->json(['success' => true, 'error' => false, 'message' =>  'View Loaded Successsfully', 'html' => $view]);
+         } catch (\Exception $e) {
+            return response()->json(
+               ['success' => false, 'error' => true, 'message' =>  $e->getMessage()]
+            );
+         }
+      } else {
+         echo 'This request is not ajax !';
+      }
+   } 
+
+
+
+
+
+
+
 
 
    public function requisitionReviewAcceptedByBranchManager(Request $request){
@@ -288,18 +352,84 @@ class ProductRequisitionController extends Controller
    }
 
 
-    public function requisitionReviewDeclinedByBranchManager(Request $request){
+
+
+
+ public function requisitionReviewAcceptedByHeadOffice(Request $request){
 
          $item = $request->requisition_id;
+
+
+          $data = DB::table('product_requisitions')
+              ->where('id', $item)
+              ->update([
+                'status_by_head_office' => 1,
+                'requisition_current_status'=> 4,
+            ]);
+
+       return redirect()->route('product-requisition.index');
+
+   }
+
+
+
+
+
+
+    public function requisitionReviewDeclinedByBranchManager(Request $request){
+
+        if($request->ajax()){
+
+        $item = $request->row_id;
+         $reason = $request->reason;
+
 
           $data = DB::table('product_requisitions')
               ->where('id', $item)
               ->update([
                 'status_by_branch_manager' => 2,
                 'requisition_current_status'=> 3,
+                'requisition_decline_reason'=> $reason
             ]);
 
-       return redirect()->route('product-requisition.index');
+       // return redirect()->route('product-requisition.index');
+    return response()->json(['success' => true, 'error' => false, 'message' =>  'View Loaded Successsfully']);
+
+        }else{
+            echo('not ajax');
+        }
+
+        
+
+   }
+
+
+
+
+       public function requisitionReviewDeclinedByHeadOffice(Request $request){
+
+        if($request->ajax()){
+
+        $item = $request->row_id;
+         $reason = $request->reason;
+
+
+          $data = DB::table('product_requisitions')
+              ->where('id', $item)
+              ->update([
+                'status_by_head_office' => 2,
+                'requisition_current_status'=> 3,
+                'requisition_decline_reason'=> $reason
+            ]);
+
+       // return redirect()->route('product-requisition.index');
+    return response()->json(['success' => true, 'error' => false, 'message' =>  'View Loaded Successsfully']);
+
+        }else{
+            echo('not ajax');
+        }
+
+        
 
    }
 
