@@ -19,7 +19,7 @@
 
     	      <div class="panel-hdr">
                 <h2>
-                    Inventory Requisition Report<span class="fw-300"><i>List</i></span>
+                    Inventory Product Entry Report<span class="fw-300"><i>List</i></span>
                 </h2>   
              </div>              
                 
@@ -29,7 +29,7 @@
 
 
 <!-- report filters start -->
-				<form action="" method="" id="requisitionReportForm" >
+				<form action="" method="" id="inventoryEntryReportForm" >
 		    	<div class="col">
 		    		<div class="row">
 		    					<div class="col-3 form-group">
@@ -55,7 +55,16 @@
                        @endphp
 
 
-		               	<div class="col-3 form-group">
+		               
+
+		               	<!-- <div class="col-3 ">
+		               		<label><strong>Product</strong></label>
+		               		<select class="form-control select2" name="product_entry_id" id="product_entry_id">
+                                  <option value="">Select Inventory Product</option>
+                            </select>
+		               	</div> -->
+
+		               		<div class="col-3 form-group">
 		               		<label><strong>Branch</strong></label>
 		               		<select class="form-control select2" name="branch_id" id="branch_id" >
 
@@ -73,20 +82,7 @@
                                 @endif
 
                             </select>
-		               	</div>
-
-
-		               	<!-- <div class="col-4 ">
-		               		<label><strong>From (Requisition Date)</strong></label>
-		               		<input type="text" name="requisitionFrom" class="form-control" id="requisitionFrom" readonly placeholder="Select date">
-		               	</div>
-
-		               		
-
-		              <div class="col-4 ">
-		               		<label><strong>To (Requisition Date)</strong></label>
-		               		<input type="text" name="requisitionTo" class="form-control" id="requisitionTo" readonly placeholder="Select date">
-		               	</div> -->
+		               	</div>	
 
 		               <div class="col-3 form-group">
 		               	<label style="color: #faf8fb">sub</label><br>
@@ -107,15 +103,14 @@
                                     <!-- <th>SL</th> -->
                                     <th>Item Category</th>
                                     <th>Product Category</th>
-                                    <th>Inventory Product Name</th>
-                                    <th>Branch</th>                                 
+                                    <th>Inventory Product Name</th>                           
                                     <th>Brand No</th>
                                     <th>Model No</th>
                                     <th>Quantity</th>
                                     <th>Warranty (years)</th>
-                                    <th>Requisition From</th>
-                                    <th>Requisition Date</th>
-                                    <th>Status</th>                                 
+                                    <th>Entry User</th>
+                                    <th>Entry User Branch</th>
+                                                                  
                                 </tr>
                             </thead>
                             <tbody id="rr">
@@ -127,28 +122,14 @@
                                         <td>{{ $item->item_cat_name }}</td>
                                         <td>{{ $item->product_cat_name }}</td>
                                         <td>{{ $item->product_name }}</td>
-                                        <td>{{ $item->branch_name }}</td>                                       
-                                        <td>{{$item->brand}}</td>
-                                        <td>{{$item->model}}</td>
+                                                                              
+                                        <td>{{$item->brand_no}}</td>
+                                        <td>{{$item->model_no}}</td>
                                         <td>{{$item->quantity}}</td>
-                                        <td>{{$item->warranty}}</td>
-                                        <td>{{$item->req_from}}</td>
-                                        <td>{{$item->requisition_request_date}}</td>
-
-                                        <td>
-                                         @if($item->requisition_current_status == 1)
-                                        <span class="badge badge-warning" style="padding: 10px">{{'Pending'}}</span>
-
-                                         @elseif($item->requisition_current_status == 2)           
-                                         <span class="badge badge-info" style="padding: 10px">{{'Received'}}</span>
-
-                                         @elseif($item->requisition_current_status == 3)
-                                         <span class="badge badge-danger" style="padding: 10px">{{'Canceled'}}</span>
-                                         
-                                         @else
-                                         <span class="badge badge-success" style="padding: 10px">{{'Delivered'}}</span>
-                                         @endif
-                                        </td>
+                                        <td>{{$item->warranty_date}}</td>
+                                        <td>{{$item->entry_user_name}}</td>
+                                        <td>{{ $item->branch_name }}</td> 
+                                       
                                    </tr>
                                
            
@@ -159,22 +140,21 @@
                                     <!-- <th>SL</th> -->
                                     <th>Item Category</th>
                                     <th>Product Category</th>
-                                    <th>Inventory Product Name</th>
-                                    <th>Branch</th>                                 
+                                    <th>Inventory Product Name</th>                           
                                     <th>Brand No</th>
                                     <th>Model No</th>
                                     <th>Quantity</th>
                                     <th>Warranty (years)</th>
-                                    <th>Requisition From</th>
-                                    <th>Requisition Date</th>
-                                    <th>Status</th>
+                                    <th>Entry User</th>
+                                    <th>Entry User Branch</th>
+                                   
                                 </tr>
                             </tfoot>
                         </table>
 
 </div>
-                        <!-- datatable start -->
-                        <!-- datatable end -->
+                      
+                      
 
                     </div>
                 </div>
@@ -219,7 +199,7 @@
   
             // initialize datatable
             $('#dt').dataTable({
-                responsive: true,
+                // responsive: true,
                 lengthChange: false,
                 dom:
 
@@ -272,7 +252,9 @@
 
 
 
-         // for fetching product categroy data start
+   
+
+     // for fetching product categroy data start
     $('#item_category_id').change(function(e) {
       $.ajaxSetup({
         headers: {
@@ -281,10 +263,14 @@
       });
       e.preventDefault();
 
+      $('#product_entry_id').html('');
+     
+
       var item_category_id = $(this).val();
-      var product_category_id = $(this).closest('form').find('#product_category_id');
+
       if (item_category_id == '') {
         $('#product_category_id').html('');
+       
         return false;
       }
       $.ajax({
@@ -297,8 +283,6 @@
            
            $('#product_category_id').html(response);
             console.log(response);
-
-
         },
         error: function(response) {
         
@@ -311,17 +295,63 @@
 
 
 
-$('#requisitionReportForm').submit(function(e){
+// // for fetching product entry data start
+//     $('#product_category_id').change(function(e) {
+//       $.ajaxSetup({
+//         headers: {
+//           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+//         }
+//       });
+//       e.preventDefault();
+
+//       var product_category_id = $(this).val();
+
+    
+
+//       if (product_category_id == '') {
+//         $('#product_entry_id').html('');
+//         return false;
+//       }
+//       $.ajax({
+//         url: "{{ route('productEntryDropdown') }}",
+//         method: "POST",
+//         data: {
+//           'product_category_id': product_category_id
+//         },
+//         success: function(response) {
+           
+//            $('#product_entry_id').html(response);
+//             console.log(response);
+//         },
+//         error: function(response) {
+        
+//           console.log(response);
+//         }
+//       }); 
+//     });
+// // for fetching product entry data end
+
+
+
+
+
+//filtering data (start)
+
+$('#inventoryEntryReportForm').submit(function(e){
 
     e.preventDefault();
 	
-	var requisitionReportFormData = new FormData(document.querySelector('#requisitionReportForm'));
+	var inventoryEntryReportFormData = new FormData(document.querySelector('#inventoryEntryReportForm'));
 
 	var item_category_id = $('#item_category_id').val();
 	var product_category_id = $('#product_category_id').val();
+	var product_entry_id = $('#product_entry_id').val();
+
+
 	var branch_id = $('#branch_id').val();
-	var requisitionFrom = $('#requisitionFrom').val();
-	var requisitionTo = $('#requisitionTo').val();
+
+	// var requisitionFrom = $('#requisitionFrom').val();
+	// var requisitionTo = $('#requisitionTo').val();
 	
 	if(item_category_id == ''){
 		alert('Please select an item category');
@@ -333,13 +363,18 @@ $('#requisitionReportForm').submit(function(e){
 		return false;
 	}
 
+
+	// if(product_entry_id == ''){
+	// 	alert('Please select a inventory product');
+	// 	return false;
+	// }
+
 	if(branch_id == ''){
 		alert('Branch can not be null');
 		return false;
 	}
 
-            
-
+           
 
 	$.ajaxSetup({
         headers: {
@@ -348,11 +383,11 @@ $('#requisitionReportForm').submit(function(e){
       });
 
 	$.ajax({
-		url: "{{ route('requisitionReport') }}",
+		url: "{{ route('inventoryEntryReport') }}",
         method: "POST",
         processData: false,
         contentType: false,
-        data: requisitionReportFormData,
+        data: inventoryEntryReportFormData,
         success: function(response) {
            
            $('#dt').html(response);
@@ -368,18 +403,9 @@ $('#requisitionReportForm').submit(function(e){
 
 })
 
+// filtering data (ends)
 
-// var myTable = $('#dt-basic-example').DataTable( {
-//     "serverSide": true,
-//     "ajax": { 
-//         "url" : "{{ route('requisitionReport') }}",
-//         "method" : "POST"
-//     },
-//     "drawCallback": function (settings) { 
-//         var response = settings.json;
-//         console.log(response);
-//     },
-// });
+
 
 
     </script>

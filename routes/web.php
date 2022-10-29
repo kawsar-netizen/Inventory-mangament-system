@@ -80,8 +80,15 @@ Route::group(['middleware' => 'auth'], function () {
 //report route (start)
      Route::resource('/report', 'App\Http\Controllers\Admin\ReportController');
 
-
+//inventory requisition report filter data
      Route::post('/report/requisition-report',[App\Http\Controllers\Admin\ReportController::class, 'requisitionReport'])->name('requisitionReport');
+
+//inventory entry report list
+    Route::get('/inventory-entry-report-index',[App\Http\Controllers\Admin\ReportController::class, 'inventoryEntryReportIndexList'])->name('inventoryEntryReportIndex');
+
+
+ //inventory entry report filter data
+     Route::post('/inventory-entry-report',[App\Http\Controllers\Admin\ReportController::class, 'inventoryEntryReport'])->name('inventoryEntryReport');   
 //report route (end)
 
 });

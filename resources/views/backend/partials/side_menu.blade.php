@@ -103,20 +103,26 @@
                
             </ul>
         </li>
-         <li class="{{ Route::currentRouteNamed('#items')||Route::currentRouteNamed('#products')||Route::currentRouteNamed('#valuation')||Route::currentRouteNamed('#mis') ? 'active' : '' }}">
+
+
+
+
+
+        
+         <li class="{{ Route::currentRouteNamed('inventoryEntryReportIndex')||Route::currentRouteNamed('report.index')||Route::currentRouteNamed('#valuation')||Route::currentRouteNamed('#mis') ? 'active' : '' }}">
             <a href="#" title="Report">
                 <i class="fa fa-list-ul"></i>
                 <span class="nav-link-text" data-i18n="nav.package_info">Report</span>
             </a>
             <ul>
                 <li>
-                    <a href="#items" title="Items"  class="{{ Route::currentRouteNamed('#items') ? 'list-group-item active' : '' }}">
+                    <a href="{{route('inventoryEntryReportIndex')}}" title="Items"  class="{{ Route::currentRouteNamed('inventoryEntryReportIndex') ? 'list-group-item active' : '' }}">
                         <i class="fa fa-cube" aria-hidden="true"></i>
                         <span class="nav-link-text" data-i18n="nav.package_info_documentation">Inventory Entry Report</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('report.index')}}" title="Products" class="{{ Route::currentRouteNamed('#products') ? 'list-group-item active' : '' }}">
+                    <a href="{{route('report.index')}}" title="Products" class="{{ Route::currentRouteNamed('report.index') ? 'list-group-item active' : '' }}">
                         <i class="fa fa-cubes" aria-hidden="true"></i>
                         <span class="nav-link-text" data-i18n="nav.package_info_product_licensing">Inventory Requisition Report</span>
                     </a>

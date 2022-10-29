@@ -30,29 +30,18 @@
                                     <div class="col-md-6">
                                         <div class="col-md-12 mb-3 select_2_error">
                                             <label class="form-label" for="item_category_id"> Item Category</label>
-                                            <select class="form-control select2" name="item_category_id"
-                                                id="item_category_id" required="" data-select2-id="item_category_id"
-                                                tabindex="-1" aria-hidden="true" aria-required="true" readonly>
-                                                <option value="">Select Item Category</option>
-                                                @foreach ($itemCategory as $item)
-                                                    <option value="{{$item->id}}" {{ $item->id == $data->item_category_id ?"selected":""}}>{{$item->name}}</option>
-                                                @endforeach
-                                            </select>
+                                            
+                                            <input type="text" name="item_category_id" id="item_category_id" class="form-control" value="{{$data->item_cat_name}}" readonly>
+
+                                         
                                         </div>
 
                                          <div class="col-md-12 mb-3 select_2_error">
                                             <label class="form-label" for="product_category_id"> Product Category</label>
-                                            <select class="form-control select2" name="product_category_id"
-                                                id="product_category_id" required=""
-                                                data-select2-id="product_category_id" tabindex="-1" aria-hidden="true"
-                                                aria-required="true" readonly>
 
-                                                <option value="">Select Product Category</option>
-                                                @foreach ($productCategory as $item)
-                                                    <option value="{{$item->id}}" {{ $item->id == $data->product_category_id ?"selected":""}}>{{$item->name}}</option>
-                                                @endforeach
+                                             <input type="text" name="product_category_id" id="product_category_id" class="form-control" value="{{$data->product_cat_name}}" readonly>
 
-                                            </select>
+
                                         </div>
 
                                         <!-- <div class="col-md-12 mb-3 select_2_error">
@@ -76,18 +65,7 @@
                                     <div class="col-md-6">
 
                                        
-                                       <!--  <div class="col-md-12 mb-3 select_2_error">
-                                            <label class="form-label" for="branch_id"> Branch</label>
-                                            <select class="form-control select2" name="branch_id" id="branch_id"
-                                                required="" data-select2-id="branch_id" tabindex="-1"
-                                                aria-hidden="true" aria-required="true" readonly>
-
-                                                <option value="">Select Branch</option>
-                                                @foreach ($branches as $item)
-                                                <option value="{{$item->id}}" {{ $item->id == $data->branch_id ?"selected":""}} readonly>{{$item->br_name}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div> -->
+                                     
 
                                       <!--   <div class="col-md-12 mb-3 select_2_error">
                                             <label class="form-label" for="status">Status</label>
