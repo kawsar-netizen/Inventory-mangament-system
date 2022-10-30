@@ -6,6 +6,8 @@
                         <div class="loader"><i class="fal fa-spinner-third fa-spin-4x fs-xxl"></i></div>
                         <div class="panel-content">
 
+                        <form action="{{route('requisition_accepted_by_head_office')}}" method="post">
+                        @csrf
                             
                                 <div class="row">
                                     <div class="col-md-6">
@@ -75,17 +77,16 @@
                                 <button type="button" class="btn btn-danger">Decline</button> -->
 
 
-                                              <form action="{{route('requisition_accepted_by_head_office')}}" method="post">
-                                                @csrf
-                                                <input type="hidden" name="requisition_id" value="{{$productRequisitionData->id}}"> 
-                                                <button type="submit" class="btn btn-sm btn-success waves-effect waves-themed" onclick="return confirm('Are you ?');" style="margin-bottom: 4px; margin-right: 10px">Accept</button>
+                                              
+                            <input type="hidden" name="requisition_id" value="{{$productRequisitionData->id}}"> 
+                            <button type="submit" class="btn btn-sm btn-success waves-effect waves-themed" onclick="return confirm('Are you ?');" style="margin-bottom: 15px; margin-right: 10px">Accept</button>
 
-                                                </form>
+                            </form>
 
 
-                                               <form action="" method="post">                    
-                                                <button type="button"  onclick="popHeadOffice({{$productRequisitionData->id}})" class="btn btn-sm btn-danger waves-effect waves-themed" style="margin-bottom: 4px;">Decline</button>
-                                                </form>
+                           <form action="" method="post">                    
+                            <button type="button"  onclick="popHeadOffice({{$productRequisitionData->id}})" class="btn btn-sm btn-danger waves-effect waves-themed" style="margin-bottom: 4px;">Decline</button>
+                            </form>
 
 
 

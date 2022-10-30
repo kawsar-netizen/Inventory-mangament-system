@@ -339,10 +339,12 @@ public function requisitionReviewByBranchManagerModal(Request $request)
    public function requisitionReviewAcceptedByBranchManager(Request $request){
 
          $item = $request->requisition_id;
+         $qty = $request->quantity;
 
           $data = DB::table('product_requisitions')
               ->where('id', $item)
               ->update([
+                'quantity' => $qty,
                 'status_by_branch_manager' => 1,
                 'requisition_current_status'=> 2,
             ]);
@@ -359,10 +361,13 @@ public function requisitionReviewByBranchManagerModal(Request $request)
 
          $item = $request->requisition_id;
 
+         $qty = $request->quantity;
+
 
           $data = DB::table('product_requisitions')
               ->where('id', $item)
               ->update([
+                'quantity' => $qty,
                 'status_by_head_office' => 1,
                 'requisition_current_status'=> 4,
             ]);

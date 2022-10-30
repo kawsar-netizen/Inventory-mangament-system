@@ -83,7 +83,7 @@
             </a>
             <ul>
 
-                @if(Auth::user()->role_id == 4)
+                @if( (Auth::user()->role_id == 3) || (Auth::user()->role_id == 4) )
                 @else
 
                 <li>
@@ -93,6 +93,10 @@
                     </a>
                 </li>
                 @endif
+
+
+
+
                 <li>
                     <a href="{{route('product-requisition.index')}}" title="Inventory Requisition" class="{{ Route::currentRouteNamed('product-requisition.index')||Route::currentRouteNamed('product-requisition.create')||Route::currentRouteNamed('product-requisition.edit') ? 'list-group-item active' : '' }}">
                       <i class="fa fa-check-square"></i>
