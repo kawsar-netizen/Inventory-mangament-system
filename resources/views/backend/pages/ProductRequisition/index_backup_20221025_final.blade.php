@@ -36,18 +36,11 @@
                     <h2>
                         Inventory Requisition <span class="fw-300"><i>List</i></span>
                     </h2>
-
-                @if( Auth::user()->role_id == 3 )
-                @else
-
                     <div class="panel-toolbar">
                         <a href="{{ route('product-requisition.create') }}">
                             <button class="btn btn-primary btn-sm"><span class="fal fa-plus mr-1"></span>Add Inventory Requisition</button>
                         </a>
                     </div>
-          @endif
-
-
                 </div>
                 <div class="panel-container show">
                     <div class="panel-content">
@@ -66,30 +59,22 @@
                                     <th>Warranty (years)</th>
                                     <th>Requisition From</th>
                                     <th>Requisition Date</th>
-                                    <th>Status</th>                                 
+                                    <th>Status</th>
+                                  
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                  @php                                                       
                                   $role = Auth::user()->role_id;                                             
-                                  $current_user_id = Auth::user()->id;                                             
                                 @endphp
 
                                 @foreach ($productRequisition as $item)
 
-                <!--list of requisitions for Head office (starts)-->
 
-                 
-                    @if( (($item->status_by_branch_manager == 1) && ($role == 1) && ($item->status_by_head_office == 0) && ($item->direct_requested_to_head_office == 0) )|| 
-                   
-                    (($item->status_by_branch_manager == 1) && ($role == 2)  && ($item->status_by_head_office == 0) && ($item->direct_requested_to_head_office == 0) ) || 
-                  
-                    (($item->status_by_branch_manager == 1) && ($role == 2) && ($item->status_by_head_office == 0) && ($item->direct_requested_to_head_office == $current_user_id) ) ||
-               
-                    (($item->status_by_branch_manager == 1) && ($role == 2) && ($item->status_by_head_office == 0) && ($item->requested_from == $current_user_id) ) )
+                                @if( (($item->status_by_branch_manager == 1) && ($role == 1)) || (($item->status_by_branch_manager == 1) && ($role == 2)))
 
-                                 
+                                  <!--list of requisitions for Head office (starts)-->
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
@@ -133,7 +118,9 @@
                                         </td>
                                         <td>{{$item->requisition_request_date}}</td>
 
-                                        <td>
+                                        <td>-</td>
+
+                                        <!-- <td>
                                          @if($item->requisition_current_status == 1)
                                         <span class="badge badge-warning" style="padding: 10px">{{'Pending'}}</span>
 
@@ -141,60 +128,27 @@
                                          <span class="badge badge-info" style="padding: 10px">{{'Received'}}</span>
 
                                          @elseif($item->requisition_current_status == 3)
-                                         <span class="badge badge-danger" style="padding: 10px">{{'Canceled'}}</span>
+                                         <span class="badge badge-danger" style="padding: 10px">{{'Declined'}}</span>
                                          
                                          @else
                                          <span class="badge badge-success" style="padding: 10px">{{'Delivered'}}</span>
                                          @endif
                                         </td>
+ -->
 
-                                  
-                                   <!-- original starts -->
-
-                                       <!-- <td>
+                                       <td>
                                           <form action="" method="post">
                                                 @csrf                                                                                       
-                        <button type="button" class="btn btn-outline-info" onclick="openEditResolveAgendaFormWithModal({{$item->id}})" >Review</button>                                              
+                        <button type="button" class="btn btn-info" onclick="openEditResolveAgendaFormWithModal({{$item->id}})" >Review</button>                                              
                                             </form> 
-                                       </td> -->
-
-                                    <!-- original ends -->
-
-
-
-                                     <!-- latest format starts -->
-                                      <td>
-                                                                                        
-                                     @if(($item->requisition_current_status == 1)  && ($item->requested_from == $current_user_id))
-
-                                     <form action="" method="post">
-                                                @csrf                                              
-                                                @if($item->requisition_current_status == 1)
-                                               <a href="{{ route('product-requisition.edit', $item->id) }}"style="margin-bottom: 4px;"  class="btn btn-sm btn-info waves-effect waves-themed"> Edit </a>
-                                                @else
-                                                @endif
-                                            </form>                               
-
-                                     @else    
-                                         
-                                          <form action="" method="post">
-                                                @csrf                                                                                       
-                                         <button type="button" class="btn btn-outline-primary" onclick="openEditResolveAgendaFormWithModal({{$item->id}})" >Review</button>                                              
-                                            </form> 
-                                     @endif
-                                            
                                        </td>
-                                <!-- latest format ends -->
-
                                    </tr>
-
-
 
                             <!--list of requisitions for Head office (ends)-->
 
-                               @elseif( ($role == 3) || ($role == 4) )
 
-                        <!--list of requisitions for branch manager and branch user (starts)-->  
+
+                               @elseif( ($role == 3) || ($role == 4))                         
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
@@ -237,7 +191,6 @@
 
                                         </td>
                                         <td>{{$item->requisition_request_date}}</td>
-
                                         <td>
                                          @if($item->requisition_current_status == 1)
                                         <span class="badge badge-warning" style="padding: 10px">{{'Pending'}}</span>
@@ -252,39 +205,59 @@
                                          <span class="badge badge-success" style="padding: 10px">{{'Delivered'}}</span>
                                          @endif
                                         </td>
-
-                                            
-
-                                       <td>
-                                           @php                                                       
-                                              $uRole = Auth::user()->role_id;                                             
+                                      
+                                        <td>
+                                             @php                                                       
+                                              $role = Auth::user()->role_id;                                             
                                             @endphp
                                              
-                                            @if($uRole == 3) 
+                                            @if($role == 3) 
                                             <!-- if user is branch manager -->
-                                          <form action="" method="post">
-                                                @csrf                                                                                       
-                             <button type="button" class="btn btn-outline-primary" onclick="openBranchManagerReviewModal({{$item->id}})" >Review</button>                                              
-                                            </form> 
-                                             @else
 
+
+                                               <!-- branch manager action buttons (starts)  -->
+                                                @if($item->status_by_branch_manager == 1)                                               
+                                                <button type="submit" class="btn btn-sm btn-secondary waves-effect waves-themed" disabled style="margin-bottom: 4px;">Accepted</button>
+                                               
+
+                                                 @elseif($item->status_by_branch_manager == 2)
+                                                <button type="submit" class="btn btn-sm btn-secondary waves-effect waves-themed" disabled style="margin-bottom: 4px;">Declined</button>
+
+                                                @else
+
+                                                <form action="{{route('requisition_accepted_by_branch_manager')}}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="requisition_id" value="{{$item->id}}"> 
+                                                <button type="submit" class="btn btn-sm btn-success waves-effect waves-themed" onclick="return confirm('Are you sure?');" style="margin-bottom: 4px;">Accept</button>
+
+                                                </form>
+
+
+                                                <form action="{{route('requisition_declined_by_branch_manager')}}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="requisition_id" value="{{$item->id}}">
+                                                <button type="submit" class="btn btn-sm btn-danger waves-effect waves-themed" onclick="return confirm('Are you sure?');" style="margin-bottom: 4px;">Decline</button>
+                                                </form>
+                                              @endif
+                                              <!-- branch manager action buttons (ends) -->
+
+                                               
+
+
+                                            @else
                                             <!-- if user is branch user -->
                                             <form action="" method="post">
                                                 @csrf                                              
-                                                <!-- <a href=""class="btn btn-sm btn-primary waves-effect waves-themed" style="margin-bottom: 4px;">View</a> -->
+                                                <a href=""class="btn btn-sm btn-primary waves-effect waves-themed" style="margin-bottom: 4px;">View</a>
 
                                                 @if($item->requisition_current_status == 1)
-                                               <a href="{{ route('product-requisition.edit', $item->id) }}"style="margin-bottom: 4px;"  class="btn btn-sm btn-info waves-effect waves-themed"> Edit </a>
+                                                <a href=""style="margin-bottom: 4px;" class="btn btn-sm btn-info waves-effect waves-themed">Edit</a>
                                                 @else
                                                 @endif
                                             </form>
                                            @endif
-                                       </td>
-
-
-                                   </tr>
-
-            <!--list of requisitions for branch manager and branch user (ends)-->         
+                                        </td>
+                                    </tr>
 
                                     @else
 
@@ -311,7 +284,7 @@
                         </table>
                         <!-- datatable end -->
 
-                        <!-- Modal for review by head office (start)-->
+                        <!-- Modal for review (start)-->
                                             <div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-hidden="true">
                                                 <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                                     <div class="modal-content">
@@ -319,9 +292,7 @@
                                                             <h4 class="modal-title">
                                                                 Review Current Requisition
                                                             </h4>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true"><i class="fal fa-times"></i></span>
-                                                            </button>
+                                                           
                                                         </div>
                                                         <div class="modal-body">
                                                             
@@ -333,32 +304,7 @@
                                                 </div>
                                             </div>
 
-                        <!-- Modal for review  by head office (end)-->
-
-
-                         <!-- Modal for review by branch manager (start)-->
-                                            <div class="modal fade" id="reviewByBranchManagerModal" tabindex="-1" role="dialog" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h4 class="modal-title">
-                                                                Review Current Requisition
-                                                            </h4>
-                                                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true"><i class="fal fa-times"></i></span>
-                                                            </button> 
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            
-                                                        </div>
-                                                        <!-- <div class="modal-footer">
-                                                            
-                                                        </div> -->
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                        <!-- Modal for review  by branch manager (end)-->
+                        <!-- Modal for review (end)-->
 
                     </div>
                 </div>
@@ -463,55 +409,7 @@
 
             }
         });
-    } 
-
-
-
-
-
-         function openBranchManagerReviewModal(row_id) {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-            }
-        });
-    
-
-        if (row_id == '') {
-            alert('No ID Found !');
-            return false;
-        }
-        var formData = {
-            'row_id': row_id
-        };
-        $.ajax({
-            type: 'POST',
-            url: "{{ route('requisition_review_by_branch_modal') }}",
-            data: formData,
-            beforeSend: function() {
-                $('#reviewByBranchManagerModal .modal-body').html('');
-            },
-            success: function(response) {
-                if (response.success == true) {
-                    $('#reviewByBranchManagerModal .modal-body').html(response.html);
-                    $('#reviewByBranchManagerModal').modal('show');
-                } else {
-                    $('#reviewByBranchManagerModal .modal-body').html('');
-                    alert(response.message);
-                    console.log(response);
-                }
-            },
-            error: function(response) {
-                $('#reviewByBranchManagerModal .modal-body').html('');
-                alert('Error Is Occored ! ' + response.message);
-                console.log(response);
-            },
-            complete: function() {
-
-            }
-        });
-    } 
-
+    } // end -:- openEditResolveAgendaFormWithModal()
 
     </script>
 @endsection

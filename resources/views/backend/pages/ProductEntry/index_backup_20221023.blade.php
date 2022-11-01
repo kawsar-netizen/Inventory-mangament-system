@@ -50,26 +50,56 @@
                                 <tr>
                                     <th>SL</th>
                                     <th>Item Category</th>
-                                    <th>Product Category</th>                                  
+                                    <th>Product Category</th>
+                                    <th>Type</th>
+                                    <th>Branch</th>
                                     <th>Product</th>
                                     <th>Brand No</th>
-                                    <th>Model No</th>                                  
+                                    <th>Model No</th>
+                                    <th>Purchase Date</th>
+                                    <th>Tag No</th>
                                     <th>User Name</th>
-                                    <th>Branch</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($productEntry as $item)
                                     <tr>
-                                        <td>{{$loop->iteration }}</td>
-                                        <td>{{$item->item_cat_name }}</td>
-                                        <td>{{$item->product_cat_name }}</td>                                       
-                                        <td>{{$item->name}}</td>                                        
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>
+                                            @php
+                                                $item_category = DB::table('item_categories')
+                                                    ->where('id', '=', $item->item_category_id)
+                                                    ->orderBy('id', 'ASC')
+                                                    ->first();
+                                            @endphp
+                                            {{ $item_category->name }}
+                                        </td>
+                                        <td>
+                                            @php
+                                                $product_category = DB::table('product_categories')->where('id','=',$item->product_category_id)->orderBy('id','ASC')->first();
+                                            @endphp
+                                            {{$product_category->name}}
+                                        </td>
+                                        <td>
+                                            @if ($item->type == 1)
+                                                {{ "Asset" }}
+                                            @else
+                                                {{ "Inventory" }}
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @php
+                                                $branches = DB::table('branches')->where('id','=',$item->branch_id)->orderBy('id','ASC')->first();
+                                            @endphp
+                                            {{$branches->br_name}}
+                                        </td>
+                                        <td>{{$item->name}}</td>
                                         <td>{{$item->brand_no}}</td>
-                                        <td>{{$item->model_no}}</td>                                       
-                                        <td>{{$item->entry_user_name}}</td>
-                                        <td>{{$item->branch_name}}</td>
+                                        <td>{{$item->model_no}}</td>
+                                        <td>{{$item->purchase_date}}</td>
+                                        <td>{{$item->tag_no}}</td>
+                                        <td>{{$item->entry_by}}</td>
                                         <td>
                                             <form action="{{ route('product-entry.destroy', $item->id) }}" method="post">
                                                 @csrf
@@ -91,12 +121,15 @@
                                 <tr>
                                     <th>SL</th>
                                     <th>Item Category</th>
-                                    <th>Product Category</th>                                  
+                                    <th>Product Category</th>
+                                    <th>Type</th>
+                                    <th>Branch</th>
                                     <th>Product</th>
                                     <th>Brand No</th>
-                                    <th>Model No</th>                                  
+                                    <th>Model No</th>
+                                    <th>Purchase Date</th>
+                                    <th>Tag No</th>
                                     <th>User Name</th>
-                                    <th>Branch</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>

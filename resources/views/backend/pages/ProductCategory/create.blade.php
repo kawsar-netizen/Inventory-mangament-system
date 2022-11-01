@@ -124,6 +124,7 @@
 
      // $('#valuation').attr('readonly', 'readonly');
      $('#valuation').prop("disabled", true);
+     $('#valuation').val('0');
      
 
 
@@ -164,8 +165,23 @@
           'item_category_id': item_category_id
         },
         success: function(response) {
+
+
+            var tt = $('#types').val();
+
+            if( tt == 1){
+
+               valuation.val(response);
+
+            }else{
+
+              valuation.val('0');
+
+            }
            
-            valuation.val(response);
+           
+
+
         },
         error: function(response) {
         
