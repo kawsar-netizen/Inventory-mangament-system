@@ -25,6 +25,9 @@
             </a>
          
         </li>
+
+        @if( (Auth::user()->role_id == 3) || (Auth::user()->role_id == 4) )
+        @else
        
        <li class="{{ Route::currentRouteNamed('branch.index')||Route::currentRouteNamed('branch.create')||Route::currentRouteNamed('branch.edit')||Route::currentRouteNamed('user.index')||Route::currentRouteNamed('user.create')||Route::currentRouteNamed('user.edit')||Route::currentRouteNamed('item-category.index')||Route::currentRouteNamed('item-category.create')||Route::currentRouteNamed('item-category.edit')||Route::currentRouteNamed('product-category.index')||Route::currentRouteNamed('product-category.create')||Route::currentRouteNamed('product-category.edit') ? 'active' : '' }}">
             <a href="#" title="Parameter Settings" >
@@ -69,7 +72,7 @@
             </ul>
         </li>
 
-
+@endif
 
 
 
@@ -119,12 +122,21 @@
                 <span class="nav-link-text" data-i18n="nav.package_info">Report</span>
             </a>
             <ul>
+
+
+                 @if( Auth::user()->role_id == 4 )
+                 @else
+
                 <li>
                     <a href="{{route('inventoryEntryReportIndex')}}" title="Items"  class="{{ Route::currentRouteNamed('inventoryEntryReportIndex') ? 'list-group-item active' : '' }}">
                         <i class="fa fa-cube" aria-hidden="true"></i>
                         <span class="nav-link-text" data-i18n="nav.package_info_documentation">Inventory Entry Report</span>
                     </a>
                 </li>
+ 
+               @endif
+
+
                 <li>
                     <a href="{{route('report.index')}}" title="Products" class="{{ Route::currentRouteNamed('report.index') ? 'list-group-item active' : '' }}">
                         <i class="fa fa-cubes" aria-hidden="true"></i>

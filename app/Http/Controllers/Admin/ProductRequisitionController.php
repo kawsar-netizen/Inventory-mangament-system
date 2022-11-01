@@ -61,19 +61,26 @@ class ProductRequisitionController extends Controller
     public function create()
     {
 
-        $user_role = Auth::user()->role_id;
+        // $user_role = Auth::user()->role_id;
 
-        if(($user_role == 1) ||  ($user_role == 2)){
+        // if(($user_role == 1) ||  ($user_role == 2)){
 
-            $branches = DB::table('branches')->orderBy('id', 'ASC')->get();
+        //     $branches = DB::table('branches')->orderBy('id', 'ASC')->get();
 
-        }else{
+        // }else{
 
-            $branches = DB::table('branches')
+        //     $branches = DB::table('branches')
+        //                 ->select('*')
+        //                 ->where('id', Auth::user()->branch_id)
+        //                 ->get();
+        // }
+
+
+
+        $branches = DB::table('branches')
                         ->select('*')
                         ->where('id', Auth::user()->branch_id)
                         ->get();
-        }
 
 
 
@@ -97,16 +104,56 @@ class ProductRequisitionController extends Controller
             'product_entry_id'                              => 'required',
           
         ], [
-            'item_category_id.required'                                 => 'Select item category name',
-            'product_category_id.required'                              => 'Select product category name',
-            'branch_id.required'                                        => 'Select branch name',
-            'product_entry_id.required'                                 => 'Select inventory product name',
+            'item_category_id.required'                     => 'Select item category name',
+            'product_category_id.required'                  => 'Select product category name',
+            'branch_id.required'                            => 'Select branch name',
+            'product_entry_id.required'                     => 'Select inventory product name',
             
 
         ]);
 
 
-         $br = $request->branch_id;
+     $user = Auth::user()->id;
+     $user_role = Auth::user()->role_id;
+     $br = $request->branch_id;
+
+
+
+
+      if($user_role == 2){
+
+        //for head office own requisition (special condition)
+       $alter_hd_user = DB::table('users')
+                        ->select('id')
+                        ->where('branch_id',$br)
+                        ->where('role_id',2)
+                        ->where('id','!=',Auth::user()->id)
+                        ->first();
+
+      $alter_hd_user_id = $alter_hd_user->id;
+
+     
+        $data = DB::table('product_requisitions')->insert([
+            'item_category_id'                      => $request->input('item_category_id'),
+            'product_category_id'                   => $request->input('product_category_id'),
+            'inventory_product_id'                  => $request->input('product_entry_id'),
+            'branch_id'                             => $br,
+            'brand'                                 => $request->input('brand_no'),
+            'model'                                 => $request->input('model_no'),
+            'quantity'                              => $request->input('quantity'),
+            'warranty'                              => $request->input('warranty_date'),
+            'requisition_request_date'              => Carbon::today(),
+            'requested_from'                        => $user,
+            'direct_requested_to_head_office'       => $alter_hd_user_id,
+            'requisition_current_status'            => 1,
+            'status_by_branch_manager'              =>1
+
+        ]);
+
+      }else{
+
+         //for branch requisition
+        
          $req = DB::table('users')
                            ->select('id')
                            ->where('branch_id',$br)
@@ -114,8 +161,7 @@ class ProductRequisitionController extends Controller
                            ->first();
 
          $req_to_user_id = $req->id;
-        
-        $user = Auth::user()->id;
+
 
         $data = DB::table('product_requisitions')->insert([
             'item_category_id'                      => $request->input('item_category_id'),
@@ -132,6 +178,10 @@ class ProductRequisitionController extends Controller
             'requisition_current_status'            => 1
 
         ]);
+
+      }
+
+
         if ($data) {
             return redirect()->route('product-requisition.index')->with('success', 'Product Requisition have been successfully sumbmitted!');
         } else {

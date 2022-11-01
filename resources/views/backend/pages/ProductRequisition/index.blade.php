@@ -36,11 +36,18 @@
                     <h2>
                         Inventory Requisition <span class="fw-300"><i>List</i></span>
                     </h2>
+
+                @if( Auth::user()->role_id == 3 )
+                @else
+
                     <div class="panel-toolbar">
                         <a href="{{ route('product-requisition.create') }}">
                             <button class="btn btn-primary btn-sm"><span class="fal fa-plus mr-1"></span>Add Inventory Requisition</button>
                         </a>
                     </div>
+          @endif
+
+
                 </div>
                 <div class="panel-container show">
                     <div class="panel-content">
@@ -59,20 +66,28 @@
                                     <th>Warranty (years)</th>
                                     <th>Requisition From</th>
                                     <th>Requisition Date</th>
-                                    <th>Status</th>
-                                  
+                                    <th>Status</th>                                 
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                  @php                                                       
                                   $role = Auth::user()->role_id;                                             
+                                  $current_user_id = Auth::user()->id;                                             
                                 @endphp
 
                                 @foreach ($productRequisition as $item)
 
                 <!--list of requisitions for Head office (starts)-->
-                    @if( (($item->status_by_branch_manager == 1) && ($role == 1) && ($item->status_by_head_office == 0))|| (($item->status_by_branch_manager == 1) && ($role == 2)  && ($item->status_by_head_office == 0)))
+
+                 
+                    @if( (($item->status_by_branch_manager == 1) && ($role == 1) && ($item->status_by_head_office == 0) && ($item->direct_requested_to_head_office == 0) )|| 
+                   
+                    (($item->status_by_branch_manager == 1) && ($role == 2)  && ($item->status_by_head_office == 0) && ($item->direct_requested_to_head_office == 0) ) || 
+                  
+                    (($item->status_by_branch_manager == 1) && ($role == 2) && ($item->status_by_head_office == 0) && ($item->direct_requested_to_head_office == $current_user_id) ) ||
+               
+                    (($item->status_by_branch_manager == 1) && ($role == 2) && ($item->status_by_head_office == 0) && ($item->requested_from == $current_user_id) ) )
 
                                  
                                     <tr>
@@ -118,21 +133,64 @@
                                         </td>
                                         <td>{{$item->requisition_request_date}}</td>
 
-                                        <td></td>
+                                        <td>
+                                         @if($item->requisition_current_status == 1)
+                                        <span class="badge badge-warning" style="padding: 10px">{{'Pending'}}</span>
+
+                                         @elseif($item->requisition_current_status == 2)           
+                                         <span class="badge badge-info" style="padding: 10px">{{'Received'}}</span>
+
+                                         @elseif($item->requisition_current_status == 3)
+                                         <span class="badge badge-danger" style="padding: 10px">{{'Canceled'}}</span>
+                                         
+                                         @else
+                                         <span class="badge badge-success" style="padding: 10px">{{'Delivered'}}</span>
+                                         @endif
+                                        </td>
 
                                   
+                                   <!-- original starts -->
 
-                                       <td>
+                                       <!-- <td>
                                           <form action="" method="post">
                                                 @csrf                                                                                       
                         <button type="button" class="btn btn-outline-info" onclick="openEditResolveAgendaFormWithModal({{$item->id}})" >Review</button>                                              
                                             </form> 
+                                       </td> -->
+
+                                    <!-- original ends -->
+
+
+
+                                     <!-- latest format starts -->
+                                      <td>
+                                                                                        
+                                     @if(($item->requisition_current_status == 1)  && ($item->requested_from == $current_user_id))
+
+                                     <form action="" method="post">
+                                                @csrf                                              
+                                                @if($item->requisition_current_status == 1)
+                                               <a href="{{ route('product-requisition.edit', $item->id) }}"style="margin-bottom: 4px;"  class="btn btn-sm btn-info waves-effect waves-themed"> Edit </a>
+                                                @else
+                                                @endif
+                                            </form>                               
+
+                                     @else    
+                                         
+                                          <form action="" method="post">
+                                                @csrf                                                                                       
+                                         <button type="button" class="btn btn-outline-primary" onclick="openEditResolveAgendaFormWithModal({{$item->id}})" >Review</button>                                              
+                                            </form> 
+                                     @endif
+                                            
                                        </td>
+                                <!-- latest format ends -->
+
                                    </tr>
 
+
+
                             <!--list of requisitions for Head office (ends)-->
-
-
 
                                @elseif( ($role == 3) || ($role == 4) )
 
@@ -204,17 +262,12 @@
                                              
                                             @if($uRole == 3) 
                                             <!-- if user is branch manager -->
-
-
                                           <form action="" method="post">
                                                 @csrf                                                                                       
-                    <button type="button" class="btn btn-outline-primary" onclick="openBranchManagerReviewModal({{$item->id}})" >Review</button>                                              
+                             <button type="button" class="btn btn-outline-primary" onclick="openBranchManagerReviewModal({{$item->id}})" >Review</button>                                              
                                             </form> 
-
-
-
-
                                              @else
+
                                             <!-- if user is branch user -->
                                             <form action="" method="post">
                                                 @csrf                                              
@@ -226,10 +279,9 @@
                                                 @endif
                                             </form>
                                            @endif
-
-
-
                                        </td>
+
+
                                    </tr>
 
             <!--list of requisitions for branch manager and branch user (ends)-->         
@@ -459,9 +511,6 @@
             }
         });
     } 
-
-
-
 
 
     </script>

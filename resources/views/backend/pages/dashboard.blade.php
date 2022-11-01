@@ -14,9 +14,10 @@
 @section('content_ims')
 
     <h1 style="text-align: center; margin-top: 20px"><strong>Inventory Management System</strong></h1>
-    <div style="align-self: center; margin-top: 20px">
+    <!-- <div style="align-self: center; margin-top: 20px">
         <img src="{{asset('backend/assets/img/sbac2.jpg')}}" width="400px" height="auto" class="center">
-    </div>
+    </div> -->
+
    
 
     <div class="row"style="margin-left: 80px;margin-right: 80px; margin-top:30px;">
@@ -30,7 +31,7 @@
 
                             <div class="card bg-info text-white text-center p-3">
                                 <blockquote class="blockquote mb-0">
-                                    <h2>475</h2>
+                                    <h2>{{$number_of_branches}}</h2>
                                     <footer class="blockquote-footer text-white">
                                         <h4>Number of Branches</h4>
                                     </footer>
@@ -41,7 +42,7 @@
 
                             <div class="card bg-success text-white text-center p-3">
                                 <blockquote class="blockquote mb-0">
-                                    <h2>2774</h2>
+                                    <h2>{{$total_valuation}} %</h2>
                                     <footer class="blockquote-footer text-white">
                                         <h4>Current Asset Valuation</h4>
                                     </footer>
@@ -51,7 +52,7 @@
 
                             <div class="card bg-primary text-white text-center p-3">
                                 <blockquote class="blockquote mb-0">
-                                    <h2>25</h2>
+                                    <h2>{{$total_number_of_product_categories}}</h2>
                                     <footer class="blockquote-footer text-white">
                                        <h4>Number of Product Category</h4>
                                     </footer>
@@ -82,44 +83,25 @@
                                 <tr>
                                     <th>SL</th>
                                     <th>Item Category Name</th>
-                                    <th>Product Category Name</th>
-                                   
+                                    <th>Product Category Name</th>                                   
                                     <th>Inventory Product Name</th>
                                     <th>Brand No</th>
-                                    <th>Model No</th>
-                                   
+                                    <th>Model No</th>                                  
                                     <th>User Name</th>
-                                    
+                                    <th>Branch</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($productEntry as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>
-                                            @php
-                                                $item_category = DB::table('item_categories')
-                                                    ->where('id', '=', $item->item_category_id)
-                                                    ->orderBy('id', 'ASC')
-                                                    ->first();
-                                            @endphp
-                                            {{ $item_category->name }}
-                                        </td>
-                                        <td>
-                                            @php
-                                                $product_category = DB::table('product_categories')->where('id','=',$item->product_category_id)->orderBy('id','ASC')->first();
-                                            @endphp
-                                            {{$product_category->name}}
-                                        </td>
-                                       
-                                        
-                                        <td>{{$item->name}}</td>
+                                        <td>{{$item->item_cat_name }}</td>
+                                        <td>{{$item->product_cat_name }}</td>                                       
+                                        <td>{{$item->name}}</td>             
                                         <td>{{$item->brand_no}}</td>
                                         <td>{{$item->model_no}}</td>
-                                        
-                                        <td>{{$item->entry_by}}</td>
-                                       
-
+                                        <td>{{$item->entry_user_name}}</td>
+                                        <td>{{$item->branch_name}}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -127,13 +109,12 @@
                                <tr>
                                     <th>SL</th>
                                     <th>Item Category Name</th>
-                                    <th>Product Category Name</th>
-                                   
+                                    <th>Product Category Name</th>                                   
                                     <th>Inventory Product Name</th>
                                     <th>Brand No</th>
-                                    <th>Model No</th>
-                                   
+                                    <th>Model No</th>                                  
                                     <th>User Name</th>
+                                    <th>Branch</th>
                                     
                                 </tr>
                             </tfoot>
@@ -153,6 +134,9 @@
     <script>
         $(document).ready(function() {
 
+
+
+
             // initialize datatable
             $('#dt-basic-example').dataTable({
                 responsive: true,
@@ -169,12 +153,12 @@
                         titleAttr: 'Col visibility',
                         className: 'mr-sm-3'
                     },*/
-                    {
-                        extend: 'pdfHtml5',
-                        text: 'PDF',
-                        titleAttr: 'Generate PDF',
-                        className: 'btn-outline-danger btn-sm mr-1'
-                    },
+                    // {
+                    //     extend: 'pdfHtml5',
+                    //     text: 'PDF',
+                    //     titleAttr: 'Generate PDF',
+                    //     className: 'btn-outline-danger btn-sm mr-1'
+                    // },
                     {
                         extend: 'excelHtml5',
                         text: 'Excel',

@@ -9,7 +9,7 @@
 @endsection
 @section('content_ims')
 
-    <div class="row" style="margin-left: 6px;margin-right: 6px; margin-top:40px;">
+    <div class="row" style="margin-left: -5px;margin-right: -2px; margin-top:40px;">
 
        
 		    	
