@@ -80,9 +80,9 @@
                                                     Branch</option>
                                                 <option value="2" {{ $edit->br_type == '2' ? 'selected' : '' }}>Head
                                                     Office</option>
-                                                <option value="3" {{ $edit->br_type == '3' ? 'selected' : '' }}>Agent
+                                                <option value="3" {{ $edit->br_type == '3' ? 'selected' : '' }}>ATM Booth
                                                 </option>
-                                                <option value="4" {{ $edit->br_type == '4' ? 'selected' : '' }}>Branch
+                                                <option value="4" {{ $edit->br_type == '4' ? 'selected' : '' }}>Collection Booth
                                                 </option>
 
                                             </select>

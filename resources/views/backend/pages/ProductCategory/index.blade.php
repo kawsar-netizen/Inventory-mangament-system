@@ -47,7 +47,7 @@
                                     <th>Item Category Name</th>
                                     <th>Product Category Name</th>
                                     <th>Type</th>
-                                    <th>Valuation</th>
+                                    <th>Depreciation</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -92,7 +92,7 @@
                                     <th>Item Category Name</th>
                                     <th>Product Category Name</th>
                                     <th>Type</th>
-                                    <th>Valuation</th>
+                                    <th>Depreciation</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>

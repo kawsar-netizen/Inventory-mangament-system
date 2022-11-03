@@ -76,16 +76,16 @@
                                             @elseif($item->br_type == 2)
                                                 {{ 'Head Office' }}
                                             @elseif($item->br_type == 3)
-                                                {{ 'Agent' }}
+                                                {{ 'ATM Booth' }}
                                             @else
-                                                {{ 'Branch' }}
+                                                {{ 'Collection Booth' }}
                                             @endif
                                         </td>
                                         <td>{{ $item->br_code }}</td>
                                         <td>
                                             <form action="{{ route('branch.destroy', $item->id) }}" method="post">
                                                 @csrf
-                                                <a
+                                                <a style="margin-bottom: 10px;"
                                                     href="{{ route('branch.show', $item->id) }}"class="btn btn-sm btn-primary waves-effect waves-themed">View</a>
                                                 <a href="{{ route('branch.edit', $item->id) }}">
                                                     <button type="button"

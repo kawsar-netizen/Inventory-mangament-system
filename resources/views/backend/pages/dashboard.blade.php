@@ -44,7 +44,7 @@
                                 <blockquote class="blockquote mb-0">
                                     <h2>{{$total_valuation}} %</h2>
                                     <footer class="blockquote-footer text-white">
-                                        <h4>Current Asset Valuation</h4>
+                                        <h4>Current Asset Depreciation</h4>
                                     </footer>
                                 </blockquote>
                                 <i class="fa fa-percent position-absolute pos-right pos-bottom opacity-15 mb-n1 mr-n1" style="font-size:6rem"></i>

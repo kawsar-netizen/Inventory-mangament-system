@@ -42,8 +42,8 @@
                                             </span>
                                         </div>
                                         <div class="col-md-12 mb-3">
-                                            <label class="form-label" for="valuation">Valuation</label>
-                                            <input type="number" placeholder="Enter item category valuation"
+                                            <label class="form-label" for="valuation">Depreciation</label>
+                                            <input type="number" placeholder="Enter item category depreciation"
                                                 name="valuation"value="{{ old('valuation') }}" id="valuation"
                                                 class="form-control" required="" aria-required="true">
                                             <span style="color: red">

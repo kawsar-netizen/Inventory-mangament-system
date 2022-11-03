@@ -43,7 +43,7 @@
                                             </span>
                                         </div>
                                         <div class="col-md-12 mb-3">
-                                            <label class="form-label" for="valuation">Valuation</label>
+                                            <label class="form-label" for="valuation">Depreciation</label>
                                             <input type="number" name="valuation"value="{{ $edit->valuation }}"
                                                 id="valuation" class="form-control" required="" aria-required="true">
                                             <span style="color: red">

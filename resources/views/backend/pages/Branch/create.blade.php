@@ -77,8 +77,8 @@
                                                 <option value="">Select Branch Type</option>
                                                 <option value="1">Sub Branch</option>
                                                 <option value="2">Head Office</option>
-                                                <option value="3">Agent</option>
-                                                <option value="4">Branch</option>
+                                                <option value="3">ATM Booth</option>
+                                                <option value="4">Collection Booth</option>
 
                                             </select>
                                             <span style="color: red">

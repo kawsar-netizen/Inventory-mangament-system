@@ -51,7 +51,7 @@
                                 <tr>
                                     <th>SL</th>
                                     <th>Item Category Name</th>
-                                    <th>Valuation</th>
+                                    <th>Depreciation</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
