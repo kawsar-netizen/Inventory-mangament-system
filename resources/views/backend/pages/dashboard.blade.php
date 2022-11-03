@@ -29,7 +29,7 @@
 
                         <div class="card-columns" style="margin-top:20px;">
 
-                            <div class="card bg-info text-white text-center p-3">
+                            <div class="card bg-danger text-white text-center p-3">
                                 <blockquote class="blockquote mb-0">
                                     <h2>{{$number_of_branches}}</h2>
                                     <footer class="blockquote-footer text-white">
